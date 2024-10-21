@@ -30,7 +30,7 @@ class CourtController extends Controller
     public function store(StoreCourtRequest $request)
     {
         Court::create(['name_court' => $request->name_court]);
-        return 'store';
+        return redirect('/admin');
     }
 
     /**
@@ -62,6 +62,8 @@ class CourtController extends Controller
      */
     public function destroy(Court $court)
     {
-        //
+        $court->delete();
+
+        return redirect('/admin');
     }
 }

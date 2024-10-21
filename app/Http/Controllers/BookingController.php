@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
-use App\Http\Requests\StoreAdminRequest;
-use App\Http\Requests\UpdateAdminRequest;
-use App\Models\Court;
+use App\Models\Booking;
+use App\Http\Requests\StoreBookingRequest;
+use App\Http\Requests\UpdateBookingRequest;
 
-class AdminController extends Controller
+class BookingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['courts'] = Court::all();
-        return view('admin.index', $data);
+        //
     }
 
     /**
@@ -29,7 +27,7 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAdminRequest $request)
+    public function store(StoreBookingRequest $request)
     {
         //
     }
@@ -37,7 +35,7 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Admin $admin)
+    public function show(Booking $booking)
     {
         //
     }
@@ -45,7 +43,7 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Admin $admin)
+    public function edit(Booking $booking)
     {
         //
     }
@@ -53,7 +51,7 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAdminRequest $request, Admin $admin)
+    public function update(UpdateBookingRequest $request, Booking $booking)
     {
         //
     }
@@ -61,7 +59,7 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Admin $admin)
+    public function destroy(Booking $booking)
     {
         //
     }
