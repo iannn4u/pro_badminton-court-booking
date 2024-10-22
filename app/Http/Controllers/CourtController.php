@@ -29,7 +29,12 @@ class CourtController extends Controller
      */
     public function store(StoreCourtRequest $request)
     {
-        Court::create(['name_court' => $request->name_court]);
+        $data = [
+            'name_court' => $request->name_court,
+            'price_court' => $request->price_court,
+            'description' => $request->description
+        ];
+        Court::create($data);
         return redirect('/admin');
     }
 

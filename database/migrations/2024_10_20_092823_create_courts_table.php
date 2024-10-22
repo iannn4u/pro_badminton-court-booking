@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_court');
             $table->string('name_court');
             $table->text('description');
-            $table->int('price_court');
+            $table->integer('price_court');
             $table->timestamps();
         });
     }
