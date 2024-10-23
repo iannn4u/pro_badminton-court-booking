@@ -2,7 +2,7 @@
 
 @section('content')
     
-<div class="relative overflow-x-auto">
+{{-- <div class="relative overflow-x-auto">
     <div class="flex justify-between items-center">
         <div class="flex flex-col justify-between gap-10">
             <h1 class="text-4xl font-bold">Dashboard Admin</h1>
@@ -58,7 +58,7 @@
                     {{ $court['name_court'] }}
                 </th>
                 <td class="px-6 py-4 text-center">
-                    {{-- <a href="" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">Detail</a> --}}
+                    <a href="" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">Detail</a>
                     <form action="/court/{{ $court['id_court'] }}" method="POST">
                         @csrf
                         @method('delete')
@@ -83,5 +83,9 @@
             roundToHour(this);
         });
     });
-</script>
+</script> --}}
+
+<h1 class="text-4xl font-bold">Dashboard Admin</h1>
+
+
 @endsection
