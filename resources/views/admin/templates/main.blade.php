@@ -13,7 +13,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="text-gray-900 p-5">
+<body class="text-gray-900 font-semibold">
 
     {{-- <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
         <span class="sr-only">Open sidebar</span>
@@ -24,8 +24,8 @@
 
     {{-- @include('admin.templates.aside') --}}
 
-    <div class="">
-            @yield('content')
+    <div class="bg-gray-100 h-[100%] max-w-[2040px] mx-auto md:p-10 p-5">
+        @yield('content')
     </div>
 
 </body>

@@ -333,10 +333,10 @@
                         <table class="w-full text-sm text-center">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3">Time</th>
-                                    <th scope="col" class="px-6 py-3">Field 1</th>
-                                    <th scope="col" class="px-6 py-3">Field 2</th>
-                                    <th scope="col" class="px-6 py-3">Field 3</th>
+                                    <th scope="col" class="px-6 py-3">JAM</th>
+                                    @foreach ($courts as $court)
+                                    <th scope="col" class="px-6 py-3">{{ $court['name_court'] }}</th>
+                                    @endforeach
                                 </tr>
                             </thead>
                             <tbody>
@@ -370,35 +370,6 @@
             </div>
         </div>
     </div>
-    {{-- <div class="w-full max-w-4xl bg-white shadow-md rounded-lg p-6">
-        <div class="grid grid-cols-4 bg-gray-100 text-center font-semibold text-gray-700 py-3 rounded-t-lg">
-            <div class="col-span-1">Time</div>
-            <div class="col-span-1">Field 1</div>
-            <div class="col-span-1">Field 2</div>
-            <div class="col-span-1">Field 3</div>
-        </div>
-
-        <div class="divide-y divide-gray-200">
-            <div class="grid grid-cols-4 text-center py-4">
-                <div class="col-span-1">08:00</div>
-                <div class="col-span-1 bg-green-200 rounded">John Doe</div>
-                <div class="col-span-1 bg-gray-100 italic text-gray-500">Available</div>
-                <div class="col-span-1 bg-green-200 rounded">Mike Tyson</div>
-            </div>
-            <div class="grid grid-cols-4 text-center py-4">
-                <div class="col-span-1">09:00</div>
-                <div class="col-span-1 bg-gray-100 italic text-gray-500">Available</div>
-                <div class="col-span-1 bg-green-200 rounded">Jessica</div>
-                <div class="col-span-1 bg-gray-100 italic text-gray-500">Available</div>
-            </div>
-            <div class="grid grid-cols-4 text-center py-4">
-                <div class="col-span-1">10:00</div>
-                <div class="col-span-1 bg-gray-100 italic text-gray-500">Available</div>
-                <div class="col-span-1 bg-gray-100 italic text-gray-500">Available</div>
-                <div class="col-span-1 bg-green-200 rounded">Sarah</div>
-            </div>
-        </div>
-    </div> --}}
     <footer class="bg-gray-300 text-center py-5 h-[100%] max-w-[2040px] mx-auto p-10">
         <h1>Make with love❤️</h1>
     </footer>
