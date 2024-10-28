@@ -1,10 +1,17 @@
 @extends('admin.templates.main')
 
 @section('content')
+<div class="border border-gray-600 rounded-md w-max">
+<h1 class="bg-gray-400 text-center text-white font-light p-2">Jadwal Pemesanan</h1>
+<ul class="list-disc p-3 ms-4">
+    <li>Hermansyah, Lunas, 10.00 - 12.00</li>
+    <li>Hermansyah, Lunas, 10.00 - 12.00</li>
+    <li>Hermansyah, Lunas, 10.00 - 12.00</li>
+    <li>Hermansyah, Lunas, 10.00 - 12.00</li>
+    <li>Hermansyah, Lunas, 10.00 - 12.00</li>
+</ul>
+</div>
 
-
-
-    
     {{-- <div class="max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
         <h2 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Jadwal Pemesanan Mendatang
@@ -97,8 +104,8 @@
             </li>
         </ul>
     </div> --}}
-    
-    
+
+
 
 
     {{-- <ul role="list" class="grid w-full grid-cols-2 gap-x-6 gap-y-3 text-sm sm:grid-cols-3 md:gap-y-10 lg:grid-cols-4 my-4">

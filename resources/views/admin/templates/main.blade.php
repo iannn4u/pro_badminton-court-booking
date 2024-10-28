@@ -24,7 +24,7 @@
 
     {{-- @include('admin.templates.aside') --}}
 
-    <div class="bg-gray-100 h-[100%] max-w-[2040px] mx-auto md:p-10 p-5">
+    <div class="bg-gray-50 h-[100%] max-w-[2040px] mx-auto md:p-10 p-5">
         @yield('content')
     </div>
 
