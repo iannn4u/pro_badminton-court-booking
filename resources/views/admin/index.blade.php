@@ -1,20 +1,18 @@
 @extends('admin.templates.main')
 
 @section('content')
-<div class="border border-gray-600 rounded-md w-max">
-<h1 class="bg-gray-400 text-center text-white font-light p-2">Jadwal Pemesanan</h1>
-<ul class="list-disc p-3 ms-4">
-    <li>Hermansyah, Lunas, 10.00 - 12.00</li>
-    <li>Hermansyah, Lunas, 10.00 - 12.00</li>
-    <li>Hermansyah, Lunas, 10.00 - 12.00</li>
-    <li>Hermansyah, Lunas, 10.00 - 12.00</li>
-    <li>Hermansyah, Lunas, 10.00 - 12.00</li>
-</ul>
-</div>
-
-    {{-- <div class="max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-        <h2 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Jadwal Pemesanan Mendatang
+<div class="flex w-full gap-5">
+        <div class="p-6 w-[75%] bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+            <h2 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 text-center dark:text-white">
+                General Settings
+            </h2>
+                    <a href="" class="hover:underline hover:text-gray-700">Tambah Lapangan</a>
+                    <a href="" class="hover:underline hover:text-gray-700">Tambah Jadwal</a>
+                    <a href="" class="block hover:underline hover:text-gray-700">Ganti Password</a>
+        </div>
+    <div class="max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+        <h2 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 text-center dark:text-white">
+            Jadwal Booking Mendatang
         </h2>
         <ul class="space-y-3">
             <li class="flex flex-col p-4 bg-gray-50 border rounded-lg">
@@ -23,15 +21,9 @@
                         <h3 class="text-lg font-semibold text-gray-900">Lapangan 1</h3>
                         <p class="text-sm text-gray-500">Tanggal: 25 Oktober 2024, 10:00 - 11:00</p>
                     </div>
-                    <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
-                        Confirmed
-                    </span>
-                </div>
-                <div class="mt-2 flex justify-between">
-                    <span class="text-sm text-gray-700">Status Pembayaran:</span>
-                    <span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">
-                        Belum Bayar
-                    </span>
+                    {{-- <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
+                        Lunas
+                    </span> --}}
                 </div>
             </li>
             <li class="flex flex-col p-4 bg-gray-50 border rounded-lg">
@@ -40,15 +32,9 @@
                         <h3 class="text-lg font-semibold text-gray-900">Lapangan 2</h3>
                         <p class="text-sm text-gray-500">Tanggal: 26 Oktober 2024, 14:00 - 15:00</p>
                     </div>
-                    <span class="px-2 py-1 text-xs font-medium text-yellow-800 bg-yellow-100 rounded-full">
-                        Pending
-                    </span>
-                </div>
-                <div class="mt-2 flex justify-between">
-                    <span class="text-sm text-gray-700">Status Pembayaran:</span>
-                    <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
-                        Sudah Bayar
-                    </span>
+                    {{-- <span class="px-2 py-1 text-xs font-medium text-yellow-800 bg-yellow-100 rounded-full">
+                        DP
+                    </span> --}}
                 </div>
             </li>
             <li class="flex flex-col p-4 bg-gray-50 border rounded-lg">
@@ -57,15 +43,9 @@
                         <h3 class="text-lg font-semibold text-gray-900">Lapangan 3</h3>
                         <p class="text-sm text-gray-500">Tanggal: 27 Oktober 2024, 09:00 - 10:00</p>
                     </div>
-                    <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
-                        Confirmed
-                    </span>
-                </div>
-                <div class="mt-2 flex justify-between">
-                    <span class="text-sm text-gray-700">Status Pembayaran:</span>
-                    <span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">
-                        Belum Bayar
-                    </span>
+                    {{-- <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
+                        Lunas
+                    </span> --}}
                 </div>
             </li>
             <li class="flex flex-col p-4 bg-gray-50 border rounded-lg">
@@ -74,15 +54,9 @@
                         <h3 class="text-lg font-semibold text-gray-900">Lapangan 1</h3>
                         <p class="text-sm text-gray-500">Tanggal: 28 Oktober 2024, 16:00 - 17:00</p>
                     </div>
-                    <span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">
-                        Canceled
-                    </span>
-                </div>
-                <div class="mt-2 flex justify-between">
-                    <span class="text-sm text-gray-700">Status Pembayaran:</span>
-                    <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
-                        Sudah Bayar
-                    </span>
+                    {{-- <span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">
+                        Cash
+                    </span> --}}
                 </div>
             </li>
             <li class="flex flex-col p-4 bg-gray-50 border rounded-lg">
@@ -91,19 +65,14 @@
                         <h3 class="text-lg font-semibold text-gray-900">Lapangan 2</h3>
                         <p class="text-sm text-gray-500">Tanggal: 29 Oktober 2024, 18:00 - 19:00</p>
                     </div>
-                    <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
-                        Confirmed
-                    </span>
-                </div>
-                <div class="mt-2 flex justify-between">
-                    <span class="text-sm text-gray-700">Status Pembayaran:</span>
-                    <span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">
-                        Belum Bayar
-                    </span>
+                    {{-- <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
+                        Lunas
+                    </span> --}}
                 </div>
             </li>
         </ul>
-    </div> --}}
+    </div>
+</div>
 
 
 
