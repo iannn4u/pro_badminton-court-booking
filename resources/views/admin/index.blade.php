@@ -1,78 +1,107 @@
 @extends('admin.templates.main')
 
 @section('content')
-<div class="flex w-full gap-5">
-        <div class="p-6 w-[75%] bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-            <h2 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 text-center dark:text-white">
-                General Settings
-            </h2>
-                    <a href="" class="hover:underline hover:text-gray-700">Tambah Lapangan</a>
-                    <a href="" class="hover:underline hover:text-gray-700">Tambah Jadwal</a>
-                    <a href="" class="block hover:underline hover:text-gray-700">Ganti Password</a>
+<h1 class="text-3xl font-bold mb-5">Halaman Admin</h1>
+    <div class="flex gap-2">
+        <div class="relative overflow-x-auto sm:rounded-lg">
+            <a href="/court/create"
+                class="block w-max text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tambah
+                Lapangan</a>
+            <table class="max-w-xl text-center shadow-md text-sm rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Nama Lapangan
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Harga
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Aksi
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ($courts->isEmpty())
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        Tidak Ada Lapangan
+                    </td>
+                    </tr>
+                    @endif
+                    @foreach ($courts as $court)
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $court['name_court'] }}
+                            </td>
+                            <td scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $court['price_court'] }}
+                            </td>
+                            <td scope="row"
+                                class="px-6 py-4 flex gap-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <a href="/court/{{ $court['id_court'] }}/edit">Edit</a>
+                                <form action="/court/{{ $court['id_court'] }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button onclick="return confirm('Are you sure want delete it?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-    <div class="max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-        <h2 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 text-center dark:text-white">
-            Jadwal Booking Mendatang
-        </h2>
-        <ul class="space-y-3">
-            <li class="flex flex-col p-4 bg-gray-50 border rounded-lg">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900">Lapangan 1</h3>
-                        <p class="text-sm text-gray-500">Tanggal: 25 Oktober 2024, 10:00 - 11:00</p>
-                    </div>
-                    {{-- <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
-                        Lunas
-                    </span> --}}
-                </div>
-            </li>
-            <li class="flex flex-col p-4 bg-gray-50 border rounded-lg">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900">Lapangan 2</h3>
-                        <p class="text-sm text-gray-500">Tanggal: 26 Oktober 2024, 14:00 - 15:00</p>
-                    </div>
-                    {{-- <span class="px-2 py-1 text-xs font-medium text-yellow-800 bg-yellow-100 rounded-full">
-                        DP
-                    </span> --}}
-                </div>
-            </li>
-            <li class="flex flex-col p-4 bg-gray-50 border rounded-lg">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900">Lapangan 3</h3>
-                        <p class="text-sm text-gray-500">Tanggal: 27 Oktober 2024, 09:00 - 10:00</p>
-                    </div>
-                    {{-- <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
-                        Lunas
-                    </span> --}}
-                </div>
-            </li>
-            <li class="flex flex-col p-4 bg-gray-50 border rounded-lg">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900">Lapangan 1</h3>
-                        <p class="text-sm text-gray-500">Tanggal: 28 Oktober 2024, 16:00 - 17:00</p>
-                    </div>
-                    {{-- <span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">
-                        Cash
-                    </span> --}}
-                </div>
-            </li>
-            <li class="flex flex-col p-4 bg-gray-50 border rounded-lg">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900">Lapangan 2</h3>
-                        <p class="text-sm text-gray-500">Tanggal: 29 Oktober 2024, 18:00 - 19:00</p>
-                    </div>
-                    {{-- <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
-                        Lunas
-                    </span> --}}
-                </div>
-            </li>
-        </ul>
+
+        <div class="relative overflow-x-auto sm:rounded-lg">
+            <a href="/booking/create"
+                class="block w-max text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tambah
+                Jadwal</a>
+            <table class="max-w-2xl text-center shadow-md text-sm rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Nama
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Jam
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Lapangan
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Status Pembayaran
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Aksi
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Hermansyah
+                        </td>
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            10.00 - 12.00
+                        </td>
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Lapangan 1
+                        </td>
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Cash
+                        </td>
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <button onclick="return confirm('Are you sure want delete it?')">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+
 
 
 

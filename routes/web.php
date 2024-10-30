@@ -20,3 +20,4 @@ Route::post('/login', function(Request $request) {
 });
 
 Route::resource('court', CourtController::class);
+Route::resource('booking', BookingController::class);

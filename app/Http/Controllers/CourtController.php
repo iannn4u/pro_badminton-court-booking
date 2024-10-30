@@ -51,7 +51,7 @@ class CourtController extends Controller
      */
     public function edit(Court $court)
     {
-        //
+        return view('admin.court.edit', ['court' => $court]);
     }
 
     /**
@@ -59,7 +59,13 @@ class CourtController extends Controller
      */
     public function update(UpdateCourtRequest $request, Court $court)
     {
-        //
+        $data = [
+            'name_court' => $request->name_court,
+            'price_court' => $request->price_court,
+            'description' => $request->description
+        ];
+        $court->update($data);
+        return redirect('/admin');
     }
 
     /**
