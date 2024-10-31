@@ -11,7 +11,7 @@ class StoreBookingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,26 @@ class StoreBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name_booking' => 'required',
+            'date_booking' => 'required',
+            'time_booking' => 'required',
+            'method_payment' => 'required',
+            'description' => 'required'
+        ];
+    }
+
+    /**
+     * Custom messages for validation rules.
+     */
+    public function messages(): array
+    {
+        return [
+            'name_booking.required' => 'Nama pemesan harus diisi.',
+            'date_booking.required' => 'Tanggal main harus diisi.',
+            'time_booking.required' => 'Jam main harus dipilih.',
+            'court_booking.required' => 'Lapangan harus dipilih.',
+            'method_payment.required' => 'Metode pembayaran harus dipilih.',
+            'description.required' => 'Deskripsi harus diisi.',
         ];
     }
 }

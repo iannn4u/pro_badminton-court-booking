@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
+use App\Models\Booking;
 use App\Models\Court;
 
 class AdminController extends Controller
@@ -15,6 +16,7 @@ class AdminController extends Controller
     public function index()
     {
         $data['courts'] = Court::all();
+        $data['bookings'] = Booking::all();
         return view('admin.index', $data);
     }
 

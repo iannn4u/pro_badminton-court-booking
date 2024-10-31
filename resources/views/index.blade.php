@@ -77,7 +77,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                     </svg>
-                    <span>Jl. Setia Budi, Karangasih, Kec. Cikarang Utara, <br>Kabupaten Bekasi, Jawa Barat 17530</span>
+                    <span>Jl. Setia Budi, Karangasih, Kec. Cikarang Utara, <br>Kabupaten Bekasi, Jawa Barat
+                        17530</span>
                 </a>
                 <a href="" class="flex gap-2 underline hover:text-green-600 w-max max-sm:text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5 ms-0.5" viewBox="0 0 448 512">
@@ -135,7 +136,8 @@
                         </h5>
                         <p class="font-normal text-gray-700 dark:text-gray-400">
                             - Untuk mendapatkan MEMBER, silakan hubungi Admin via whatsapp <a href="0812 3456 7891"
-                                class="underline hover:text-green-600">0812 3456 7891</a> <br>
+                                class="underline hover:text-green-600">0812 3456
+                                7891</a> <br>
                             - DP harus dibayar dalam waktu 30 menit setelah booking. <br>
                     </div>
                 </div>
@@ -161,27 +163,11 @@
             <div>
                 <div class="week">
                     <div class="flex justify-between gap-2 mt-10">
-                        <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center">
-                            <span>Sun</span><span>1/12</span>
-                        </p>
-                        <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center">
-                            <span>Mon</span><span>2/12</span>
-                        </p>
-                        <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center">
-                            <span>Tue</span><span>3/12</span>
-                        </p>
-                        <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center">
-                            <span>Wed</span><span>4/12</span>
-                        </p>
-                        <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center">
-                            <span>Thu</span><span>5/12</span>
-                        </p>
-                        <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center">
-                            <span>Fri</span><span>6/12</span>
-                        </p>
-                        <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center">
-                            <span>Sat</span><span>7/12</span>
-                        </p>
+                        @foreach ($date as $day)
+                            <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center">
+                                <span>{{ $day['day'] }}</span><span>{{ $day['date'] }}</span>
+                            </p>
+                        @endforeach
                     </div>
                     <div class="flex justify-between mt-2 gap-2">
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">8.00</a>
@@ -249,16 +235,19 @@
                     <div class="flex justify-between mt-1 gap-2">
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">15.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">15.00</a>
-                        <a href="" class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">15.00</a>
+                        <a href=""
+                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">15.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">15.00</a>
-                        <a href="" class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">15.00</a>
+                        <a href=""
+                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">15.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">15.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">15.00</a>
                     </div>
                     <div class="flex justify-between mt-1 gap-2">
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">16.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">16.00</a>
-                        <a href="" class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">16.00</a>
+                        <a href=""
+                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">16.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">16.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">16.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">16.00</a>
@@ -268,15 +257,18 @@
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">17.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">17.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">17.00</a>
-                        <a href="" class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">17.00</a>
+                        <a href=""
+                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">17.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">17.00</a>
-                        <a href="" class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">17.00</a>
+                        <a href=""
+                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">17.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">17.00</a>
                     </div>
                     <div class="flex justify-between mt-1 gap-2">
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">18.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">18.00</a>
-                        <a href="" class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">18.00</a>
+                        <a href=""
+                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">18.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">18.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">18.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">18.00</a>
@@ -294,7 +286,8 @@
                     <div class="flex justify-between mt-1 gap-2">
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">20.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">20.00</a>
-                        <a href="" class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">20.00</a>
+                        <a href=""
+                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">20.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">20.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">20.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">20.00</a>
@@ -303,16 +296,20 @@
                     <div class="flex justify-between mt-1 gap-2">
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">21.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">21.00</a>
-                        <a href="" class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">21.00</a>
-                        <a href="" class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">21.00</a>
+                        <a href=""
+                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">21.00</a>
+                        <a href=""
+                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">21.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">21.00</a>
-                        <a href="" class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">21.00</a>
+                        <a href=""
+                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">21.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">21.00</a>
                     </div>
                     <div class="flex justify-between mt-1 gap-2">
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">22.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">22.00</a>
-                        <a href="" class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">22.00</a>
+                        <a href=""
+                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">22.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">22.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">22.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">22.00</a>
@@ -321,10 +318,13 @@
                     <div class="flex justify-between mt-1 gap-2">
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">23.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">23.00</a>
-                        <a href="" class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">23.00</a>
-                        <a href="" class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">23.00</a>
+                        <a href=""
+                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">23.00</a>
+                        <a href=""
+                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">23.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">23.00</a>
-                        <a href="" class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">23.00</a>
+                        <a href=""
+                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">23.00</a>
                         <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">23.00</a>
                     </div>
                 </div>
@@ -335,7 +335,7 @@
                                 <tr>
                                     <th scope="col" class="px-6 py-3">JAM</th>
                                     @foreach ($courts as $court)
-                                    <th scope="col" class="px-6 py-3">{{ $court['name_court'] }}</th>
+                                        <th scope="col" class="px-6 py-3">{{ $court['name_court'] }}</th>
                                     @endforeach
                                 </tr>
                             </thead>
