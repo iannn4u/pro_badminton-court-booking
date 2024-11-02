@@ -1,10 +1,10 @@
 @extends('admin.templates.main')
 
 @section('content')
-    <div class="bg-gray-50 rounded-lg p-5">
+    <div class="bg-gray-50 rounded-lg p-5 md:min-w-[500px] min-w-[90%]">
         <form class="w-full" method="post" action="/booking">
             @csrf
-            <h1 class="text-3xl md:text-4xl font-bold mb-5">Tambah Jadwal</h1>
+            <h1 class="text-3xl font-bold mb-5">Tambah Jadwal</h1>
             <div class="flex justify-evenly gap-5">
                 <div class="w-full">
                     <div class="mb-5">

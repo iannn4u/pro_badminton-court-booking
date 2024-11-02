@@ -25,6 +25,7 @@ class StoreBookingRequest extends FormRequest
             'name_booking' => 'required',
             'date_booking' => 'required',
             'time_booking' => 'required',
+            'name_court' => 'required',
             'method_payment' => 'required',
             'description' => 'required'
         ];
@@ -38,6 +39,7 @@ class StoreBookingRequest extends FormRequest
         return [
             'name_booking.required' => 'Nama pemesan harus diisi.',
             'date_booking.required' => 'Tanggal main harus diisi.',
+            'name_court.required' => 'Lapangan main harus dipilih.',
             'time_booking.required' => 'Jam main harus dipilih.',
             'court_booking.required' => 'Lapangan harus dipilih.',
             'method_payment.required' => 'Metode pembayaran harus dipilih.',
