@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Court;
+use App\Models\Operational;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -37,6 +38,11 @@ class DatabaseSeeder extends Seeder
                 'price_court' => '45000',
                 'description_court' => 'Hello World!',
             ]
+        ]);
+
+        Operational::create([
+            'open' => '08.00',
+            'close' => '23.00'
         ]);
     }
 }

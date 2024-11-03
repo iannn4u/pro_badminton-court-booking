@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/admin', [AdminController::class, 'index']);
+// Route::get('/admin', [AdminController::class, 'index']);
 
 Route::view('/login', 'admin.signin');
 Route::post('/login', function(Request $request) {

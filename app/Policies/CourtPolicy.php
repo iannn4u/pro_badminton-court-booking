@@ -13,7 +13,7 @@ class CourtPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->name;
     }
 
     /**
@@ -21,7 +21,7 @@ class CourtPolicy
      */
     public function view(User $user, Court $court): bool
     {
-        //
+        return $user->name;
     }
 
     /**
@@ -29,7 +29,7 @@ class CourtPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->name;//
     }
 
     /**
@@ -37,7 +37,7 @@ class CourtPolicy
      */
     public function update(User $user, Court $court): bool
     {
-        //
+        return $user->name;
     }
 
     /**
@@ -45,7 +45,7 @@ class CourtPolicy
      */
     public function delete(User $user, Court $court): bool
     {
-        //
+        return $user->name;//
     }
 
     /**
@@ -53,7 +53,7 @@ class CourtPolicy
      */
     public function restore(User $user, Court $court): bool
     {
-        //
+        return $user->name;
     }
 
     /**
@@ -61,6 +61,6 @@ class CourtPolicy
      */
     public function forceDelete(User $user, Court $court): bool
     {
-        //
+        return $user->name;
     }
 }
