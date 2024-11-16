@@ -30,7 +30,6 @@ class CourtResource extends Resource
                     ->required()
                     ->numeric(),
                 Forms\Components\Textarea::make('description_court')
-                    ->required()
                     ->columnSpanFull(),
             ]);
     }
@@ -42,7 +41,6 @@ class CourtResource extends Resource
                 Tables\Columns\TextColumn::make('name_court')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price_court')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

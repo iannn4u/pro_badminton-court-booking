@@ -7,6 +7,7 @@ use App\Models\Booking;
 use App\Models\Court;
 use App\Models\Operational;
 use App\Rules\Tanggal;
+use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Radio;
@@ -45,22 +46,23 @@ class BookingResource extends Resource
 
         return $form
             ->schema([
-                TextInput::make('name_booking')
+                TextInput::make('name_booking')->label(__('Nama Booking'))
                     ->required()
                     ->maxLength(255),
 
-                DatePicker::make('date_booking')
+                DatePicker::make('date_booking')->label(__('Tanggal Booking'))
                     ->native(false)
                     ->weekStartsOnMonday()
                     ->required()
+                    ->rules(['after_or_equal:today'])
                     ->reactive()
-                    ->afterStateUpdated(fn(callable $set) => $set('time_booking', null)), // Reset time_booking saat tanggal berubah
+                    ->afterStateUpdated(fn(callable $set) => $set('time_booking', null)),
 
-                Radio::make('court_booking')
+                Radio::make('court_booking')->label(__('Lapangan Booking'))
                     ->options($newCourts)
                     ->required()
                     ->reactive()
-                    ->afterStateUpdated(fn(callable $set) => $set('time_booking', null)), // Reset time_booking saat lapangan berubah
+                    ->afterStateUpdated(fn(callable $set) => $set('time_booking', null)),
 
                 Select::make('time_booking')
                     ->label('Waktu Booking')
@@ -73,11 +75,26 @@ class BookingResource extends Resource
                             return [];
                         }
 
-                        return Booking::getAvailableSlotsForCourtAndDate($date, $court, $time_booking);
+                        $today = Carbon::today()->toDateString();
+                        $date = Carbon::parse($date)->toDateString();
+                        $currentHour = Carbon::now('Asia/Jakarta')->hour;
+                        $filteredSlots = $time_booking;
+
+                        if ($date === $today) {
+                            $filteredSlots = array_filter($time_booking, function ($slot) use ($currentHour) {
+                                [$startTime] = explode(' - ', $slot);
+                                $startHour = (int) str_replace('.00', '', $startTime);
+
+                                return $startHour >= $currentHour;
+                            });
+
+                        }
+
+                        return Booking::getAvailableSlotsForCourtAndDate($date, $court, $filteredSlots);
                     })
                     ->required(),
 
-                Radio::make('method_payment')
+                Radio::make('method_payment')->label(__('Metode Pembayaran'))
                     ->options([
                         'Cash' => 'Cash',
                         'Transfer' => 'Transfer',
@@ -85,8 +102,7 @@ class BookingResource extends Resource
                     ])
                     ->required(),
 
-                Textarea::make('message_booking')
-                    ->required()
+                Textarea::make('message_booking')->label(__('Pesan'))
                     ->columnSpanFull(),
             ])
             ->columns(1);
@@ -100,9 +116,9 @@ class BookingResource extends Resource
                 Tables\Columns\TextColumn::make('name_booking')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date_booking')
-                    ->searchable(),
+                    ->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('time_booking')
-                    ->searchable(),
+                    ->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('court_booking')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('method_payment')

@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Laravel</title>
 
@@ -154,7 +155,7 @@
                     Schedule</h2>
                 <form class="max-w-sm shadow-md">
                     <select id="filter"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500">
                         <option selected value="week">Week</option>
                         <option value="day">Day</option>
                     </select>
@@ -162,219 +163,179 @@
             </div>
             <div>
                 <div class="week">
-                    <div class="flex justify-between gap-2 mt-10">
-                        @foreach ($date as $day)
-                            <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center">
-                                <span>{{ $day['day'] }}</span><span>{{ $day['date'] }}</span>
-                            </p>
+                    <div class="grid grid-cols-7 gap-2 mt-10">
+                        @foreach ($dates as $day)
+                            <div class="grid grid-cols-{{ count($day['slots']) + 1 }} gap-2">
+                                <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center">
+                                    <span>{{ $day['day'] }}</span><span>{{ $day['date'] }}</span>
+                                </p>
+                                @foreach ($day['slots'] as $slot)
+                                    <button data-modal-target="default-modal" data-modal-toggle="default-modal"
+                                        onclick="showDataBooking('{{ $slot['time'] }}', '{{ $day['date'] }}')"
+                                        class="text-center {{ $slot['is_full'] ? 'bg-slate-200' : 'bg-green-200' }} w-full py-1 rounded-md"
+                                        type="button">
+                                        {{ $slot['time'] }}
+                                    </button>
+                                @endforeach
+                            </div>
                         @endforeach
                     </div>
-                    <div class="flex justify-between mt-2 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">8.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">8.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">8.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">8.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">8.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">8.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">8.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">9.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">9.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">9.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">9.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">9.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">9.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">9.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">10.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">10.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">10.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">10.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">10.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">10.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">10.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">11.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">11.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">11.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">11.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">11.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">11.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">11.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">12.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">12.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">12.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">12.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">12.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">12.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">12.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">13.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">13.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">13.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">13.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">13.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">13.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">13.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">14.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">14.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">14.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">14.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">14.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">14.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">14.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">15.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">15.00</a>
-                        <a href=""
-                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">15.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">15.00</a>
-                        <a href=""
-                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">15.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">15.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">15.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">16.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">16.00</a>
-                        <a href=""
-                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">16.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">16.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">16.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">16.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">16.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">17.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">17.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">17.00</a>
-                        <a href=""
-                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">17.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">17.00</a>
-                        <a href=""
-                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">17.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">17.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">18.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">18.00</a>
-                        <a href=""
-                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">18.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">18.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">18.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">18.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">18.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">19.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">19.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">19.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">19.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">19.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">19.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">19.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">20.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">20.00</a>
-                        <a href=""
-                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">20.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">20.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">20.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">20.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">20.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">21.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">21.00</a>
-                        <a href=""
-                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">21.00</a>
-                        <a href=""
-                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">21.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">21.00</a>
-                        <a href=""
-                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">21.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">21.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">22.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">22.00</a>
-                        <a href=""
-                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">22.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">22.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">22.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">22.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">22.00</a>
-                    </div>
-                    <div class="flex justify-between mt-1 gap-2">
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">23.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">23.00</a>
-                        <a href=""
-                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">23.00</a>
-                        <a href=""
-                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">23.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">23.00</a>
-                        <a href=""
-                            class="text-center bg-gray-200 w-full py-1 rounded-md text-gray-500">23.00</a>
-                        <a href="" class="text-center bg-green-200 w-full py-1 rounded-md">23.00</a>
+                    <!-- Main modal -->
+                    <div id="default-modal" tabindex="-1" aria-hidden="true"
+                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                        <div class="relative p-4 w-full max-w-2xl max-h-full">
+                            <!-- Modal content -->
+                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                <!-- Modal header -->
+                                <div
+                                    class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                        Jadwal Booking Pukul 8.00, Kamis, 14 November 2024.
+                                    </h3>
+                                    <button type="button"
+                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                        data-modal-hide="default-modal">
+                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 14 14">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                        </svg>
+                                        <span class="sr-only">Close modal</span>
+                                    </button>
+                                </div>
+                                <!-- Modal body -->
+                                <div class="p-4 md:p-5 space-y-4">
+                                    <table class="w-full text-sm text-center">
+                                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3"></th>
+                                                <th scope="col" class="px-6 py-3">Lapangan 1</th>
+                                                <th scope="col" class="px-6 py-3">Lapangan 2</th>
+                                                <th scope="col" class="px-6 py-3">Lapangan 3</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="bg-white border-b">
+                                                <td class="px-6 py-4 bg-gray-50 text-gray-900">
+                                                    Nama
+                                                </td>
+                                                <td class="px-6 py-4 bg-gray-100 italic text-gray-900">
+                                                    Hermansyah
+                                                </td>
+                                                <td class="px-6 py-4 bg-green-200 italic text-gray-900">
+                                                    Irawan
+                                                </td>
+                                                <td class="px-6 py-4 bg-green-200 italic text-gray-900">
+                                                    Sucipto
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-6 py-4 bg-gray-50 text-gray-900">
+                                                    Pesan dari admin
+                                                </td>
+                                                <td class="px-6 py-4 bg-gray-100 text-gray-900">
+                                                    Tidak ada.
+                                                </td>
+                                                <td class="px-6 py-4 bg-gray-100 text-gray-900">
+                                                    Tidak ada.
+                                                </td>
+                                                <td class="px-6 py-4 bg-gray-100 text-gray-900">
+                                                    Tidak ada.
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Modal footer -->
+                                <div
+                                    class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                    <button data-modal-hide="default-modal" type="button"
+                                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Close</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="today w-full max-w-4xl bg-white shadow-md rounded-lg max-sm:p-3 p-6 mt-5 mx-auto">
-                    <div class="">
-                        <table class="w-full text-sm text-center">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">JAM</th>
-                                    @foreach ($courts as $court)
-                                        <th scope="col" class="px-6 py-3">{{ $court['name_court'] }}</th>
-                                    @endforeach
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900">08:00</th>
-                                    <td class="px-6 py-4 bg-green-200 rounded">John Doe</td>
-                                    <td class="px-6 py-4 bg-gray-100 italic text-gray-500">Available</td>
-                                    <td class="px-6 py-4 bg-green-200 rounded">Mike Tyson</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900">09:00</th>
-                                    <td class="px-6 py-4 bg-gray-100 italic text-gray-500">Available</td>
-                                    <td class="px-6 py-4 bg-green-200 rounded">Jessica</td>
-                                    <td class="px-6 py-4 bg-gray-100 italic text-gray-500">Available</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900">10:00</th>
-                                    <td class="px-6 py-4 bg-gray-100 italic text-gray-500">Available</td>
-                                    <td class="px-6 py-4 bg-gray-100 italic text-gray-500">Available</td>
-                                    <td class="px-6 py-4 bg-green-200 rounded">Sarah</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
             </div>
+            <div class="today w-full max-w-4xl bg-white shadow-md rounded-lg max-sm:p-3 p-6 mt-5 mx-auto">
+                <div>
+                    <table class="w-full text-sm text-center">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">JAM</th>
+                                @if (count($courts) != 0)
+                                    @foreach ($courts as $court)
+                                        <th scope="col" class="px-6 py-3">{{ $court->name_court }}</th>
+                                    @endforeach
+                                @else
+                                    <th scope="col" class="px-6 py-3">Lapangan</th>
+                                @endif
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (count($todaySchedule) != 0)
+                                @foreach ($todaySchedule as $row)
+                                    <tr class="bg-white border-b">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900">
+                                            {{ $row['time'] }}
+                                        </th>
+
+                                        @foreach ($row['courts'] as $courtSlot)
+                                            <td
+                                                class="px-6 py-4 {{ $courtSlot['status'] == 'booked' ? 'bg-gray-100' : 'bg-green-200 italic text-gray-900' }}">
+                                                {{ $courtSlot['name'] }}
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                @endforeach
+                            @else
+                                @foreach ($slotJamHariIni as $row)
+                                    <tr class="bg-white border-b">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900">
+                                            {{ $row }}
+                                        </th>
+                                        <td class="px-6 py-4 bg-green-200 italic text-gray-900">
+                                            belum ada lapangan tersedia
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <div class="mt-5 ms-5 status">
                 <a href="" class="text-center bg-green-200 p-2 rounded-md">Tersedia</a>
                 <a href="" class="text-center bg-gray-200 p-2 rounded-md">Tidak Tersedia</a>
             </div>
         </div>
     </div>
+    </div>
     <footer class="bg-gray-300 text-center py-5 h-[100%] max-w-[2040px] mx-auto p-10">
         <h1>Make with love❤️</h1>
     </footer>
 
+
+
     <script>
+        function showDataBooking(jam, tanggal) {
+            fetch(`/get/booking/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    time: jam,
+                    date: tanggal
+                })
+            }).then(response => response.json()).then(data => {
+                console.log(data);
+            }).catch(err => console.log(err));
+        }
+
         const filterSchedule = document.getElementById('filter');
         const week = document.querySelector('.week');
         const today = document.querySelector('.today');

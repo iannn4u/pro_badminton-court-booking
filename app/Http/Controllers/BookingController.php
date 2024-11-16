@@ -6,57 +6,46 @@ use App\Models\Booking;
 use App\Http\Requests\StoreBookingRequest;
 use App\Http\Requests\UpdateBookingRequest;
 use App\Models\Court;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $time = $request->input('time');
+        $date = $request->input('date');
+        $formattedDate = Carbon::createFromFormat('d/m', $date)
+            ->year(Carbon::now()->year)
+            ->format('Y-m-d');
+        $jamAwal = (int) explode('.', $time)[0];
+        $jamAkhir = $jamAwal + 1;
+        $slotJam = $time . ' - ' . ($jamAkhir < 10 ? '0' . $jamAkhir . '.00' : $jamAkhir . '.00');
+        $result = Booking::where('time_booking', $slotJam)->where('date_booking', $formattedDate)->get();
+
+        $data = [
+            'response' => 200,
+            'data' => []
+        ];
+        foreach ($result as $r => $value) {
+            $data['data']['bookings'][$r] = [$value->name_booking, $value->message_booking];
+        }
+
+        return response()->json($data);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        $data["courts"] = Court::all();
-
-        return view('admin.booking.create', $data);
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBookingRequest $request)
-    {
-        dd($request);
-        if (count($request->time_booking) > 1) {
-            $lamaMain = count($request->time_booking) - 1;
-            $jamMulai = $request->time_booking[0] < 10 ? '0' . $request->time_booking[0] . '.00' : $request->time_booking[0] . '.00';
-            $jamSelesai = $request->time_booking[$lamaMain] < 10 ? '0' . $request->time_booking[$lamaMain] + 1 . '.00' : $request->time_booking[$lamaMain] + 1 . '.00';
-            $jamMain = $jamMulai . ' - ' . $jamSelesai;
-        } else {
-            $jamMulai = $request->time_booking[0] < 10 ? '0' . $request->time_booking[0] . '.00' : $request->time_booking[0] . '.00';
-            $jamSelesai = $request->time_booking[0] + 1 < 10 ? '0' . $request->time_booking[0] + 1 . '.00' : $request->time_booking[0] + 1 . '.00';
-            $jamMain = $jamMulai . ' - ' . $jamSelesai;
-            $jamMain = $jamMulai . ' - ' . $jamSelesai;
-        }
-
-        $data = [
-            'name_booking' => $request->name_booking,
-            'date_booking' => $request->date_booking,
-            'time_booking' => $jamMain,
-            'court_booking' => $request->court_booking,
-            'method_payment' => $request->method_payment,
-            'message_booking' => $request->description
-        ];
-        Booking::create($data);
-        session()->flash('message', 'Berhasil menambahkan jadwal.');
-        return redirect('/admin');
-    }
+    public function store(StoreBookingRequest $request) {}
 
     /**
      * Display the specified resource.
