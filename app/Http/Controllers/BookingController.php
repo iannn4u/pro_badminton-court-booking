@@ -28,10 +28,13 @@ class BookingController extends Controller
 
         $data = [
             'response' => 200,
-            'data' => []
         ];
         foreach ($result as $r => $value) {
-            $data['data']['bookings'][$r] = [$value->name_booking, $value->message_booking];
+            $data['bookings'][$r] = [
+                "name_booking" => $value->name_booking,
+                "court_booking" => $value->court_booking,
+                "message_booking" => $value->message_booking
+            ];
         }
 
         return response()->json($data);

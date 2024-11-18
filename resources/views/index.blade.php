@@ -190,7 +190,7 @@
                                 <div
                                     class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                        Jadwal Booking Pukul 8.00, Kamis, 14 November 2024.
+                                        Jadwal Pukul <span id="komplit"></span>
                                     </h3>
                                     <button type="button"
                                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -220,27 +220,33 @@
                                                 <td class="px-6 py-4 bg-gray-50 text-gray-900">
                                                     Nama
                                                 </td>
-                                                <td class="px-6 py-4 bg-gray-100 italic text-gray-900">
-                                                    Hermansyah
+                                                <td class="px-6 py-4 bg-green-200 italic text-gray-900"
+                                                    id="name_booking_court1">
+
                                                 </td>
-                                                <td class="px-6 py-4 bg-green-200 italic text-gray-900">
-                                                    Irawan
+                                                <td class="px-6 py-4 bg-green-200 italic text-gray-900"
+                                                    id="name_booking_court2">
+
                                                 </td>
-                                                <td class="px-6 py-4 bg-green-200 italic text-gray-900">
-                                                    Sucipto
+                                                <td class="px-6 py-4 bg-green-200 italic text-gray-900"
+                                                    id="name_booking_court3">
+
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="px-6 py-4 bg-gray-50 text-gray-900">
                                                     Pesan dari admin
                                                 </td>
-                                                <td class="px-6 py-4 bg-gray-100 text-gray-900">
+                                                <td class="px-6 py-4 bg-gray-100 text-gray-900"
+                                                    id="message_booking_court1">
                                                     Tidak ada.
                                                 </td>
-                                                <td class="px-6 py-4 bg-gray-100 text-gray-900">
+                                                <td class="px-6 py-4 bg-gray-100 text-gray-900"
+                                                    id="message_booking_court1">
                                                     Tidak ada.
                                                 </td>
-                                                <td class="px-6 py-4 bg-gray-100 text-gray-900">
+                                                <td class="px-6 py-4 bg-gray-100 text-gray-900"
+                                                    id="message_booking_court1">
                                                     Tidak ada.
                                                 </td>
                                             </tr>
@@ -321,6 +327,25 @@
 
     <script>
         function showDataBooking(jam, tanggal) {
+            const spanKomplit = document.querySelector('#komplit');
+            const lapangan1 = document.querySelector('#name_booking_court1');
+            const lapangan2 = document.querySelector('#name_booking_court2');
+            const lapangan3 = document.querySelector('#name_booking_court3');
+            const daysInIndonesian = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const d = new Date();
+            const newTanggal = `${tanggal}/${d.getFullYear()}`;
+            const dateParts = newTanggal.split('/');
+            const date = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`);
+            const dayIndex = date.getDay();
+            const options = {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            };
+            const tanggalSlot = new Intl.DateTimeFormat('id-ID', options).format(date);
+            const paketKomplitTanggal = `${jam}, ${daysInIndonesian[dayIndex]}, ${tanggalSlot}.`;
+            spanKomplit.textContent = paketKomplitTanggal;
+            let dataBooking;
             fetch(`/get/booking/`, {
                 method: 'POST',
                 headers: {
@@ -332,7 +357,38 @@
                     date: tanggal
                 })
             }).then(response => response.json()).then(data => {
-                console.log(data);
+                lapangan1.textContent = "Tersedia";
+                lapangan2.textContent = "Tersedia";
+                lapangan3.textContent = "Tersedia";
+                lapangan1.classList.add("bg-green-200");
+                lapangan1.classList.remove("bg-gray-100");
+
+                lapangan2.textContent = "Tersedia";
+                lapangan2.classList.add("bg-green-200");
+                lapangan2.classList.remove("bg-gray-100");
+
+                lapangan3.textContent = "Tersedia";
+                lapangan3.classList.add("bg-green-200");
+                lapangan3.classList.remove("bg-gray-100");
+                
+                data.bookings.forEach(booking => {
+                    console.log(booking);
+                    if (booking.court_booking === 'Lapangan 1') {
+                        lapangan1.textContent = booking.name_booking;
+                        lapangan1.classList.add("bg-gray-100")
+                        lapangan1.classList.remove("bg-green-200")
+                    }
+                    if (booking.court_booking === 'Lapangan 2') {
+                        lapangan2.textContent = booking.name_booking;
+                        lapangan2.classList.add("bg-gray-100")
+                        lapangan2.classList.remove("bg-green-200")
+                    }
+                    if (booking.court_booking === 'Lapangan 3') {
+                        lapangan3.textContent = booking.name_booking;
+                        lapangan3.classList.add("bg-gray-100")
+                        lapangan3.classList.remove("bg-green-200")
+                    }
+                });
             }).catch(err => console.log(err));
         }
 
