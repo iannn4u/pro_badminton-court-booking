@@ -9,6 +9,7 @@ use App\Models\Operational;
 use App\Rules\Tanggal;
 use Carbon\Carbon;
 use Filament\Forms;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
@@ -48,7 +49,7 @@ class BookingResource extends Resource
             ->schema([
                 TextInput::make('name_booking')->label(__('Nama Booking'))
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)->columnSpan(2),
 
                 DatePicker::make('date_booking')->label(__('Tanggal Booking'))
                     ->native(false)
@@ -92,7 +93,9 @@ class BookingResource extends Resource
 
                         return Booking::getAvailableSlotsForCourtAndDate($date, $court, $filteredSlots);
                     })
-                    ->required(),
+                    ->required()->columnSpan(2),
+
+                Checkbox::make('member')->label(__('Member. Main 1x seminggu selama satu bulan.'))->columnSpan(2),
 
                 Radio::make('method_payment')->label(__('Metode Pembayaran'))
                     ->options([
@@ -105,7 +108,7 @@ class BookingResource extends Resource
                 Textarea::make('message_booking')->label(__('Pesan'))
                     ->columnSpanFull(),
             ])
-            ->columns(1);
+            ->columns(2);
     }
 
 
@@ -123,17 +126,9 @@ class BookingResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('method_payment')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

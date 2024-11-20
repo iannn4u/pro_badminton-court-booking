@@ -40,6 +40,26 @@ class BookingController extends Controller
         return response()->json($data);
     }
 
+    public function search($name)
+    {
+        $bookings = Booking::where('name_booking', 'like', '%' . $name . '%')->take(5)->get();
+        $bookingsData = [];
+        foreach($bookings as $booking => $value) {
+            $bookingsData[$booking] = [
+                'name_booking' => $value->name_booking,
+                'court_booking' => $value->court_booking,
+                'date_booking' => $value->date_booking,
+                'time_booking' => $value->time_booking,
+            ];
+        }
+        $data = [
+            'response' => 200,
+            'bookings' => $bookingsData
+        ];
+
+        return response()->json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

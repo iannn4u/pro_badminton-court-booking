@@ -155,11 +155,106 @@
                     Schedule</h2>
                 <form class="max-w-sm shadow-md">
                     <select id="filter"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5">
                         <option selected value="week">Week</option>
                         <option value="day">Day</option>
                     </select>
                 </form>
+
+
+                <!-- Modal toggle -->
+                <button data-modal-target="search-modal" data-modal-toggle="search-modal"
+                    class="flex justify-center items-center gap-2 bg-gray-50 border shadow-md border-gray-300 text-gray-900 text-sm rounded-lg ocus:ring-4 focus:outline-none focus:ring-gray-500 focus:border-gray-500 font-medium  p-2.5 text-center"
+                    type="button">
+                    Search<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="size-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                </button>
+
+                <!-- Main modal -->
+                <div id="search-modal" tabindex="-1" aria-hidden="true"
+                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative p-4 w-full max-w-5xl max-h-full">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <!-- Modal header -->
+                            <div
+                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                    Search
+                                </h3>
+                                <button type="button"
+                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                    data-modal-hide="search-modal">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                    </svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="p-4 md:p-5 space-y-4">
+
+                                <div class="max-w-md mx-auto">
+                                    <label for="default-search"
+                                        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                                    <div class="relative">
+                                        <div
+                                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 20 20">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                            </svg>
+                                        </div>
+                                        <input type="search" id="search-input"
+                                            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                                            placeholder="Search nama..." required />
+                                        <button type="submit" onclick="search()" id="search-button"
+                                            class="text-white absolute end-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
+                                    </div>
+                                </div>
+                                <div class="relative overflow-x-auto">
+                                    <table
+                                        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        <thead
+                                            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3">
+                                                    Nama
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                    Tanggal
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                    Jam
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                    Lapangan
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table-booking">
+                                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                <th scope="row" colspan="4"
+                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                                    Cari data menggunakan search
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div>
                 <div class="week">
@@ -190,7 +285,7 @@
                                 <div
                                     class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                        Jadwal Pukul <span id="komplit"></span>
+                                        Jadwal <span id="komplit"></span>
                                     </h3>
                                     <button type="button"
                                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -207,50 +302,36 @@
                                 <!-- Modal body -->
                                 <div class="p-4 md:p-5 space-y-4">
                                     <table class="w-full text-sm text-center">
-                                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                        <thead class="text-xs text-gray-700 uppercase">
                                             <tr>
                                                 <th scope="col" class="px-6 py-3"></th>
-                                                <th scope="col" class="px-6 py-3">Lapangan 1</th>
-                                                <th scope="col" class="px-6 py-3">Lapangan 2</th>
-                                                <th scope="col" class="px-6 py-3">Lapangan 3</th>
+                                                @foreach ($courts as $court)
+                                                    <th scope="col" class="px-6 py-3 bg-gray-300">
+                                                        {{ $court->name_court }}</th>
+                                                @endforeach
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="bg-white border-b">
-                                                <td class="px-6 py-4 bg-gray-50 text-gray-900">
-                                                    Nama
-                                                </td>
-                                                <td class="px-6 py-4 bg-green-200 italic text-gray-900"
-                                                    id="name_booking_court1">
-
-                                                </td>
-                                                <td class="px-6 py-4 bg-green-200 italic text-gray-900"
-                                                    id="name_booking_court2">
-
-                                                </td>
-                                                <td class="px-6 py-4 bg-green-200 italic text-gray-900"
-                                                    id="name_booking_court3">
-
-                                                </td>
+                                                <td class="px-6 py-4 bg-gray-300 text-gray-900">Nama</td>
+                                                @foreach ($courts as $index => $court)
+                                                    <td class="px-6 py-4 bg-green-200 italic text-gray-900"
+                                                        id="name_booking_court{{ $index + 1 }}">
+                                                        Tersedia
+                                                    </td>
+                                                @endforeach
                                             </tr>
                                             <tr>
-                                                <td class="px-6 py-4 bg-gray-50 text-gray-900">
-                                                    Pesan dari admin
-                                                </td>
-                                                <td class="px-6 py-4 bg-gray-100 text-gray-900"
-                                                    id="message_booking_court1">
-                                                    Tidak ada.
-                                                </td>
-                                                <td class="px-6 py-4 bg-gray-100 text-gray-900"
-                                                    id="message_booking_court1">
-                                                    Tidak ada.
-                                                </td>
-                                                <td class="px-6 py-4 bg-gray-100 text-gray-900"
-                                                    id="message_booking_court1">
-                                                    Tidak ada.
-                                                </td>
+                                                <td class="px-6 py-4 bg-gray-300 text-gray-900">Pesan dari admin</td>
+                                                @foreach ($courts as $index => $court)
+                                                    <td class="px-6 py-4 bg-gray-100 text-gray-900"
+                                                        id="message_booking_court{{ $index + 1 }}">
+                                                        Tidak ada.
+                                                    </td>
+                                                @endforeach
                                             </tr>
                                         </tbody>
+
                                     </table>
                                 </div>
                                 <!-- Modal footer -->
@@ -319,18 +400,75 @@
         </div>
     </div>
     </div>
-    <footer class="bg-gray-300 text-center py-5 h-[100%] max-w-[2040px] mx-auto p-10">
+    {{-- <footer class="bg-gray-300 text-center py-5 h-[100%] max-w-[2040px] mx-auto p-10">
         <h1>Make with love❤️</h1>
-    </footer>
-
+    </footer> --}}
 
 
     <script>
+        function search() {
+            const input = document.querySelector('#search-input');
+            const button = document.querySelector('#search-button');
+            const tableBooking = document.querySelector('#table-booking');
+
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+            })
+            fetch('/get/search/booking/' + input.value).then(response => response.json()).then(response => {
+                if (response.bookings.length !== 0) {
+                    tableBooking.innerHTML = '';
+                    response.bookings.forEach(element => {
+                        tableBooking.innerHTML += `
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                <th scope="row"
+                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                                    ${element.name_booking}
+                                                </th>
+                                                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                                    ${formatTanggal(element.date_booking)}
+                                                </td>
+                                                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                                    ${element.time_booking}
+                                                </td>
+                                                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                                    ${element.court_booking}
+                                                </td>
+                                            </tr>
+                                            `
+                        console.log(element.date_booking)
+                    });
+                } else {
+                    tableBooking.innerHTML = `
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                <th scope="row" colspan="4"
+                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                                    Tidak ada data
+                                                </th>
+                                            </tr>
+                                            `
+                }
+            }).catch(e => console.log(e))
+        }
+
+        function formatTanggal(tanggal) {
+            const date = new Date(tanggal);
+            const hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const indexHari = date.getDay();
+            const options = {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            };
+            const tanggalTerformat = date.toLocaleDateString('id-ID', options);
+            const namaHari = hari[indexHari];
+            const tanggalLengkap = tanggalTerformat;
+
+            return tanggalLengkap;
+        }
+
         function showDataBooking(jam, tanggal) {
             const spanKomplit = document.querySelector('#komplit');
-            const lapangan1 = document.querySelector('#name_booking_court1');
-            const lapangan2 = document.querySelector('#name_booking_court2');
-            const lapangan3 = document.querySelector('#name_booking_court3');
             const daysInIndonesian = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
             const d = new Date();
             const newTanggal = `${tanggal}/${d.getFullYear()}`;
@@ -343,54 +481,41 @@
                 year: 'numeric'
             };
             const tanggalSlot = new Intl.DateTimeFormat('id-ID', options).format(date);
-            const paketKomplitTanggal = `${jam}, ${daysInIndonesian[dayIndex]}, ${tanggalSlot}.`;
+            const paketKomplitTanggal = `${daysInIndonesian[dayIndex]}, ${tanggalSlot}, pukul ${jam}.`;
             spanKomplit.textContent = paketKomplitTanggal;
-            let dataBooking;
+
             fetch(`/get/booking/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({
-                    time: jam,
-                    date: tanggal
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        time: jam,
+                        date: tanggal
+                    })
                 })
-            }).then(response => response.json()).then(data => {
-                lapangan1.textContent = "Tersedia";
-                lapangan2.textContent = "Tersedia";
-                lapangan3.textContent = "Tersedia";
-                lapangan1.classList.add("bg-green-200");
-                lapangan1.classList.remove("bg-gray-100");
-
-                lapangan2.textContent = "Tersedia";
-                lapangan2.classList.add("bg-green-200");
-                lapangan2.classList.remove("bg-gray-100");
-
-                lapangan3.textContent = "Tersedia";
-                lapangan3.classList.add("bg-green-200");
-                lapangan3.classList.remove("bg-gray-100");
-                
-                data.bookings.forEach(booking => {
-                    console.log(booking);
-                    if (booking.court_booking === 'Lapangan 1') {
-                        lapangan1.textContent = booking.name_booking;
-                        lapangan1.classList.add("bg-gray-100")
-                        lapangan1.classList.remove("bg-green-200")
-                    }
-                    if (booking.court_booking === 'Lapangan 2') {
-                        lapangan2.textContent = booking.name_booking;
-                        lapangan2.classList.add("bg-gray-100")
-                        lapangan2.classList.remove("bg-green-200")
-                    }
-                    if (booking.court_booking === 'Lapangan 3') {
-                        lapangan3.textContent = booking.name_booking;
-                        lapangan3.classList.add("bg-gray-100")
-                        lapangan3.classList.remove("bg-green-200")
-                    }
-                });
-            }).catch(err => console.log(err));
+                .then((response) => response.json())
+                .then((data) => {
+                    document.querySelectorAll('[id^="name_booking_court"]').forEach((lapangan) => {
+                        lapangan.textContent = "Tersedia";
+                        lapangan.classList.add("bg-green-200");
+                        lapangan.classList.remove("bg-gray-100");
+                    });
+                    data.bookings.forEach((booking) => {
+                        const courtElement = document.querySelector(
+                            `#name_booking_court${booking.court_booking.split(' ')[1]}`
+                        );
+                        if (courtElement) {
+                            courtElement.textContent = booking.name_booking;
+                            courtElement.classList.add("bg-gray-100");
+                            courtElement.classList.remove("bg-green-200");
+                        }
+                    });
+                })
+                .catch((e) => console.error(e));
         }
+
 
         const filterSchedule = document.getElementById('filter');
         const week = document.querySelector('.week');

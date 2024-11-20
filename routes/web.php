@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::post('/get/booking/', [BookingController::class, 'index']);
+Route::get('/get/search/booking/{name}', [BookingController::class, 'search']);
 
 Route::view('/login', 'admin.signin');
 Route::post('/login', function(Request $request) {
