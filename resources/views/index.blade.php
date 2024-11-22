@@ -306,14 +306,14 @@
                                             <tr>
                                                 <th scope="col" class="px-6 py-3"></th>
                                                 @foreach ($courts as $court)
-                                                    <th scope="col" class="px-6 py-3 bg-gray-300">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-100">
                                                         {{ $court->name_court }}</th>
                                                 @endforeach
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="bg-white border-b">
-                                                <td class="px-6 py-4 bg-gray-300 text-gray-900">Nama</td>
+                                                <td class="px-6 py-4 bg-gray-100 text-gray-900">Nama</td>
                                                 @foreach ($courts as $index => $court)
                                                     <td class="px-6 py-4 bg-green-200 italic text-gray-900"
                                                         id="name_booking_court{{ $index + 1 }}">
@@ -321,17 +321,7 @@
                                                     </td>
                                                 @endforeach
                                             </tr>
-                                            <tr>
-                                                <td class="px-6 py-4 bg-gray-300 text-gray-900">Pesan dari admin</td>
-                                                @foreach ($courts as $index => $court)
-                                                    <td class="px-6 py-4 bg-gray-100 text-gray-900"
-                                                        id="message_booking_court{{ $index + 1 }}">
-                                                        Tidak ada.
-                                                    </td>
-                                                @endforeach
-                                            </tr>
                                         </tbody>
-
                                     </table>
                                 </div>
                                 <!-- Modal footer -->

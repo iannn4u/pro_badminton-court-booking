@@ -29,8 +29,8 @@ class CourtResource extends Resource
                 Forms\Components\TextInput::make('price_court')
                     ->required()
                     ->numeric(),
-                Forms\Components\Textarea::make('description_court')
-                    ->columnSpanFull(),
+                // Forms\Components\Textarea::make('description_court')
+                //     ->columnSpanFull(),
             ]);
     }
 

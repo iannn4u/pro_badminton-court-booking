@@ -97,16 +97,16 @@ class BookingResource extends Resource
 
                 Checkbox::make('member')->label(__('Member. Main 1x seminggu selama satu bulan.'))->columnSpan(2),
 
-                Radio::make('method_payment')->label(__('Metode Pembayaran'))
-                    ->options([
-                        'Cash' => 'Cash',
-                        'Transfer' => 'Transfer',
-                        'DP' => 'DP'
-                    ])
-                    ->required(),
+                // Radio::make('method_payment')->label(__('Metode Pembayaran'))
+                //     ->options([
+                //         'Cash' => 'Cash',
+                //         'Transfer' => 'Transfer',
+                //         'DP' => 'DP'
+                //     ])
+                //     ->required(),
 
-                Textarea::make('message_booking')->label(__('Pesan'))
-                    ->columnSpanFull(),
+                // Textarea::make('message_booking')->label(__('Pesan'))
+                //     ->columnSpanFull(),
             ])
             ->columns(2);
     }

@@ -22,8 +22,8 @@ class CreateBooking extends CreateRecord
                     "date_booking" =>  $currentDate->format('Y-m-d'),
                     "time_booking" => $data['time_booking'],
                     "court_booking" => $data["court_booking"],
-                    "method_payment" => $data["method_payment"],
-                    "message_booking" => $data["message_booking"],
+                    // "method_payment" => $data["method_payment"],
+                    // "message_booking" => $data["message_booking"],
                     "created_at" => $date->format('Y-m-d H:i:s'),
                     "updated_at" => $date->format('Y-m-d H:i:s')
                 ]);
@@ -34,8 +34,8 @@ class CreateBooking extends CreateRecord
                         "date_booking" =>  $currentDate->format('Y-m-d'),
                         "time_booking" => $value,
                         "court_booking" => $data["court_booking"],
-                        "method_payment" => $data["method_payment"],
-                        "message_booking" => $data["message_booking"],
+                        // "method_payment" => $data["method_payment"],
+                        // "message_booking" => $data["message_booking"],
                         "created_at" => $date->format('Y-m-d H:i:s'),
                         "updated_at" => $date->format('Y-m-d H:i:s')
                     ]);
@@ -50,8 +50,8 @@ class CreateBooking extends CreateRecord
                     "date_booking" =>  $value['date_booking'],
                     "time_booking" => $value['time_booking'],
                     "court_booking" => $value["court_booking"],
-                    "method_payment" => $value["method_payment"],
-                    "message_booking" => $value["message_booking"],
+                    // "method_payment" => $value["method_payment"],
+                    // "message_booking" => $value["message_booking"],
                     "created_at" => $value["created_at"],
                     "updated_at" => $value["updated_at"]
                 ]);
@@ -86,8 +86,8 @@ class CreateBooking extends CreateRecord
                                 "date_booking" =>  $value['date_booking'],
                                 "time_booking" => $value['time_booking'],
                                 "court_booking" => $value["court_booking"],
-                                "method_payment" => $value["method_payment"],
-                                "message_booking" => $value["message_booking"],
+                                // "method_payment" => $value["method_payment"],
+                                // "message_booking" => $value["message_booking"],
                                 "created_at" => $date->format('Y-m-d H:i:s'),
                                 "updated_at" => $date->format('Y-m-d H:i:s')
                             ];

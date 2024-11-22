@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_court');
             $table->string('name_court');
             $table->string('price_court');
-            $table->text('description_court')->nullable();
+            // $table->text('description_court')->nullable();
             $table->timestamps();
         });
     }
