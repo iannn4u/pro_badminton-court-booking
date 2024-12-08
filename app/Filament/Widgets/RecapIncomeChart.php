@@ -2,7 +2,7 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\Laporan;
+use App\Models\Booking; // Menggunakan model Booking
 use Carbon\Carbon;
 use Filament\Widgets\ChartWidget;
 
@@ -20,9 +20,9 @@ class RecapIncomeChart extends ChartWidget
         for ($i = 4; $i >= 0; $i--) {
             $month = Carbon::now()->subMonths($i);
             $monthName = $month->format('M'); // Nama bulan
-            $income = Laporan::whereMonth('date_booking', $month->month)
+            $income = Booking::whereMonth('date_booking', $month->month)
                 ->whereYear('date_booking', $month->year)
-                ->sum('price_booking');
+                ->sum('price_booking'); // Mengambil total dari field price_booking
 
             $data[] = $income;
             $labels[] = $monthName;

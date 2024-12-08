@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Booking extends Model
 {
-    protected $fillable = ['name_booking', 'date_booking', 'time_booking', 'court_booking', 'method_payment', 'message_booking'];
+    protected $fillable = ['name_booking', 'date_booking', 'time_booking', 'court_booking', 'method_payment', 'message_booking', 'price_booking'];
     public $primaryKey = 'id_booking';
     public $incrementing = true;
     protected $keyType = 'int';
+    use SoftDeletes;
 
     public static function getAvailableSlotsForCourtAndDate($date, $court, $allSlots)
     {

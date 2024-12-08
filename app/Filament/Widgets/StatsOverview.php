@@ -24,7 +24,6 @@ class StatsOverview extends BaseWidget
         return [
             Stat::make('Jumlah Pengunjung Hari Ini', $jumlahPengunjung),
             Stat::make('Income Bulan Ini', $formattedKeuanganBulanIni),
-            Stat::make('Average time on page', '3:12'),
         ];
     }
 }

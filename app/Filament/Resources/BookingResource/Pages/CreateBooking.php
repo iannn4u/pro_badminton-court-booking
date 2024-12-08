@@ -182,7 +182,9 @@ class CreateBooking extends CreateRecord
             if (count($data["time_booking"]) == 1) {
                 Laporan::create([
                     "date_booking" => $tanggalBookingPertama->format('Y-m-d'),
-                    "price_booking" => $court->price_court
+                    "price_booking" => $court->price_court,
+                    "court_booking" => $data["court_booking"],
+                    "time_booking" => $data["time_booking"][0]
                 ]);
                 if ($i == 3) {
                     $singleData = [
@@ -190,6 +192,7 @@ class CreateBooking extends CreateRecord
                         "date_booking" => $tanggalBookingPertama->format('Y-m-d'),
                         "time_booking" => $data["time_booking"][0],
                         "court_booking" => $data["court_booking"],
+                        "price_booking" => $court->price_court,
                         // "method_payment" => $value["method_payment"],
                         // "message_booking" => $value["message_booking"],
                         "created_at" => $date->format('Y-m-d H:i:s'),
@@ -201,6 +204,7 @@ class CreateBooking extends CreateRecord
                         "date_booking" =>  $tanggalBookingPertama->format('Y-m-d'),
                         "time_booking" => $data["time_booking"][0],
                         "court_booking" => $data["court_booking"],
+                        "price_booking" => $court->price_court,
                         // "method_payment" => $value["method_payment"],
                         // "message_booking" => $value["message_booking"],
                         "created_at" => $date->format('Y-m-d H:i:s'),
@@ -213,7 +217,9 @@ class CreateBooking extends CreateRecord
                 foreach ($data["time_booking"] as $time) {
                     Laporan::create([
                         "date_booking" => $tanggalBookingPertama->format('Y-m-d'),
-                        "price_booking" => $court->price_court
+                        "price_booking" => $court->price_court,
+                        "court_booking" => $data["court_booking"],
+                        "time_booking" => $time
                     ]);
                     if ($endDataTimeBooking == $time && $i == 3) {
                         $singleData = [
@@ -221,6 +227,7 @@ class CreateBooking extends CreateRecord
                             "date_booking" =>   $tanggalBookingPertama->format('Y-m-d'),
                             "time_booking" => $time,
                             "court_booking" => $data["court_booking"],
+                            "price_booking" => $court->price_court,
                             // "method_payment" => $value["method_payment"],
                             // "message_booking" => $value["message_booking"],
                             "created_at" => $date->format('Y-m-d H:i:s'),
@@ -232,6 +239,7 @@ class CreateBooking extends CreateRecord
                             "date_booking" =>  $tanggalBookingPertama->format('Y-m-d'),
                             "time_booking" => $time,
                             "court_booking" => $data["court_booking"],
+                            "price_booking" => $court->price_court,
                             // "method_payment" => $value["method_payment"],
                             // "message_booking" => $value["message_booking"],
                             "created_at" => $date->format('Y-m-d H:i:s'),
@@ -251,12 +259,15 @@ class CreateBooking extends CreateRecord
         $date = Carbon::now();
         $court = Court::where("name_court", $data["court_booking"])->first();
         unset($data["member"]);
-        
+
         if (count($data["time_booking"]) == 1) {
             Laporan::create([
                 "date_booking" => $data["date_booking"],
-                "price_booking" => $court->price_court
+                "price_booking" => $court->price_court,
+                "court_booking" => $data["court_booking"],
+                "time_booking" => $data["time_booking"][0]
             ]);
+            $data["price_booking"] = $court->price_court;
             $data["time_booking"] = $data["time_booking"][0];
             return $data;
         } else {
@@ -265,7 +276,9 @@ class CreateBooking extends CreateRecord
             foreach ($data["time_booking"] as $time) {
                 Laporan::create([
                     "date_booking" => $data["date_booking"],
-                    "price_booking" => $court->price_court
+                    "price_booking" => $court->price_court,
+                    "time_booking" => $time,
+                    "court_booking" => $data["court_booking"],
                 ]);
                 if ($time == $endDataTimeBooking) {
                     $singleData = [
@@ -273,6 +286,7 @@ class CreateBooking extends CreateRecord
                         "date_booking" =>  $data['date_booking'],
                         "time_booking" => $time,
                         "court_booking" => $data["court_booking"],
+                        "price_booking" => $court->price_court,
                         // "method_payment" => $value["method_payment"],
                         // "message_booking" => $value["message_booking"],
                         "created_at" => $date->format('Y-m-d H:i:s'),
@@ -284,6 +298,7 @@ class CreateBooking extends CreateRecord
                         "date_booking" =>  $data['date_booking'],
                         "time_booking" => $time,
                         "court_booking" => $data["court_booking"],
+                        "price_booking" => $court->price_court,
                         // "method_payment" => $value["method_payment"],
                         // "message_booking" => $value["message_booking"],
                         "created_at" => $date->format('Y-m-d H:i:s'),

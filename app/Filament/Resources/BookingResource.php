@@ -51,17 +51,17 @@ class BookingResource extends Resource
                     ->required()
                     ->maxLength(255)->columnSpan(2),
 
+                Radio::make('court_booking')->label(__('Lapangan Booking'))
+                    ->options($newCourts)
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(fn(callable $set) => $set('time_booking', null)),
+
                 DatePicker::make('date_booking')->label(__('Tanggal Booking'))
                     ->native(false)
                     ->weekStartsOnMonday()
                     ->required()
                     ->rules(['after_or_equal:today'])
-                    ->reactive()
-                    ->afterStateUpdated(fn(callable $set) => $set('time_booking', null)),
-
-                Radio::make('court_booking')->label(__('Lapangan Booking'))
-                    ->options($newCourts)
-                    ->required()
                     ->reactive()
                     ->afterStateUpdated(fn(callable $set) => $set('time_booking', null)),
 
@@ -88,7 +88,6 @@ class BookingResource extends Resource
 
                                 return $startHour >= $currentHour;
                             });
-
                         }
 
                         return Booking::getAvailableSlotsForCourtAndDate($date, $court, $filteredSlots);
@@ -124,12 +123,10 @@ class BookingResource extends Resource
                     ->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('court_booking')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('method_payment')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('method_payment')
+                //     ->searchable(),
             ])
-            ->filters([
-                
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('laporans', function (Blueprint $table) {
             $table->id("id_laporan");
+            $table->string("time_booking");
             $table->string("date_booking");
             $table->string("price_booking");
+            $table->string("court_booking");
             $table->timestamps();
         });
     }

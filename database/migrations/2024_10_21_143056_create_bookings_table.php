@@ -17,9 +17,12 @@ return new class extends Migration
             $table->string("date_booking");
             $table->string("time_booking");
             $table->string("court_booking");
+            $table->string("price_booking");
+            $table->boolean("expired")->default(0)->nullable();
             // $table->string("method_payment");
             // $table->text("message_booking")->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
