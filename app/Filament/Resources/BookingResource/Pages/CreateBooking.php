@@ -253,12 +253,20 @@ class CreateBooking extends CreateRecord
         unset($data["member"]);
         
         if (count($data["time_booking"]) == 1) {
+            Laporan::create([
+                "date_booking" => $data["date_booking"],
+                "price_booking" => $court->price_court
+            ]);
             $data["time_booking"] = $data["time_booking"][0];
             return $data;
         } else {
             $endDataTimeBooking = end($data["time_booking"]);
 
             foreach ($data["time_booking"] as $time) {
+                Laporan::create([
+                    "date_booking" => $data["date_booking"],
+                    "price_booking" => $court->price_court
+                ]);
                 if ($time == $endDataTimeBooking) {
                     $singleData = [
                         "name_booking" => $data["name_booking"],
@@ -284,10 +292,6 @@ class CreateBooking extends CreateRecord
                 }
             }
         }
-        Laporan::create([
-            "date_booking" => $data["date_booking"],
-            "price_booking" => $court->price_court
-        ]);
 
         return $singleData;
     }

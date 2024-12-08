@@ -3,6 +3,8 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Widgets\StatsOverview;
+use App\Filament\Widgets\RecapIncomeChart;
+use App\Filament\Widgets\RecapPengunjungChart;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -38,7 +40,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->widgets([
                 Widgets\AccountWidget::class,
-                StatsOverview::class
+                StatsOverview::class,
+                RecapIncomeChart::class,
+                RecapPengunjungChart::class
             ])
             ->middleware([
                 EncryptCookies::class,
