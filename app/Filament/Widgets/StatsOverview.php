@@ -13,12 +13,11 @@ class StatsOverview extends BaseWidget
     protected function getStats(): array
     {
         $jumlahPengunjung = Booking::whereDate('date_booking', Carbon::today())->count();
-        $jumlahPengunjungBulanIni = Laporan::whereMonth('date_booking', Carbon::now()->month)->whereYear('date_booking', Carbon::now()->year)->get();
-        $keuanganBulanIni = 0;
-        foreach ($jumlahPengunjungBulanIni as $pengunjung) {
-            $keuanganBulanIni += (int)$pengunjung->price_booking;
-        }
-        
+
+        $keuanganBulanIni = Booking::whereMonth('date_booking', Carbon::now()->month)
+            ->whereYear('date_booking', Carbon::now()->year)
+            ->sum('price_booking'); // Hitung langsung menggunakan sum()
+
         $formattedKeuanganBulanIni = 'Rp ' . number_format($keuanganBulanIni, 0, ',', '.');
 
         return [
