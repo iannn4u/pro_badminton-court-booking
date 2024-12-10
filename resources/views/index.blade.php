@@ -35,8 +35,8 @@
                 class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
                 data-carousel-prev>
                 <span
-                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M5 1 1 5l4 4" />
@@ -48,8 +48,8 @@
                 class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
                 data-carousel-next>
                 <span
-                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 9 4-4-4-4" />
@@ -96,10 +96,10 @@
             <div class="flex flex-wrap justify-between items-center">
                 <div class="font-normal mt-5 max-lg:w-full">
                     <div
-                        class="block w-full lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        class="block w-full lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+                        <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
                             Fasilitas</h5>
-                        <p class="font-normal text-gray-700 dark:text-gray-400">
+                        <p class="font-normal text-gray-700">
                             - 3 lapangan kayu <br>
                             - Kamar mandi dan musholla <br>
                             - kantin <br></p>
@@ -107,10 +107,10 @@
                 </div>
                 <div class="font-normal mt-5 max-lg:w-full">
                     <div
-                        class="block lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        class="block lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+                        <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
                             Harga Sewa</h5>
-                        <p class="font-normal text-gray-700 dark:text-gray-400">
+                        <p class="font-normal text-gray-700">
                             - 1 jam: Rp. 50.000 <br>
                             - 3 jam: Rp. 120.000 <br>
                             - Hubungi Whatsapp untuk member <br></p>
@@ -118,11 +118,11 @@
                 </div>
                 <div class="font-normal mt-5 max-lg:w-full">
                     <div
-                        class="block lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        class="block lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+                        <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
                             Review Lapangan
                         </h5>
-                        <p class="font-normal text-gray-700 dark:text-gray-400">
+                        <p class="font-normal text-gray-700">
                             - <a href="https://www.instagram.com/reel/"
                                 class="underline hover:text-green-600">https://www.instagram.com/reel/</a> <br>
                             - <a href="https://www.instagram.com/reel/"
@@ -131,11 +131,11 @@
                 </div>
                 <div class="font-normal mt-5 max-lg:w-full">
                     <div
-                        class="block lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        class="block lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+                        <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
                             Booking Policy
                         </h5>
-                        <p class="font-normal text-gray-700 dark:text-gray-400">
+                        <p class="font-normal text-gray-700">
                             - Untuk mendapatkan MEMBER, silakan hubungi Admin via whatsapp <a href="0812 3456 7891"
                                 class="underline hover:text-green-600">0812 3456
                                 7891</a> <br>
@@ -178,15 +178,15 @@
                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div class="relative p-4 w-full max-w-5xl max-h-full">
                         <!-- Modal content -->
-                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <div class="relative bg-white rounded-lg shadow">
                             <!-- Modal header -->
                             <div
-                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                                <h3 class="text-xl font-semibold text-gray-900">
                                     Search
                                 </h3>
                                 <button type="button"
-                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                                     data-modal-hide="search-modal">
                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         fill="none" viewBox="0 0 14 14">
@@ -201,11 +201,11 @@
 
                                 <div class="max-w-md mx-auto">
                                     <label for="default-search"
-                                        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                                        class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                                     <div class="relative">
                                         <div
                                             class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                            <svg class="w-4 h-4 text-gray-500" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 20 20">
                                                 <path stroke="currentColor" stroke-linecap="round"
@@ -222,9 +222,9 @@
                                 </div>
                                 <div class="relative overflow-x-auto">
                                     <table
-                                        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        class="w-full text-sm text-left rtl:text-right text-gray-500">
                                         <thead
-                                            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="text-xs text-gray-700 uppercase bg-gray-50">
                                             <tr>
                                                 <th scope="col" class="px-6 py-3">
                                                     Nama
@@ -241,7 +241,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="table-booking">
-                                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            <tr class="bg-white border-b">
                                                 <th scope="row" colspan="4"
                                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                                     Cari data menggunakan search
@@ -280,15 +280,15 @@
                         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-2xl max-h-full">
                             <!-- Modal content -->
-                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <div class="relative bg-white rounded-lg shadow">
                                 <!-- Modal header -->
                                 <div
-                                    class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                    class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                                    <h3 class="text-xl font-semibold text-gray-900">
                                         Jadwal <span id="komplit"></span>
                                     </h3>
                                     <button type="button"
-                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                                         data-modal-hide="default-modal">
                                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             fill="none" viewBox="0 0 14 14">
@@ -326,9 +326,9 @@
                                 </div>
                                 <!-- Modal footer -->
                                 <div
-                                    class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                    class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
                                     <button data-modal-hide="default-modal" type="button"
-                                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Close</button>
+                                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Close</button>
                                 </div>
                             </div>
                         </div>
@@ -409,7 +409,7 @@
                     tableBooking.innerHTML = '';
                     response.bookings.forEach(element => {
                         tableBooking.innerHTML += `
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <tr class="bg-white border-b">
                                                 <th scope="row"
                                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                                     ${element.name_booking}
@@ -429,7 +429,7 @@
                     });
                 } else {
                     tableBooking.innerHTML = `
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <tr class="bg-white border-b">
                                                 <th scope="row" colspan="4"
                                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                                     Tidak ada data
