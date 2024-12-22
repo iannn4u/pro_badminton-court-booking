@@ -15,8 +15,8 @@
 </head>
 
 <body class="text-gray-900 font-semibold">
-    <div class="bg-gray-100 h-[100%] max-w-[2040px] mx-auto md:p-10 p-5">
-        <div id="controls-carousel" class="relative md:w-[80%] mx-auto" data-carousel="static">
+    <div class="bg-gray-100 h-[100%] max-w-[2040px] mx-auto md:p-10">
+        <div id="controls-carousel" class="relative md:w-[80%] mx-auto max-md:p-3 rounded-3xl" data-carousel="static">
             <!-- Carousel wrapper -->
             <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                 <!-- Item 1 -->
@@ -58,7 +58,7 @@
                 </span>
             </button>
         </div>
-        <div class="xl:ms-[130px] lg:ms-[105px] md:ms-[90px] my-5 lg:my-10">
+        <div class="xl:ms-[130px] lg:ms-[105px] md:ms-[90px] mb-5 lg:my-10 max-md:p-5">
             <h1 class="max-sm:text-3xl text-4xl font-bold">Gor Puja Bangsa</h1>
             <div class="mt-2 gap-1 flex flex-col max-sm:text-sm">
                 <p class="flex gap-2 items-center">
@@ -90,10 +90,10 @@
                 </a>
             </div>
         </div>
-        <div class="bg-gray-300 md:w-[80%] mx-auto h-0.5"></div>
-        <div class="md:ms-[30px] my-10">
+        <div class="bg-gray-300 md:w-[80%] mx-auto h-0.5 w-[85%]"></div>
+        <div class="md:ms-[30px] my-10 max-md:p-5">
             <h2 class="text-2xl md:text-3xl font-bold text-center">Highlights</h2>
-            <div class="flex flex-wrap justify-between items-center">
+            <div class="flex flex-wrap justify-between items-center md:w-max gap-5 mx-auto">
                 <div class="font-normal mt-5 max-lg:w-full">
                     <div
                         class="block w-full lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -129,24 +129,11 @@
                                 class="underline hover:text-green-600">https://www.instagram.com/reel/</a> <br>
                     </div>
                 </div>
-                <div class="font-normal mt-5 max-lg:w-full">
-                    <div
-                        class="block lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            Booking Policy
-                        </h5>
-                        <p class="font-normal text-gray-700 dark:text-gray-400">
-                            - Untuk mendapatkan MEMBER, silakan hubungi Admin via whatsapp <a href="0812 3456 7891"
-                                class="underline hover:text-green-600">0812 3456
-                                7891</a> <br>
-                            - DP harus dibayar dalam waktu 30 menit setelah booking. <br>
-                    </div>
-                </div>
             </div>
         </div>
-        <div class="bg-gray-300 md:w-[80%] mx-auto h-0.5"></div>
-        <div class="lg:ms-[130px] my-20 lg:max-w-[81%]">
-            <div class="flex gap-5">
+        <div class="bg-gray-300 md:w-[80%] mx-auto h-0.5 w-[85%]"></div>
+        <div class="lg:ms-[130px] mt-20 pb-10 lg:max-w-[81%]">
+            <div class="flex gap-5 max-md:p-5">
                 <h2 class="text-2xl font-bold flex gap-2 items-center"><svg xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -157,16 +144,16 @@
                     <select id="filter"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5">
                         <option selected value="week">Week</option>
-                        <option value="day">Day</option>
+                        <option value="day">Today</option>
                     </select>
                 </form>
 
 
                 <!-- Modal toggle -->
                 <button data-modal-target="search-modal" data-modal-toggle="search-modal"
-                    class="flex justify-center items-center gap-2 bg-gray-50 border shadow-md border-gray-300 text-gray-900 text-sm rounded-lg ocus:ring-4 focus:outline-none focus:ring-gray-500 focus:border-gray-500 font-medium  p-2.5 text-center"
+                    class="flex justify-between items-center gap-2 bg-gray-50 border shadow-md border-gray-300 text-gray-900 text-sm rounded-lg ocus:ring-4 focus:outline-none focus:ring-gray-500 focus:border-gray-500 font-medium  p-2.5 text-center w-32"
                     type="button">
-                    Search<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    <p>Search</p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor" class="size-4">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -200,7 +187,7 @@
                             <div class="p-4 md:p-5 space-y-4">
 
                                 <div class="max-w-md mx-auto">
-                                    <label for="default-search"
+                                    <label for="search-input"
                                         class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                                     <div class="relative">
                                         <div
@@ -214,7 +201,7 @@
                                             </svg>
                                         </div>
                                         <input type="search" id="search-input"
-                                            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                                            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500"
                                             placeholder="Search nama..." required />
                                         <button type="submit" onclick="search()" id="search-button"
                                             class="text-white absolute end-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
@@ -258,16 +245,16 @@
             </div>
             <div>
                 <div class="week">
-                    <div class="grid grid-cols-7 gap-2 mt-10">
+                    <div class="grid grid-cols-7 gap-2 mt-10 max-md:mt-5 max-md:p-5 max-md:pt-0">
                         @foreach ($dates as $day)
                             <div class="grid grid-cols-{{ count($day['slots']) + 1 }} gap-2">
-                                <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center">
+                                <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center max-md:text-sm">
                                     <span>{{ $day['day'] }}</span><span>{{ $day['date'] }}</span>
                                 </p>
                                 @foreach ($day['slots'] as $slot)
                                     <button data-modal-target="default-modal" data-modal-toggle="default-modal"
                                         onclick="showDataBooking('{{ $slot['time'] }}', '{{ $day['date'] }}')"
-                                        class="text-center {{ $slot['is_full'] ? 'bg-slate-200' : 'bg-green-200' }} w-full py-1 rounded-md"
+                                        class="text-center {{ $slot['is_full'] ? 'bg-slate-200' : 'bg-green-200' }} w-full py-1 rounded-md max-md:text-xs max-md:px-2"
                                         type="button">
                                         {{ $slot['time'] }}
                                     </button>
@@ -307,7 +294,8 @@
                                                 <th scope="col" class="px-6 py-3"></th>
                                                 @foreach ($courts as $court)
                                                     <th scope="col" class="px-6 py-3 bg-gray-100">
-                                                        {{ $court->name_court }}</th>
+                                                        {{ $court->name_court }}
+                                                    </th>
                                                 @endforeach
                                             </tr>
                                         </thead>
@@ -335,18 +323,18 @@
                     </div>
                 </div>
             </div>
-            <div class="today w-full max-w-4xl bg-white shadow-md rounded-lg max-sm:p-3 p-6 mt-5 mx-auto">
-                <div>
+            <div class="today w-full max-w-4xl p-2 mt-5 mx-auto">
+                <div class="bg-white shadow-md rounded-lg max-md:p-3 p-6">
                     <table class="w-full text-sm text-center">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <thead class="text-gray-700 uppercase bg-gray-50">
                             <tr>
-                                <th scope="col" class="px-6 py-3">JAM</th>
+                                <th scope="col" class="px-6 py-3 max-md:text-xs max-md:py-3 max-md:px-0">JAM</th>
                                 @if (count($courts) != 0)
                                     @foreach ($courts as $court)
-                                        <th scope="col" class="px-6 py-3">{{ $court->name_court }}</th>
+                                        <th scope="col" class="px-6 py-3 max-md:text-xs max-md:py-3 max-md:px-0">{{ $court->name_court }}</th>
                                     @endforeach
                                 @else
-                                    <th scope="col" class="px-6 py-3">Lapangan</th>
+                                    <th scope="col" class="px-6 py-3 max-md:text-xs max-md:py-3 max-md:px-0">Lapangan</th>
                                 @endif
                             </tr>
                         </thead>
@@ -383,17 +371,12 @@
                 </div>
             </div>
 
-            <div class="mt-5 ms-5 status">
-                <a href="" class="text-center bg-green-200 p-2 rounded-md">Tersedia</a>
-                <a href="" class="text-center bg-gray-200 p-2 rounded-md">Tidak Tersedia</a>
+            <div class="mt-5 max-md:mt-2 ms-5 status">
+                <a href="" class="text-center bg-green-200 p-2 rounded-md max-md:text-sm">Tersedia</a>
+                <a href="" class="text-center bg-gray-200 p-2 rounded-md max-md:text-sm">Tidak Tersedia</a>
             </div>
         </div>
     </div>
-    </div>
-    {{-- <footer class="bg-gray-300 text-center py-5 h-[100%] max-w-[2040px] mx-auto p-10">
-        <h1>Make with love❤️</h1>
-    </footer> --}}
-
 
     <script>
         function search() {
@@ -425,7 +408,6 @@
                                                 </td>
                                             </tr>
                                             `
-                        console.log(element.date_booking)
                     });
                 } else {
                     tableBooking.innerHTML = `
@@ -492,16 +474,16 @@
                         lapangan.classList.add("bg-green-200");
                         lapangan.classList.remove("bg-gray-100");
                     });
-                    data.bookings.forEach((booking) => {
-                        const courtElement = document.querySelector(
-                            `#name_booking_court${booking.court_booking.split(' ')[1]}`
-                        );
+                    if (Array.isArray(data.bookings) && data.bookings.length > 0) {
+                        data.bookings.forEach((booking) => {
+                        const courtElement = document.querySelector(`#name_booking_court${booking.court_booking.split(' ')[1]}`);
                         if (courtElement) {
-                            courtElement.textContent = booking.name_booking;
-                            courtElement.classList.add("bg-gray-100");
-                            courtElement.classList.remove("bg-green-200");
-                        }
-                    });
+                                courtElement.textContent = booking.name_booking;
+                                courtElement.classList.add("bg-gray-300");
+                                courtElement.classList.remove("bg-green-200");
+                            }
+                        });
+                    }
                 })
                 .catch((e) => console.error(e));
         }
