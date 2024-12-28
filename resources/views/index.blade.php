@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name') }}</title>
 
@@ -60,7 +61,7 @@
             </button>
         </div>
         <div class="xl:ms-[135px] lg:ms-[105px] md:ms-[90px] mb-5 lg:my-10 max-md:p-5">
-            <h1 class="max-sm:text-3xl text-4xl font-bold">Gor Puja Bangsa</h1>
+            <h1 class="max-sm:text-3xl text-4xl font-bold">GOR Puja Bangsa</h1>
             <div class="mt-2 gap-1 flex flex-col max-sm:text-sm">
                 <p class="flex gap-2 items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -95,8 +96,8 @@
         <div class="bg-gray-300 md:w-[80%] mx-auto h-0.5 w-[85%]"></div>
         <div class="md:ms-[30px] my-10 max-md:p-5">
             <h2 class="text-2xl md:text-3xl font-bold text-center mb-3">Highlights</h2>
-            <div class="flex flex-wrap justify-between items-center md:w-max gap-5 mx-auto">
-                <div class="font-normal mt-5 max-lg:w-full">
+            <div class="flex flex-wrap mt-10 justify-between items-center max-xl:w-full xl:w-max gap-5 mx-auto">
+                <div class="font-normal max-lg:w-full">
                     <div
                         class="block w-full lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
                         <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
@@ -107,7 +108,7 @@
                             - kantin <br></p>
                     </div>
                 </div>
-                <div class="font-normal mt-5 max-lg:w-full">
+                <div class="font-normal max-lg:w-full">
                     <div
                         class="block lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
                         <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
@@ -118,7 +119,7 @@
                             - Hubungi Whatsapp untuk member <br></p>
                     </div>
                 </div>
-                <div class="font-normal mt-5 max-lg:w-full">
+                <div class="font-normal max-lg:w-full">
                     <div
                         class="block lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
                         <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
@@ -135,32 +136,35 @@
         </div>
         <div class="bg-gray-300 md:w-[80%] mx-auto h-0.5 w-[85%]"></div>
         <div class="lg:ms-[130px] mt-20 pb-10 lg:max-w-[81%]">
-            <div class="flex gap-5 max-md:p-5">
-                <h2 class="text-2xl font-bold flex gap-2 items-center"><svg xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <div class="flex gap-5 max-md:p-5 max-[415px]:flex-col">
+                <h2 class="text-xl md:text-2xl font-bold flex gap-2 items-center"><svg
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
                     </svg>
                     Schedule</h2>
-                <form class="max-w-sm shadow-md">
-                    <select id="filter"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5">
-                        <option selected value="week">Week</option>
-                        <option value="day">Today</option>
-                    </select>
-                </form>
+                <div class="flex gap-5">
+                    <form class="max-w-sm shadow-md">
+                        <select id="filter"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5">
+                            <option selected value="week">Week</option>
+                            <option value="day">Today</option>
+                        </select>
+                    </form>
 
 
-                <!-- Modal toggle -->
-                <button data-modal-target="search-modal" data-modal-toggle="search-modal"
-                    class="flex justify-between items-center gap-2 bg-gray-50 border shadow-md border-gray-300 text-gray-900 text-sm rounded-lg ocus:ring-4 focus:outline-none focus:ring-gray-500 focus:border-gray-500 font-medium  p-2.5 text-center w-32"
-                    type="button">
-                    <p>Search</p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="currentColor" class="size-4">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
-                </button>
+                    <!-- Modal toggle -->
+                    <button data-modal-target="search-modal" data-modal-toggle="search-modal"
+                        class="flex justify-between items-center gap-2 bg-gray-50 border shadow-md border-gray-300 text-gray-900 text-sm rounded-lg ocus:ring-4 focus:outline-none focus:ring-gray-500 focus:border-gray-500 font-medium  p-2.5 text-center w-32"
+                        type="button">
+                        <p>Search</p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>
+                    </button>
+                </div>
 
                 <!-- Main modal -->
                 <div id="search-modal" tabindex="-1" aria-hidden="true"
@@ -203,7 +207,7 @@
                                         </div>
                                         <input type="search" id="search-input"
                                             class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500"
-                                            placeholder="Search nama..." required />
+                                            placeholder="Search nama..." required autocomplete="off" />
                                         <button type="submit" onclick="search()" id="search-button"
                                             class="text-white absolute end-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
                                     </div>
@@ -212,16 +216,16 @@
                                     <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                             <tr>
-                                                <th scope="col" class="px-6 py-3">
+                                                <th scope="col" class="px-6 py-3 text-center">
                                                     Nama
                                                 </th>
-                                                <th scope="col" class="px-6 py-3">
+                                                <th scope="col" class="px-6 py-3 text-center">
                                                     Tanggal
                                                 </th>
-                                                <th scope="col" class="px-6 py-3">
+                                                <th scope="col" class="px-6 py-3 text-center">
                                                     Jam
                                                 </th>
-                                                <th scope="col" class="px-6 py-3">
+                                                <th scope="col" class="px-6 py-3 text-center">
                                                     Lapangan
                                                 </th>
                                             </tr>
@@ -243,54 +247,48 @@
 
             </div>
             <div>
-                <div class="week">
-                    <div class="grid grid-cols-7 gap-2 mt-10 max-md:mt-5 max-md:p-5 max-md:pt-0">
-                        {{-- @foreach ($dates as $day)
-                            <div class="grid grid-cols-{{ count($day['slots']) + 1 }} gap-2">
-                                <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center max-md:text-sm">
-                                    <span>{{ $day['day'] }}</span><span>{{ $day['date'] }}</span>
-                                </p>
-                                @foreach ($day['slots'] as $slot)
-                                    <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-                                        onclick="showDataBooking('{{ $slot['time'] }}', '{{ $day['date'] }}')"
-                                        class="text-center {{ $slot['is_full'] ? 'bg-slate-200' : 'bg-green-200' }} w-full py-1 rounded-md max-md:text-xs max-md:px-2"
-                                        type="button">
-                                        {{ $slot['time'] }}
-                                    </button>
-                                @endforeach
-                            </div>
-                        @endforeach --}}
-                        @php
-                            $partsTimeOpen = explode(':', $time_open);
-                            $partsTimeClose = explode(':', $time_close);
-                            $incrementOpen = (int)$partsTimeOpen[0];
-                            $incrementClose = (int)$partsTimeClose[0] == 0 ? 24 : (int)$partsTimeClose[0];
-                        @endphp
-                        @foreach ($date_slot_week as $date)
-                            <div class="grid gap-2">
+                <div class="week max-[420px]:overflow-x-scroll">
+                    <div
+                        class="grid grid-cols-7 gap-2 mt-10 max-[415px]:mt-0 max-md:mt-5 max-md:p-2 max-md:pt-0 max-[420px]:w-max">
+                        @foreach ($week as $day => $slots)
+                            <div class="grid grid-cols-1 space-y-2">
+                                <!-- Tampilkan Nama Hari -->
                                 <p
-                                    class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center max-md:text-sm">
-                                    <span>
-                                        @php
-                                            $partsDate = explode(' ', $date);
-                                            $hari = $partsDate[0];
-                                            $tanggal = $partsDate[1];
-                                        @endphp
-                                        {{ $hari }}<br>{{ $tanggal }}
-                                    </span>
+                                    class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center max-md:text-xs">
+                                    @php
+                                        $partsDay = explode(' ', $day);
+                                    @endphp
+                                    <span>{{ $partsDay[0] }}<br />{{ $partsDay[1] }}</span>
                                 </p>
-                                @for ($jamBuka = $incrementOpen; $jamBuka <= $incrementClose; $jamBuka++)
-                                    <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-                                        class="text-center {{ $jamBuka % 2 == 0 ? 'bg-slate-200' : 'bg-green-200' }} w-full py-1 rounded-md max-md:text-xs max-md:px-2"
-                                        type="button">
-                                        {{ $jamBuka < 10 ? '0' . $jamBuka . '.00' : $jamBuka . '.00' }}
-                                    </button>
-                                @endfor
+
+                                <!-- Iterasi Slot Waktu -->
+                                @foreach ($slots as $slot)
+                                    @if ($courts->isEmpty())
+                                        <button
+                                            class="text-center cursor-not-allowed bg-slate-200 w-full py-1 rounded-md max-md:text-xs max-md:px-2"
+                                            type="button" disabled>
+                                            @php
+                                                $partsSlot = explode(' ', $slot[0]);
+                                            @endphp
+                                            {{ $partsSlot[0] }}
+                                        </button>
+                                    @else
+                                        <button data-modal-target="default-modal" data-modal-toggle="default-modal"
+                                            onclick="showDataBooking('{{ $slot[0] }}', '{{ $day }}')"
+                                            class="text-center {{ $slot['full_booked'] ? 'bg-slate-200' : 'bg-green-200' }} w-full py-1 rounded-md max-md:text-xs max-md:px-2"
+                                            type="button">
+                                            @php
+                                                $partsSlot = explode(' ', $slot[0]);
+                                            @endphp
+                                            {{ $partsSlot[0] }}
+                                        </button>
+                                    @endif
+                                @endforeach
                             </div>
                         @endforeach
                     </div>
                     <!-- Main modal -->
-                    {{-- <div id="default-modal" tabindex="-1" aria-hidden="true"
+                    <div id="default-modal" tabindex="-1" aria-hidden="true"
                         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-2xl max-h-full">
                             <!-- Modal content -->
@@ -314,29 +312,31 @@
                                 </div>
                                 <!-- Modal body -->
                                 <div class="p-4 md:p-5 space-y-4">
-                                    <table class="w-full text-sm text-center">
-                                        <thead class="text-xs text-gray-700 uppercase">
-                                            <tr>
-                                                <th scope="col" class="px-6 py-3"></th>
-                                                @foreach ($courts as $court)
-                                                    <th scope="col" class="px-6 py-3 bg-gray-100">
-                                                        {{ $court->name_court }}
-                                                    </th>
-                                                @endforeach
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="bg-white border-b">
-                                                <td class="px-6 py-4 bg-gray-100 text-gray-900">Nama</td>
-                                                @foreach ($courts as $index => $court)
-                                                    <td class="px-6 py-4 bg-green-200 italic text-gray-900"
-                                                        id="name_booking_court{{ $index + 1 }}">
-                                                        Tersedia
-                                                    </td>
-                                                @endforeach
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="w-full overflow-x-scroll">
+                                        <table class="w-full text-sm text-center">
+                                            <thead class="text-xs text-gray-700 uppercase">
+                                                <tr>
+                                                    <th scope="col" class="px-6 py-3"></th>
+                                                    @foreach ($courts as $court)
+                                                        <th scope="col" class="px-6 py-3 bg-gray-100">
+                                                            {{ $court->name_court }}
+                                                        </th>
+                                                    @endforeach
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="bg-white border-b">
+                                                    <td class="px-2 py-3 bg-gray-100 text-gray-900">Nama</td>
+                                                    @foreach ($courts as $index => $court)
+                                                        <td class="px-2 py-3 bg-green-200 italic text-gray-900"
+                                                            id="name_booking_court{{ $index + 1 }}">
+                                                            Tersedia
+                                                        </td>
+                                                    @endforeach
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
@@ -345,56 +345,54 @@
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
-            {{-- <div class="today w-full max-w-4xl p-2 mt-5 mx-auto">
-                <div class="bg-white shadow-md rounded-lg max-md:p-3 p-6">
+            <div class="today w-full max-w-4xl p-2 mt-5 mx-auto">
+                <div class="bg-white shadow-md rounded-lg max-md:p-3 p-6 max-sm:overflow-x-scroll">
                     <table class="w-full text-sm text-center">
                         <thead class="text-gray-700 uppercase bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3 max-md:text-xs max-md:py-3 max-md:px-0">JAM</th>
                                 @if (count($courts) != 0)
                                     @foreach ($courts as $court)
-                                        <th scope="col" class="px-6 py-3 max-md:text-xs max-md:py-3 max-md:px-0">{{ $court->name_court }}</th>
+                                        <th scope="col" class="px-6 py-3 max-md:text-xs max-md:py-3 max-md:px-0">
+                                            {{ $court->name_court }}</th>
                                     @endforeach
                                 @else
-                                    <th scope="col" class="px-6 py-3 max-md:text-xs max-md:py-3 max-md:px-0">Lapangan</th>
+                                    <th scope="col" class="px-6 py-3 max-md:text-xs max-md:py-3 max-md:px-0">
+                                        Lapangan Belum Tersedia</th>
                                 @endif
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($todaySchedule) != 0)
-                                @foreach ($todaySchedule as $row)
-                                    <tr class="bg-white border-b">
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900">
-                                            {{ $row['time'] }}
-                                        </th>
+                            @foreach ($todaySchedule as $row)
+                                <tr class="bg-white border-b">
+                                    <th scope="row" class="px-4 py-2 font-medium text-gray-900">
+                                        @php
+                                            $partsTime = explode(' ', $row['time']);
+                                        @endphp
+                                        {{ $partsTime[0] }}
+                                    </th>
 
+                                    @if ($row['courts'] != null)
                                         @foreach ($row['courts'] as $courtSlot)
                                             <td
-                                                class="px-6 py-4 {{ $courtSlot['status'] == 'booked' ? 'bg-gray-100' : 'bg-green-200 italic text-gray-900' }}">
+                                                class="px-4 py-2 {{ $courtSlot['status'] == 'booked' ? 'bg-gray-100' : 'bg-green-200 italic text-gray-900' }}">
                                                 {{ $courtSlot['name'] }}
                                             </td>
                                         @endforeach
-                                    </tr>
-                                @endforeach
-                            @else
-                                @foreach ($slotJamHariIni as $row)
-                                    <tr class="bg-white border-b">
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900">
-                                            {{ $row }}
-                                        </th>
-                                        <td class="px-6 py-4 bg-green-200 italic text-gray-900">
-                                            belum ada lapangan tersedia
+                                    @else
+                                        <td class="px-4 py-2 bg-gray-200 italic text-gray-900">
+                                            -
                                         </td>
-                                    </tr>
-                                @endforeach
-                            @endif
+                                    @endif
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
-            </div> --}}
+            </div>
 
             <div class="mt-5 max-md:mt-2 ms-5 status">
                 <a href="" class="text-center bg-green-200 p-2 rounded-md max-md:text-sm">Tersedia</a>
@@ -402,6 +400,142 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function formatTanggal(inputDate) {
+            const dateParts = inputDate.split('-'); // Memisahkan tanggal, bulan, tahun
+            const formattedDate = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`); // Format DD-MM-YYYY
+
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }; // Format tampilan yang diinginkan
+            return formattedDate.toLocaleDateString('id-ID', options); // Mengembalikan format "hari, tanggal-bulan-tahun"
+        }
+
+        function search() {
+            const input = document.querySelector('#search-input');
+            const button = document.querySelector('#search-button');
+            const tableBooking = document.querySelector('#table-booking');
+
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+            })
+            fetch('/get/search/booking/' + input.value).then(response => response.json()).then(response => {
+                if (response.bookings.length !== 0) {
+                    tableBooking.innerHTML = '';
+                    response.bookings.forEach(element => {
+                        tableBooking.innerHTML += `
+                                        <tr class="bg-white border-b text-center">
+                                                <th scope="row"
+                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
+                                                    ${element.name_booking}
+                                                </th>
+                                                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
+                                                    ${formatTanggal(element.date_booking)}
+                                                </td>
+                                                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
+                                                    ${element.time_booking}
+                                                </td>
+                                                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
+                                                    ${element.court_booking}
+                                                </td>
+                                            </tr>
+                                            `
+                    });
+                } else {
+                    tableBooking.innerHTML = `
+                                        <tr class="bg-white border-b">
+                                                <th scope="row" colspan="4"
+                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                                    Tidak ada data
+                                                </th>
+                                            </tr>
+                                            `
+                }
+            }).catch(e => console.log(e))
+        }
+
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+
+        searchInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                searchButton.click();
+            }
+        });
+
+        function showDataBooking(jam, tanggal) {
+            const spanKomplit = document.querySelector('#komplit');
+            const daysInIndonesian = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const dateParts = tanggal.split(' ');
+            const tanggalParts = dateParts[1].split('/');
+            const d = new Date(`${tanggalParts[1]}-${tanggalParts[0]}-${tanggalParts[2]}`);
+            const dayIndex = d.getDay();
+            const options = {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            };
+            const tanggalSlot = new Intl.DateTimeFormat('id-ID', options).format(d);
+            const paketKomplitTanggal = `${daysInIndonesian[dayIndex]}, ${tanggalSlot}, pukul ${jam}.`;
+            spanKomplit.textContent = paketKomplitTanggal;
+
+            fetch(`/get/booking/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        time: jam,
+                        date: tanggal
+                    })
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    document.querySelectorAll('[id^="name_booking_court"]').forEach((lapangan) => {
+                        lapangan.textContent = "Tersedia";
+                        lapangan.classList.add("bg-green-200");
+                        lapangan.classList.remove("bg-gray-100");
+                    });
+                    if (Array.isArray(data.bookings) && data.bookings.length > 0) {
+                        data.bookings.forEach((booking) => {
+                            const courtElement = document.querySelector(
+                                `#name_booking_court${booking.court_booking.split(' ')[1]}`);
+                            if (courtElement) {
+                                courtElement.textContent = booking.name_booking;
+                                courtElement.classList.add("bg-gray-300");
+                                courtElement.classList.remove("bg-green-200");
+                            }
+                        });
+                    }
+                })
+                .catch((e) => console.error(e));
+        }
+
+        const filterSchedule = document.getElementById('filter');
+        const week = document.querySelector('.week');
+        const today = document.querySelector('.today');
+        const status = document.querySelector('.status');
+        today.style.display = 'none';
+
+        filterSchedule.addEventListener('change', function(e) {
+            e.preventDefault();
+
+            if (filterSchedule.value == 'day') {
+                today.style.display = 'block';
+                week.style.display = 'none';
+                status.style.display = 'none';
+            } else if (filterSchedule.value == 'week') {
+                week.style.display = 'block';
+                today.style.display = 'none';
+                status.style.display = 'block';
+            }
+        });
+    </script>
 </body>
 
 </html>

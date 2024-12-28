@@ -15,7 +15,7 @@
                 </button>
                 <a href="https://flowbite.com" class="flex ms-2 md:me-24">
                     <span
-                        class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">{{ env('APP_NAME') }}</span>
+                        class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">{{ $biodata->name_biodata }}</span>
                 </a>
             </div>
         </div>

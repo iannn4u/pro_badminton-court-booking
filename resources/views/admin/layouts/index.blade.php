@@ -1,3 +1,6 @@
+@php
+    $biodata = App\Models\Biodata::first();
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
 
@@ -6,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title }} | {{ config('app.name') }}</title>
+    <title>{{ $title }} | {{ $biodata->name_biodata }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -20,7 +23,7 @@
     <div class="bg-gray-50 max-w-[2040px] mx-auto">
         @include('admin.layouts.navbar')
         @include('admin.layouts.aside')
-        <main class="p-4 sm:ml-64 min-h-[100vh]">
+        <main class="p-4 sm:ml-64 min-h-[100vh] overflow-x-scroll">
             <div class="p-4 mt-14">
                 @yield('main')
             </div>
@@ -60,7 +63,7 @@
                         <path
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
-                    <span class="font-medium">Ensure that these requirements are met:</span>
+                    <span class="font-medium">Error</span>
                 </div>
                 <ul class="mt-1.5 list-disc ms-1 list-inside">
                     @foreach ($errors->all() as $error)

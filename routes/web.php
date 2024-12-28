@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CourtController;
 use App\Http\Controllers\IndexController;
@@ -20,23 +22,34 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, "index"]);
 
-Route::get('/admin/login', [AdminController::class, "pageLogin"]);
-Route::post('/admin/login', [AdminController::class, "login"]);
+Route::middleware('auth')->group(function () {
+    Route::get('admin/dashboard', [AdminController::class, "index"]);
+    Route::post('admin/operational/edit/{operational}', [OperationalController::class, "update"]);
 
-Route::get('admin/dashboard', [AdminController::class, "index"]);
-Route::post('admin/operational/edit/{operational}', [OperationalController::class, "update"]);
+    Route::get('admin/booking', [BookingController::class, "index"]);
+    Route::get('admin/booking/tambah', [BookingController::class, "create"]);
+    Route::post('admin/booking/tambah', [BookingController::class, "store"]);
+    Route::get('admin/booking/edit/{booking}', [BookingController::class, "edit"]);
+    Route::put('admin/booking/edit/{booking}', [BookingController::class, "update"]);
+    Route::delete('admin/booking/delete/{booking}', [BookingController::class, "destroy"]);
+    Route::post('booking/cekSlot', [BookingController::class, "cekSlot"]);
+    Route::get('get/search/booking/{name}', [BookingController::class, "search"]);
+    Route::post('get/booking', [BookingController::class, "modalInfo"]);
 
-Route::get('admin/booking', [BookingController::class, "index"]);
-Route::get('admin/booking/tambah', [BookingController::class, "create"]);
-Route::post('admin/booking/tambah', [BookingController::class, "store"]);
-Route::get('admin/booking/edit/{booking}', [BookingController::class, "edit"]);
-Route::put('admin/booking/edit/{booking}', [BookingController::class, "update"]);
-Route::delete('admin/booking/delete/{booking}', [BookingController::class, "destroy"]);
-Route::post('booking/cekSlot', [BookingController::class, "cekSlot"]);
+    Route::get('admin/lapangan', [CourtController::class, "index"]);
+    Route::get('admin/lapangan/tambah', [CourtController::class, "create"]);
+    Route::post('admin/lapangan/tambah', [CourtController::class, "store"]);
+    Route::get('admin/lapangan/edit/{court}', [CourtController::class, "edit"]);
+    Route::put('admin/lapangan/edit/{court}', [CourtController::class, "update"]);
+    Route::delete('admin/lapangan/delete/{court}', [CourtController::class, "destroy"]);
 
-Route::get('admin/lapangan', [CourtController::class, "index"]);
-Route::get('admin/lapangan/tambah', [CourtController::class, "create"]);
-Route::post('admin/lapangan/tambah', [CourtController::class, "store"]);
-Route::get('admin/lapangan/edit/{court}', [CourtController::class, "edit"]);
-Route::put('admin/lapangan/edit/{court}', [CourtController::class, "update"]);
-Route::delete('admin/lapangan/delete/{court}', [CourtController::class, "destroy"]);
+    Route::get('admin/pengaturan', [BiodataController::class, "index"]);
+    Route::get('admin/pengaturan/edit/{biodata}', [BiodataController::class, "edit"]);
+    Route::put('admin/pengaturan/edit/{biodata}', [BiodataController::class, "update"]);
+
+    Route::get('/admin/logout', [AdminController::class, "logout"]);
+    Route::get('/admin', [AdminController::class, "admin"]);
+});
+
+Route::get('/admin/login', [AdminController::class, "viewLogin"])->middleware('guest');
+Route::post('/admin/login', [AdminController::class, "login"])->middleware('guest');

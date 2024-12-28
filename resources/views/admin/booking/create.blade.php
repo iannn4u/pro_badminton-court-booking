@@ -53,14 +53,16 @@
             <h2 class="block mb-2 text-sm font-medium text-slate-900">Jam
                 Booking</h2>
             <ul id="timetable" class="grid w-full grid-cols-3 gap-2 mt-2">
-                <li>
-                    <input type="checkbox" id="${timeSlot}" name="time_booking[]"
-                        value="${timeSlot}" class="hidden peer" disabled>
-                    <label for="${timeSlot}"
-                        class="inline-flex items-center justify-center w-full p-2 text-sm font-medium text-center bg-white border rounded-lg text-slate-600 border-slate-600 cursor-pointer peer-checked:border-slate-600 hover:text-white peer-checked:text-white hover:bg-slate-500 peer-checked:bg-slate-700">
-                        9.00
-                    </label>
-                </li>
+                @for ($i = $incrementOpen; $i < $incrementClose; $i++)
+                    <li>
+                        <input type="checkbox" id="{{ $i }}.00 - {{ $i + 1 }}.00" name="time_booking[]"
+                            value="{{ $i }}.00 - {{ $i + 1 }}.00" class="hidden peer" disabled>
+                        <label for="{{ $i }}.00 - {{ $i + 1 }}.00"
+                            class="inline-flex items-center justify-center w-full p-2 text-sm font-medium text-center bg-white border rounded-lg cursor-not-allowed text-slate-600 border-slate-600 peer-checked:border-slate-600 hover:text-white peer-checked:text-white hover:bg-slate-500 peer-checked:bg-slate-700">
+                            {{ ($i < 10 ? '0' . $i . '.00' : $i . '.00') . ' - ' . ($i + 1 < 10 ? '0' . ($i + 1) . '.00' : $i + 1 . '.00') }}
+                        </label>
+                    </li>
+                @endfor
             </ul>
         </div>
         <div class="flex items-center mb-4">

@@ -3,7 +3,7 @@
 @section('main')
     <h1 class="text-3xl">{{ $title }}</h1>
 
-    <div class="mt-10 flex gap-5">
+    <div class="mt-10 flex flex-wrap gap-5">
         <section
             class="flex justify-between items-center min-w-[400px] h-min max-w-sm p-5 bg-white border border-gray-200 rounded-lg shadow">
             <div class="flex gap-5 items-center">
@@ -29,7 +29,8 @@
         <section class="block min-w-[400px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
             <p class="mb-2 text-xl font-bold tracking-tight text-gray-900">Set jam buka dan tutup</p>
             <div>
-                <form action="/admin/operational/edit/{{ $operational->id_operational }}" method="post" class="flex items-between gap-3">
+                <form action="/admin/operational/edit/{{ $operational->id_operational }}" method="post"
+                    class="flex items-between gap-3">
                     @csrf
                     <div>
                         <label for="time_open" class="block mb-2 text-sm font-medium text-gray-900">Jam Buka:</label>
@@ -70,14 +71,14 @@
         </section>
     </div>
 
-    <div class="mt-10 flex gap-5">
+    <div class="mt-10 flex flex-wrap gap-5">
         <section class="block min-w-[400px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
             <h5 class="font-normal text-gray-700">Jumlah Pengunjung Hari Ini</h5>
-            <p class="mb-2 text-3xl font-bold tracking-tight text-gray-900">0</p>
+            <p class="mb-2 text-3xl font-bold tracking-tight text-gray-900">{{ $visitor }}</p>
         </section>
         <section class="block min-w-[400px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
             <h5 class="font-normal text-gray-700">Income Bulan Ini</h5>
-            <p class="mb-2 text-3xl font-bold tracking-tight text-gray-900">Rp 0</p>
+            <p class="mb-2 text-3xl font-bold tracking-tight text-gray-900">Rp {{ $income }}</p>
         </section>
     </div>
 @endsection

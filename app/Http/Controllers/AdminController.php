@@ -5,23 +5,37 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
+use App\Models\Booking;
 use App\Models\Operational;
-use Illuminate\Contracts\Session\Session;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Session as FacadesSession;
-use Symfony\Component\CssSelector\Node\FunctionNode;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function admin()
+    {
+        return redirect('/admin/dashboard');
+    }
+
     public function index()
     {
         $data["title"] = "Dashboard";
         $data["operational"] =  Operational::get()->first();
-        
+        $bookings = Booking::where('status_delete_booking', [0, 1])->get();
+        $income = 0;
+        foreach($bookings as $booking) {
+            $partsDate = explode("-", $booking->date_booking);
+            if(end($partsDate) == Carbon::now()->format("Y")) {
+                $income += $booking->price_booking;
+            }
+        }
+        $data["income"] = $income;
+        $data["visitor"] = Booking::where('date_booking', Carbon::now()->format("d-m-Y"))->where("status_delete_booking", [0, 1])->count();
+
         return view("admin.index",  $data);
     }
 
@@ -73,37 +87,35 @@ class AdminController extends Controller
         //
     }
 
-    public function pageLogin()
+    public function viewLogin()
     {
         return view("admin.masuk");
     }
 
     public function login(Request $request)
     {
-        // Validasi input
-        $request->validate([
-            'username_email' => 'required',
-            'password' => 'required',
+        $validated = $request->validate([
+            "username" => "required",
+            "password" => "required"
         ]);
 
-        if (($request->username_email == "admin" || $request->username_email == "admin@gmail.com") && $request->password == "admin1234") {
-            // // Jika valid, buat sesi
-            // FacadesSession::put('logged_in', true);
-            // FacadesSession::put('user', 'admin');
+        if (Auth::attempt($validated, $request->remember)) {
+            $request->session()->regenerate();
 
-            // // Cek apakah Remember Me dicentang
-            // if ($request->has('remember')) {
-            //     // Buat cookie untuk Remember Me
-            //     Cookie::queue('remember_token', 'admin', 60 * 24 * 7); // 7 hari
-            // }
-
-            return redirect("/admin/dashboard");
-        } else {
-            return redirect()->back()->withErrors([
-                'masuk' => 'Username/Email atau password tidak sesuai.',
-            ])->withInput();
+            return redirect()->intended("/admin/dashboard");
         }
+
+        return back()->with("masuk", "Username atau password tidak valid!");
     }
 
-    public function booking() {}
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/admin/login');
+    }
 }

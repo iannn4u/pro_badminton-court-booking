@@ -21,6 +21,12 @@
                         <span class="ms-3">Lapangan</span>
                     </a>
                 </li>
+                <li>
+                    <a href="/admin/pengaturan"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 group">
+                        <span class="ms-3">Pengaturan</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </aside>
