@@ -30,9 +30,6 @@
                 <input type="password" name="password" id="password"
                     class="py-1 rounded-md focus:ring-slate-700 focus:border-slate-700">
             </div>
-            <input type="checkbox" name="remember" id="remember"
-                class="rounded-md focus:ring-slate-700 focus:border-slate-700 me-2 mb-0.5"><label
-                for="remember">Remember me</label>
             <button class="w-full bg-slate-800 text-slate-100 py-1 rounded-md mt-5">Masuk</button>
         </form>
     </section>

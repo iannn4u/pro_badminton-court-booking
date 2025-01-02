@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Booking;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
 
@@ -13,9 +14,11 @@ class CleanupBookings extends Command
 
     public function handle()
     {
-        $today = now()->format('d-m-Y');
-
-        $bookings = Booking::where('date_booking', '<', $today)->get();
+        $today = now()->format('Y-m-d');
+        $bookings = Booking::all()->filter(function ($booking) use ($today) {
+            $dateBooking = Carbon::createFromFormat('d-m-Y', $booking->date_booking)->format('Y-m-d');
+            return $dateBooking < $today;
+        });
 
         if ($bookings->isNotEmpty()) {
             foreach ($bookings as $booking) {
@@ -27,6 +30,6 @@ class CleanupBookings extends Command
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('cleanup:bookings')->daily();
+        //
     }
 }

@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Biodata;
-use App\Http\Requests\StoreBiodataRequest;
-use App\Http\Requests\UpdateBiodataRequest;
+use App\Models\Highlight;
+use App\Http\Requests\StoreHighlightRequest;
+use App\Http\Requests\UpdateHighlightRequest;
 
-class BiodataController extends Controller
+class HighlightController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data["title"] = "Biodata";
-        $data["biodata"] = Biodata::get()->first();
-
-        return view("admin.biodata.index", $data);
+        //
     }
 
     /**
@@ -30,7 +27,7 @@ class BiodataController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBiodataRequest $request)
+    public function store(StoreHighlightRequest $request)
     {
         //
     }
@@ -38,7 +35,7 @@ class BiodataController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Biodata $biodata)
+    public function show(Highlight $highlight)
     {
         //
     }
@@ -46,7 +43,7 @@ class BiodataController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Biodata $biodata)
+    public function edit(Highlight $highlight)
     {
         //
     }
@@ -54,7 +51,7 @@ class BiodataController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBiodataRequest $request, Biodata $biodata)
+    public function update(UpdateHighlightRequest $request, Highlight $highlight)
     {
         //
     }
@@ -62,7 +59,7 @@ class BiodataController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Biodata $biodata)
+    public function destroy(Highlight $highlight)
     {
         //
     }

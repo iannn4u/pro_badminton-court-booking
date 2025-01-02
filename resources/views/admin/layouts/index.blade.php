@@ -1,5 +1,5 @@
 @php
-    $biodata = App\Models\Biodata::first();
+    $biodata = App\Models\Operational::first();
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">

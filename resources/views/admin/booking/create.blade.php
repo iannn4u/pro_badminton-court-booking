@@ -103,10 +103,8 @@
         });
 
         function cekJadwal(inputLapangan, incrementOpen, incrementClose) {
-            let result;
-            incrementOpen = parseInt(incrementOpen)
-            incrementClose = parseInt(incrementClose)
-            console.log(inputLapangan, tanggal)
+            incrementOpen = parseInt(incrementOpen);
+            incrementClose = parseInt(incrementClose);
 
             fetch(`/booking/cekSlot`, {
                     method: 'POST',
@@ -131,23 +129,23 @@
                         const isBooked = bookedSlots.includes(timeSlot); // Periksa apakah timeSlot ada di bookedSlots
 
                         htmlContent += `
-                        <li>
-                            <input type="checkbox" id="${timeSlot}" name="time_booking[]"
-                                value="${timeSlot}" class="hidden peer" ${isBooked ? 'disabled' : ''}>
-                            <label for="${timeSlot}"
-                                class="inline-flex items-center justify-center w-full p-2 text-sm font-medium text-center bg-white border rounded-lg cursor-pointer ${
-                                    isBooked
-                                        ? 'bg-gray-400/30 text-gray-600 border-gray-400 cursor-not-allowed'
-                                        : 'text-slate-600 border-slate-600 cursor-pointer peer-checked:border-slate-600 hover:text-white peer-checked:text-white hover:bg-slate-500 peer-checked:bg-slate-700'
-                                }">
-                                ${timeSlot}
-                            </label>
-                        </li>`;
+                    <li>
+                        <input type="radio" id="${timeSlot}" name="time_booking[]"
+                            value="${timeSlot}" class="hidden peer" ${isBooked ? 'disabled' : ''}>
+                        <label for="${timeSlot}"
+                            class="inline-flex items-center justify-center w-full p-2 text-sm font-medium text-center bg-white border rounded-lg cursor-pointer ${
+                                isBooked
+                                    ? 'bg-gray-400/30 text-gray-400/80 border-gray-400 cursor-not-allowed'
+                                    : 'text-slate-600 border-slate-600 cursor-pointer peer-checked:border-slate-600 hover:text-white peer-checked:text-white hover:bg-slate-500 peer-checked:bg-slate-700'
+                            }">
+                            ${timeSlot}
+                        </label>
+                    </li>`;
                     }
 
                     bodyTemplate.innerHTML = htmlContent;
-                });
-            tch((e) => console.error(e));
+                })
+                .catch((e) => console.error(e));
         }
     </script>
 @endsection

@@ -9,7 +9,7 @@ class Operational extends Model
 {
     use HasFactory;
     
-    protected $fillable = ["time_open", "time_close"];
+    protected $guarded = ["id_operational"];
     protected $primaryKey = 'id_operational';
     
     public $timestamps = false;    

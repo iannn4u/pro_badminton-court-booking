@@ -4,11 +4,12 @@
     <h1 class="text-3xl">{{ $title }}</h1>
 
     <form action="/admin/booking/edit/{{ $booking->id_booking }}" method="post" class="max-w-xl mt-10 space-y-5">
-        @method("put")
+        @method('put')
         @csrf
         <div>
             <label for="name_booking" class="block mb-2 text-sm font-medium text-slate-900">Nama Booking</label>
-            <input type="text" id="name_booking" name="name_booking" value="{{ old('name_booking', $booking->name_booking) }}"
+            <input type="text" id="name_booking" name="name_booking"
+                value="{{ old('name_booking', $booking->name_booking) }}"
                 class="block w-full p-2 text-slate-900 border border-slate-500 rounded-lg bg-white text-xs focus:ring-slate-500 focus:border-slate-500">
         </div>
         <div class="flex gap-10">
@@ -99,10 +100,8 @@
         });
 
         function cekJadwal(inputLapangan, incrementOpen, incrementClose) {
-            let result;
-            incrementOpen = parseInt(incrementOpen)
-            incrementClose = parseInt(incrementClose)
-            console.log(inputLapangan, tanggal)
+            incrementOpen = parseInt(incrementOpen);
+            incrementClose = parseInt(incrementClose);
 
             fetch(`/booking/cekSlot`, {
                     method: 'POST',
@@ -127,23 +126,23 @@
                         const isBooked = bookedSlots.includes(timeSlot); // Periksa apakah timeSlot ada di bookedSlots
 
                         htmlContent += `
-                        <li>
-                            <input type="checkbox" id="${timeSlot}" name="time_booking[]"
-                                value="${timeSlot}" class="hidden peer" ${isBooked ? 'disabled' : ''}>
-                            <label for="${timeSlot}"
-                                class="inline-flex items-center justify-center w-full p-2 text-sm font-medium text-center bg-white border rounded-lg cursor-pointer ${
-                                    isBooked
-                                        ? 'bg-gray-400/30 text-gray-600 border-gray-400 cursor-not-allowed'
-                                        : 'text-slate-600 border-slate-600 cursor-pointer peer-checked:border-slate-600 hover:text-white peer-checked:text-white hover:bg-slate-500 peer-checked:bg-slate-700'
-                                }">
-                                ${timeSlot}
-                            </label>
-                        </li>`;
+                    <li>
+                        <input type="radio" id="${timeSlot}" name="time_booking"
+                            value="${timeSlot}" class="hidden peer" ${isBooked ? 'disabled' : ''}>
+                        <label for="${timeSlot}"
+                            class="inline-flex items-center justify-center w-full p-2 text-sm font-medium text-center bg-white border rounded-lg cursor-pointer ${
+                                isBooked
+                                    ? 'bg-gray-400/30 text-gray-400/80 border-gray-400 cursor-not-allowed'
+                                    : 'text-slate-600 border-slate-600 cursor-pointer peer-checked:border-slate-600 hover:text-white peer-checked:text-white hover:bg-slate-500 peer-checked:bg-slate-700'
+                            }">
+                            ${timeSlot}
+                        </label>
+                    </li>`;
                     }
 
                     bodyTemplate.innerHTML = htmlContent;
-                });
-            tch((e) => console.error(e));
+                })
+                .catch((e) => console.error(e));
         }
     </script>
 @endsection

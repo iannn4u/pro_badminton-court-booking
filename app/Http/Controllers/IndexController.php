@@ -12,19 +12,30 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $operational = Operational::get()->first();
+        $operational = Operational::first();
         $data = $this->week($operational->time_open, $operational->time_close);
         $data["time_close"] = $operational->time_close;
         $data["time_open"] = $operational->time_open;
         $data["courts"] = Court::all();
         $data['todaySchedule'] = $this->day();
+        $data["operational"] = Operational::first();
+        $operational = Operational::first();
+        $data["photos_preview"] = [];
+        if (!empty($operational->photos_place)) {
+            $existingPhotos = json_decode($operational->photos_place, true);
+
+            foreach ($existingPhotos as $photo) {
+                $data["photos_preview"][] = $photo;
+            }
+        }
+
         return view("index", $data);
     }
 
     private function day()
     {
         $data['courts'] = Court::all();
-        $operational = Operational::get()->first();
+        $operational = Operational::first();
         $time_close = $operational->time_close;
         $time_open = $operational->time_open;
         $partsTimeOpen = explode(':', $time_open);

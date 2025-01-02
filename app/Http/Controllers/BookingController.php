@@ -50,6 +50,7 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
+        $court = Court::where("name_court", $request->court_booking)->first();
         $validated = $request->validate([
             'name_booking' => 'required|string|min:3',
             'date_booking' => 'required',
@@ -95,6 +96,7 @@ class BookingController extends Controller
                             'name_booking' => $validated['name_booking'],
                             'date_booking' => $tanggalMulaiMember->copy()->addWeeks($i)->format('d-m-Y'),
                             'court_booking' => $validated['court_booking'],
+                            'price_booking' => $court->price_court,
                             'time_booking' => $time,
                         ];
                     }
@@ -116,6 +118,7 @@ class BookingController extends Controller
                         'date_booking' => $tanggalMulaiMember->copy()->addWeeks($i)->format('d-m-Y'),
                         'court_booking' => $validated['court_booking'],
                         'time_booking' => $validated["time_booking"][0],
+                        'price_booking' => $court->price_court,
                     ]);
                 }
             }
@@ -129,6 +132,7 @@ class BookingController extends Controller
                         'date_booking' => $validated['date_booking'],
                         'court_booking' => $validated['court_booking'],
                         'time_booking' => $time,
+                        'price_booking' => $court->price_court,
                     ]);
                 }
             } else {
@@ -137,6 +141,7 @@ class BookingController extends Controller
                     'date_booking' => $validated['date_booking'],
                     'court_booking' => $validated['court_booking'],
                     'time_booking' => $validated['time_booking'][0],
+                    'price_booking' => $court->price_court,
                 ]);
             }
         }
@@ -181,7 +186,7 @@ class BookingController extends Controller
             'name_booking' => 'required|string|min:3',
             'date_booking' => 'required',
             'court_booking' => 'required|string',
-            'time_booking' => 'required|array',
+            'time_booking' => 'required',
         ], [
             'name_booking.required' => 'Nama pemesanan wajib diisi.',
             'name_booking.string' => 'Nama pemesanan harus berupa teks.',
@@ -193,6 +198,8 @@ class BookingController extends Controller
             'time_booking.array' => 'Slot waktu harus berupa array.',
         ]);
 
+        $court = Court::where("name_court", $request->court_booking)->first();
+        $validated["price_booking"] = $court->price_court;
         $booking->update($validated);
 
         return redirect('/admin/booking')->with('alert', 'Pesanan berhasil diperbarui.');

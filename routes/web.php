@@ -43,13 +43,15 @@ Route::middleware('auth')->group(function () {
     Route::put('admin/lapangan/edit/{court}', [CourtController::class, "update"]);
     Route::delete('admin/lapangan/delete/{court}', [CourtController::class, "destroy"]);
 
-    Route::get('admin/pengaturan', [BiodataController::class, "index"]);
-    Route::get('admin/pengaturan/edit/{biodata}', [BiodataController::class, "edit"]);
-    Route::put('admin/pengaturan/edit/{biodata}', [BiodataController::class, "update"]);
+    Route::get('admin/pengaturan', [OperationalController::class, "index"]);
+    Route::get('admin/pengaturan/edit/account', [OperationalController::class, "editAccount"]);
+    Route::put('admin/pengaturan/edit/account/{user}', [OperationalController::class, "updateAccount"]);
+    Route::get('admin/pengaturan/edit/biodata', [OperationalController::class, "editBiodata"]);
+    Route::put('admin/pengaturan/edit/biodata/{operational}', [OperationalController::class, "updateBiodata"]);
 
-    Route::get('/admin/logout', [AdminController::class, "logout"]);
-    Route::get('/admin', [AdminController::class, "admin"]);
+    Route::get('admin/logout', [AdminController::class, "logout"]);
+    Route::get('admin', [AdminController::class, "admin"]);
 });
 
-Route::get('/admin/login', [AdminController::class, "viewLogin"])->middleware('guest');
-Route::post('/admin/login', [AdminController::class, "login"])->middleware('guest');
+Route::get('admin/login', [AdminController::class, "viewLogin"])->middleware('guest');
+Route::post('admin/login', [AdminController::class, "login"])->middleware('guest');

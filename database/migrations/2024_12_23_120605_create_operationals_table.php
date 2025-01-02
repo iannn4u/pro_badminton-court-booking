@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('operationals', function (Blueprint $table) {
             $table->id("id_operational");
+            $table->string("name_biodata");
+            $table->string("address_biodata");
+            $table->string("link_address_biodata");
+            $table->string("wa_biodata");
+            $table->string("link_wa_biodata");
+            $table->json("photos_place")->nullable();
+            $table->boolean("preview1")->default(1);
+            $table->boolean("preview2")->default(1);
             $table->string("time_open");
             $table->string("time_close");
         });
