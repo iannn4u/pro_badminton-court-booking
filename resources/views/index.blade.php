@@ -92,7 +92,7 @@
         <div class="xl:ms-[135px] lg:ms-[105px] md:ms-[90px] mb-5 lg:my-10 max-md:p-5">
             <h1 class="max-sm:text-3xl text-4xl font-bold">{{ $operational->name_biodata }}</h1>
             <div class="mt-2 gap-1 flex flex-col max-sm:text-sm">
-                <p class="flex items-center gap-2 items-center">
+                <p class="flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -101,7 +101,7 @@
                     <span>Senin - Minggu: {{ $time_open }} - {{ $time_close }}</span>
                 </p>
                 <a href="{{ $operational->link_address_biodata }}"
-                    class="flex items-center gap-2 underline hover:text-green-600 w-max max-sm:text-sm">
+                    class="flex items-center gap-2 underline w-full hover:text-green-600 max-sm:text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -109,7 +109,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                     </svg>
-                    <span>{{ $operational->address_biodata }}</span>
+                    <span class="w-full">{{ $operational->address_biodata }}</span>
                 </a>
                 <a href="{{ $operational->link_wa_biodata }}"
                     class="flex items-center gap-2 underline hover:text-green-600 hover:fill-green-600 w-max max-sm:text-sm">
@@ -122,46 +122,26 @@
             </div>
         </div>
         <div class="bg-gray-300 md:w-[80%] mx-auto h-0.5 w-[85%]"></div>
-        <div class="md:ms-[30px] my-10 max-md:p-5">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-3">Highlights</h2>
-            <div class="flex flex-wrap mt-10 justify-between items-center max-xl:w-full xl:w-max gap-5 mx-auto">
-                <div class="font-normal max-lg:w-full">
-                    <div
-                        class="block w-full lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                        <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
-                            Fasilitas</h5>
-                        <p class="font-normal text-gray-700">
-                            - 3 lapangan kayu <br>
-                            - Kamar mandi dan musholla <br>
-                            - kantin <br></p>
-                    </div>
-                </div>
-                <div class="font-normal max-lg:w-full">
-                    <div
-                        class="block lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                        <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
-                            Harga Sewa</h5>
-                        <p class="font-normal text-gray-700">
-                            - 1 jam: Rp. 50.000 <br>
-                            - 3 jam: Rp. 120.000 <br>
-                            - Hubungi Whatsapp untuk member <br></p>
-                    </div>
-                </div>
-                <div class="font-normal max-lg:w-full">
-                    <div
-                        class="block lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                        <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
-                            Review Lapangan
-                        </h5>
-                        <p class="font-normal text-gray-700">
-                            - <a href="https://www.instagram.com/reel/"
-                                class="underline hover:text-green-600">https://www.instagram.com/reel/</a> <br>
-                            - <a href="https://www.instagram.com/reel/"
-                                class="underline hover:text-green-600">https://www.instagram.com/reel/</a> <br>
-                    </div>
+        @if (count($highlights) != 0)
+            <div class="md:ms-[30px] my-10 max-md:p-5">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-3">Highlights</h2>
+                <div
+                    class="flex flex-wrap mt-10 justify-between max-sm:justify-center items-center max-xl:w-full xl:w-max gap-5 mx-auto">
+                    @foreach ($highlights as $highlight)
+                        <div class="font-normal min-w-60 max-w-sm">
+                            <div
+                                class="block w-full overflow-auto lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+                                <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
+                                    {{ $highlight->name_highlight }}</h5>
+                                <p class="font-normal text-gray-700" id="element-p">
+                                    {!! $highlight->desc_highlight !!}
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
-        </div>
+        @endif
         <div class="bg-gray-300 md:w-[80%] mx-auto h-0.5 w-[85%]"></div>
         <div class="lg:ms-[130px] mt-20 pb-10 lg:max-w-[81%]">
             <div class="flex gap-5 max-md:p-5 max-[415px]:flex-col">
@@ -340,7 +320,7 @@
                                 </div>
                                 <!-- Modal body -->
                                 <div class="p-4 md:p-5 space-y-4">
-                                    <div class="w-full overflow-x-scroll">
+                                    <div class="w-full overflow-x-auto">
                                         <table class="w-full text-sm text-center">
                                             <thead class="text-xs text-gray-700 uppercase">
                                                 <tr>
@@ -381,7 +361,8 @@
                     <table class="w-full text-sm text-center">
                         <thead class="text-gray-700 uppercase bg-gray-50">
                             <tr>
-                                <th scope="col" class="px-6 py-3 max-md:text-xs max-md:py-3 max-md:px-0">JAM</th>
+                                <th scope="col" class="px-6 py-3 max-md:text-xs max-md:py-3 max-md:px-0">JAM
+                                </th>
                                 @if (count($courts) != 0)
                                     @foreach ($courts as $court)
                                         <th scope="col" class="px-6 py-3 max-md:text-xs max-md:py-3 max-md:px-0">
@@ -422,14 +403,36 @@
                 </div>
             </div>
 
-            <div class="mt-5 max-md:mt-2 ms-5 status">
-                <a href="" class="text-center bg-green-200 p-2 rounded-md max-md:text-sm">Tersedia</a>
-                <a href="" class="text-center bg-gray-200 p-2 rounded-md max-md:text-sm">Tidak Tersedia</a>
+            <div class="mt-5 ms-5 status">
+                <p class="text-center inline bg-green-200 p-2 rounded-md max-md:text-sm">Tersedia</p>
+                <p class="text-center inline bg-gray-200 p-2 rounded-md max-md:text-sm">Tidak Tersedia</p>
             </div>
         </div>
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const orderedLists = document.querySelectorAll('ol');
+            const lists = document.querySelectorAll('ul');
+            const paragraphElements = document.querySelectorAll('#element-p');
+            paragraphElements.forEach(p => {
+                if (p.nextElementSibling) {
+                    p.nextElementSibling.classList.add('break-words');
+                }
+            });
+
+            if (lists.length > 0) {
+                lists.forEach(function(ul) {
+                    ul.classList.add('list-disc', 'ps-5');
+                });
+            }
+            if (orderedLists.length > 0) {
+                orderedLists.forEach(function(ol) {
+                    ol.classList.add('list-decimal', 'ps-5');
+                });
+            }
+        });
+
         function formatTanggal(inputDate) {
             const dateParts = inputDate.split('-'); // Memisahkan tanggal, bulan, tahun
             const formattedDate = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`); // Format DD-MM-YYYY

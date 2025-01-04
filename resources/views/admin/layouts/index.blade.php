@@ -8,6 +8,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    <script type="importmap">
+        {
+            "imports": {
+                "https://esm.sh/v135/prosemirror-model@1.22.3/es2022/prosemirror-model.mjs": "https://esm.sh/v135/prosemirror-model@1.19.3/es2022/prosemirror-model.mjs", 
+                "https://esm.sh/v135/prosemirror-model@1.22.1/es2022/prosemirror-model.mjs": "https://esm.sh/v135/prosemirror-model@1.19.3/es2022/prosemirror-model.mjs"
+            }
+        }
+    </script>
 
     <title>{{ $title }} | {{ $biodata->name_biodata }}</title>
 
@@ -19,12 +28,12 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="antialiased font-semibold relative">
-    <div class="bg-gray-50 max-w-[2040px] mx-auto">
+<body class="antialiased font-semibold">
+    <div class="bg-gray-50 max-w-[2040px] mx-auto relative">
         @include('admin.layouts.navbar')
         @include('admin.layouts.aside')
         <main class="p-4 sm:ml-64 min-h-[100vh] overflow-x-scroll">
-            <div class="p-4 mt-14">
+            <div class="mt-14">
                 @yield('main')
             </div>
         </main>

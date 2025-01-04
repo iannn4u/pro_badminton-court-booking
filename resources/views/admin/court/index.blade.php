@@ -1,8 +1,8 @@
 @extends('admin.layouts.index')
 
 @section('main')
-    <div class="flex justify-between">
-        <h1 class="text-3xl">{{ $title }}</h1>
+    <div class="flex justify-between max-sm:py-5">
+        <h1 class="max-sm:text-2xl text-3xl">{{ $title }}</h1>
         <a href="/admin/lapangan/tambah"
             class="flex justify-center items-center gap-1 text-sm px-2 py-2 h-max bg-slate-700 text-slate-100 border border-gray-200 rounded-lg shadow hover:bg-slate-600">
             <p class="font-semibold">Tambah Lapangan</p>
@@ -10,7 +10,7 @@
     </div>
 
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-3 bg-white mt-10">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-3 bg-white mt-5 md:mt-10">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>

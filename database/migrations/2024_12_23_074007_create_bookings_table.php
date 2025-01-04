@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id("id_booking");
+            $table->unsignedBigInteger("id_pelanggan");
             $table->string("name_booking");
             $table->string("date_booking");
             $table->string("court_booking");
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->integer("status_delete_booking")->default(0);
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('id_pelanggan')->references('id')->on('pelanggans')->onDelete('cascade');
         });
     }
 

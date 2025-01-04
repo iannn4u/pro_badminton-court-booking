@@ -11,6 +11,11 @@ class Booking extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ["name_booking", "date_booking", "court_booking", "price_booking", "time_booking", "status_delete_booking"];
+    protected $guarded = ["id_booking"];
     protected $primaryKey = 'id_booking';
+
+    public function pelanggan()
+    {
+        return $this->belongsTo(Pelanggan::class, 'id_pelanggan', 'id');
+    }
 }

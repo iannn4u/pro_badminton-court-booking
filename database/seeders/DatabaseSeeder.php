@@ -40,61 +40,43 @@ class DatabaseSeeder extends Seeder
             "link_wa_biodata" => "/"
         ]);
 
-        $highlight1 = ["2 Lapangan Kayu", "Kamar Mandi", "Musholla", "Kantin"];
-        $highlight2 = ["1 Jam Rp. 45.000", "3 Jam Rp. 120.000"];
-        $highlight3 = ["https://www.instagram.com/reel/", "https://www.instagram.com/reel/"];
-        Highlight::insert([
-            [
-                "name_highlight" => "Fasilitas",
-                "desc_highlight" => json_encode($highlight1),
-            ],
-            [
-                "name_highlight" => "Harga Sewa",
-                "desc_highlight" => json_encode($highlight2),
-            ],
-            [
-                "name_highlight" => "Review Lapangan",
-                "desc_highlight" => json_encode($highlight3),
-            ]
-        ]);
-
-        Booking::insert([
-            [
-                "name_booking" => "Alandrian",
-                "date_booking" => $currentDate->format("d-m-Y"),
-                "time_booking" => "08.00 - 09.00",
-                "court_booking" => "Lapangan 2",
-                "price_booking" => "45000",
-            ],
-            [
-                "name_booking" => "Surya",
-                "date_booking" => $currentDate->format("d-m-Y"),
-                "time_booking" => "21.00 - 22.00",
-                "court_booking" => "Lapangan 1",
-                "price_booking" => "45000",
-            ],
-            [
-                "name_booking" => "Tantra",
-                "date_booking" => $currentDate->format("d-m-Y"),
-                "time_booking" => "22.00 - 23.00",
-                "court_booking" => "Lapangan 1",
-                "price_booking" => "45000",
-            ],
-            [
-                "name_booking" => "Tantra",
-                "date_booking" => $currentDate->format("d-m-Y"),
-                "time_booking" => "22.00 - 23.00",
-                "court_booking" => "Lapangan 2",
-                "price_booking" => "45000",
-            ],
-            [
-                "name_booking" => "Tantra",
-                "date_booking" => $currentDate->format("d-m-Y"),
-                "time_booking" => "22.00 - 23.00",
-                "court_booking" => "Lapangan 3",
-                "price_booking" => "45000",
-            ]
-        ]);
+        // Booking::insert([
+        //     [
+        //         "name_booking" => "Alandrian",
+        //         "date_booking" => $currentDate->format("d-m-Y"),
+        //         "time_booking" => "08.00 - 09.00",
+        //         "court_booking" => "Lapangan 2",
+        //         "price_booking" => "45000",
+        //     ],
+        //     [
+        //         "name_booking" => "Surya",
+        //         "date_booking" => $currentDate->format("d-m-Y"),
+        //         "time_booking" => "21.00 - 22.00",
+        //         "court_booking" => "Lapangan 1",
+        //         "price_booking" => "45000",
+        //     ],
+        //     [
+        //         "name_booking" => "Tantra",
+        //         "date_booking" => $currentDate->format("d-m-Y"),
+        //         "time_booking" => "22.00 - 23.00",
+        //         "court_booking" => "Lapangan 1",
+        //         "price_booking" => "45000",
+        //     ],
+        //     [
+        //         "name_booking" => "Tantra",
+        //         "date_booking" => $currentDate->format("d-m-Y"),
+        //         "time_booking" => "22.00 - 23.00",
+        //         "court_booking" => "Lapangan 2",
+        //         "price_booking" => "45000",
+        //     ],
+        //     [
+        //         "name_booking" => "Tantra",
+        //         "date_booking" => $currentDate->format("d-m-Y"),
+        //         "time_booking" => "22.00 - 23.00",
+        //         "court_booking" => "Lapangan 3",
+        //         "price_booking" => "45000",
+        //     ]
+        // ]);
 
         Court::insert([
             [

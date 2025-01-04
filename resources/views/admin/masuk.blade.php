@@ -16,8 +16,8 @@
 </head>
 
 <body class="antialiased bg-gray-50 grid place-items-center h-[100vh] relative">
-    <section class="bg-white shadow-md p-10 w-[400px]">
-        <h1 class="text-center text-2xl font-semibold mb-10">Masuk</h1>
+    <section class="bg-white shadow-md p-10 max-w-[400px] w-[90%] max-sm:pt-8 max-sm:px-5">
+        <h1 class="text-center text-2xl font-semibold mb-5">Masuk</h1>
         <form action="/admin/login" method="post">
             @csrf
             <div class="flex flex-col mb-3">

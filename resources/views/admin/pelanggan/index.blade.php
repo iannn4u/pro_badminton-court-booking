@@ -1,14 +1,7 @@
 @extends('admin.layouts.index')
 
 @section('main')
-    <div class="flex justify-between max-sm:py-5">
-        <h1 class="text-3xl">{{ $title }}</h1>
-        <a href="/admin/booking/tambah"
-            class="flex justify-center items-center gap-1 text-sm px-2 py-2 h-max bg-slate-700 text-slate-100 border border-gray-200 rounded-lg shadow hover:bg-slate-600">
-            <p class="font-semibold">Tambah Booking</p>
-        </a>
-    </div>
-
+    <h1 class="text-3xl max-sm:py-5">{{ $title }}</h1>
 
     <div class="relative shadow-md sm:rounded-lg p-3 bg-white mt-5 md:mt-10">
         <div class="pb-4">
@@ -32,55 +25,75 @@
             <table class="md:w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3 text-center">
-                            Nama Booking
+                        <th scope="col" class="px-3 py-3 text-center">
+                            Nama
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center">
-                            Tanggal Booking
+                        <th scope="col" class="px-3 py-3 text-center">
+                            Nomor Telepon
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center">
-                            Lapangan Booking
+                        <th scope="col" class="px-3 py-3 text-center">
+                            Banyaknya Bermain
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center">
-                            Jam Booking
+                        <th scope="col" class="px-3 py-3 text-center">
+                            Pertama Kali Booking
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center">
+                        <th scope="col" class="px-3 py-3 text-center">
+                            Terakhir Kali Booking
+                        </th>
+                        <th scope="col" class="px-3 py-3 text-center">
+                            Alamat
+                        </th>
+                        <th scope="col" class="px-3 py-3 text-center">
+                            Status
+                        </th>
+                        <th scope="col" class="px-3 py-3 text-center">
                             Aksi
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($bookings->isEmpty())
+                    @if ($pelanggans->isEmpty())
                         <tr class="bg-white border-b">
                             <th scope="row" colspan=""
                                 class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">
-                                Tidak ada lapangan tersedia
+                                Tidak ada pelanggan yang tersedia
                             </th>
                         </tr>
                     @else
-                        @foreach ($bookings as $booking => $value)
+                        @foreach ($pelanggans as $booking => $value)
                             <tr class="bg-white border-b">
                                 <th scope="row"
                                     class="min-[955px]:px-6 min-[955px]:py-4 font-medium text-gray-900 whitespace-nowrap text-center">
-                                    {{ $value->name_booking }}
+                                    {{ $value->name }}
                                 </th>
                                 <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
-                                    {{ $value->date_booking }}
+                                    {{ $value->phoneNumber ?? 'Belum di set'  }}
                                 </td>
                                 <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
-                                    {{ $value->court_booking }}
+                                    {{ $value->playing }}
                                 </td>
                                 <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
-                                    {{ $value->time_booking }}
+                                    {{ $value->first_come }}
+                                </td>
+                                <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
+                                    {{ $value->last_playing }}
+                                </td>
+                                <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
+                                    {{ $value->address ?? 'Belum di set' }}
+                                </td>
+                                <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
+                                    {{ $value->status }}
                                 </td>
                                 <td class="px-6 py-4 flex gap-5 justify-center">
-                                    <a href="/admin/booking/edit/{{ $value->id_booking }}"
+                                    <a href="/pelanggan/{{ $value->id }}"
+                                        class="font-medium text-slate-600 dark:text-slate-500 hover:underline">Detail</a>
+                                    <a href="/pelanggan/{{ $value->id }}/edit"
                                         class="font-medium text-slate-600 dark:text-slate-500 hover:underline">Edit</a>
-                                    <form action="/admin/booking/delete/{{ $value->id_booking }}" method="post">
+                                    <form action="/pelanggan/{{ $value->id }}" method="post">
                                         @method('delete')
                                         @csrf
                                         <button class="font-medium text-slate-600 dark:text-slate-500 hover:underline"
-                                            onclick="return confirm('Yakin ingin hapus lapangan ini?')">Hapus</button>
+                                            onclick="return confirm('Yakin ingin hapus pelanggan ini?')">Hapus</button>
                                     </form>
                                 </td>
                             </tr>

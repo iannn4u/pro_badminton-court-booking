@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Court;
+use App\Models\Highlight;
 use App\Models\Operational;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class IndexController extends Controller
         $data["time_close"] = $operational->time_close;
         $data["time_open"] = $operational->time_open;
         $data["courts"] = Court::all();
+        $data["highlights"] = Highlight::all();
         $data['todaySchedule'] = $this->day();
         $data["operational"] = Operational::first();
         $operational = Operational::first();

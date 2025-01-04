@@ -1,9 +1,9 @@
 @extends('admin.layouts.index')
 
 @section('main')
-    <h1 class="text-3xl">{{ $title }}</h1>
+    <h1 class="text-3xl p-4">{{ $title }}</h1>
 
-    <form action="/admin/booking/edit/{{ $booking->id_booking }}" method="post" class="max-w-xl mt-10 space-y-5">
+    <form action="/admin/booking/edit/{{ $booking->id_booking }}" method="post" class="max-w-xl mt-5 md:mt-10 space-y-5">
         @method('put')
         @csrf
         <div>
@@ -12,7 +12,7 @@
                 value="{{ old('name_booking', $booking->name_booking) }}"
                 class="block w-full p-2 text-slate-900 border border-slate-500 rounded-lg bg-white text-xs focus:ring-slate-500 focus:border-slate-500">
         </div>
-        <div class="flex gap-10">
+        <div class="flex flex-wrap gap-10">
             <div>
                 <label for="date_booking" class="block mb-2 text-sm font-medium text-slate-900">Tanggal Booking</label>
                 <div class="relative max-w-sm">
@@ -54,7 +54,7 @@
         <div class="sm:flex-row flex-col">
             <h2 class="block mb-2 text-sm font-medium text-slate-900">Jam
                 Booking</h2>
-            <ul id="timetable" class="grid w-full grid-cols-3 gap-2 mt-2">
+            <ul id="timetable" class="grid w-full grid-cols-3 gap-2 mt-2 px-5">
                 @for ($i = $incrementOpen; $i < $incrementClose; $i++)
                     <li>
                         <input type="checkbox" id="{{ $i }}.00 - {{ $i + 1 }}.00" name="time_booking[]"

@@ -1,11 +1,11 @@
 @extends('admin.layouts.index')
 
 @section('main')
-    <h1 class="text-3xl">{{ $title }}</h1>
+    <h1 class="text-3xl max-sm:py-5">{{ $title }}</h1>
 
-    <div class="mt-10 flex flex-wrap gap-5">
+    <div class="md:mt-10 flex flex-wrap gap-5">
         <section
-            class="flex justify-between items-center min-w-[400px] h-min max-w-sm p-5 bg-white border border-gray-200 rounded-lg shadow">
+            class="flex justify-between items-center gap-20 flex-wrap max-sm:gap-5 max-sm:w-full h-min max-w-sm p-5 bg-white border border-gray-200 rounded-lg shadow">
             <div class="flex gap-5 items-center">
                 <div class="bg-slate-700 rounded-full w-11 h-11 text-white grid place-items-center">
                     <p class="mb-0.5">A</p>
@@ -17,7 +17,7 @@
             </div>
 
             <a href="/admin/logout"
-                class="flex justify-center items-center gap-1 px-2 py-2 h-max bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+                class="flex justify-center items-center gap-1 px-2 py-2 h-max max-sm:w-full bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -26,11 +26,11 @@
                 <p class="font-semibold">Keluar</p>
             </a>
         </section>
-        <section class="block min-w-[400px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+        <section class="block p-6 bg-white border border-gray-200 rounded-lg shadow max-w-sm hover:bg-gray-100 max-sm:w-full">
             <p class="mb-2 text-xl font-bold tracking-tight text-gray-900">Set jam buka dan tutup</p>
             <div>
                 <form action="/admin/operational/edit/{{ $operational->id_operational }}" method="post"
-                    class="flex items-between gap-3">
+                    class="flex items-between max-sm:flex-col gap-3">
                     @csrf
                     <div>
                         <label for="time_open" class="block mb-2 text-sm font-medium text-gray-900">Jam Buka:</label>
@@ -65,18 +65,18 @@
                         </div>
                     </div>
                     <button
-                        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2 h-[42px] mt-7">Set</button>
+                        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2 h-[42px] sm:mt-7">Set</button>
                 </form>
             </div>
         </section>
     </div>
 
     <div class="mt-10 flex flex-wrap gap-5">
-        <section class="block min-w-[400px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+        <section class="block min-w-80 max-sm:w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
             <h5 class="font-normal text-gray-700">Jumlah Pengunjung Hari Ini</h5>
             <p class="mb-2 text-3xl font-bold tracking-tight text-gray-900">{{ $visitor }}</p>
         </section>
-        <section class="block min-w-[400px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+        <section class="block min-w-80 max-sm:w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
             <h5 class="font-normal text-gray-700">Income Bulan Ini</h5>
             <p class="mb-2 text-3xl font-bold tracking-tight text-gray-900">Rp {{ $income }}</p>
         </section>

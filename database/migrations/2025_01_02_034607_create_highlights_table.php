@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('highlights', function (Blueprint $table) {
             $table->id("id_highlight");
             $table->string("name_highlight");
-            $table->json("desc_highlight");
+            $table->string("desc_highlight");
         });
     }
 

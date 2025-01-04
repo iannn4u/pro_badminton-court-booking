@@ -7,6 +7,7 @@ use App\Http\Requests\StoreBookingRequest;
 use App\Http\Requests\UpdateBookingRequest;
 use App\Models\Court;
 use App\Models\Operational;
+use App\Models\Pelanggan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -67,6 +68,8 @@ class BookingController extends Controller
             'time_booking.array' => 'Slot waktu harus berupa array.',
         ]);
 
+        $pelanggan = Pelanggan::where("name", $validated['name_booking'])->first();
+
         // Ubah format input tanggal ke format Carbon
         $formattedDate = Carbon::parse($request->date_booking)->format('d-m-Y');
         $validated['date_booking'] = $formattedDate;
@@ -81,6 +84,25 @@ class BookingController extends Controller
         // Proses booking untuk member
         if ($request->member_booking) {
             if (count($request->time_booking) > 1) {
+                // Masukkin data ke table pelanggan
+                if ($pelanggan == null) {
+                    $pelanggan = Pelanggan::create([
+                        'name' => $validated['name_booking'],
+                        'phoneNumber' => $request->input('phoneNumber'),
+                        'playing' => 4 * count($validated['time_booking']),
+                        'first_come' => $validated['date_booking'],
+                        'last_playing' => $tanggalMulaiMember->copy()->addWeeks(3)->format('d-m-Y'),
+                    ]);
+                } else {
+                    $dataPelangganUpdate = [
+                        'playing' => $pelanggan->playing + 4 * count($validated['time_booking']),
+                        'last_playing' => $tanggalMulaiMember->copy()->addWeeks(3)->format('d-m-Y'),
+                        'phoneNumber' => $request->input('phoneNumber') ?? $pelanggan->phoneNumber
+                    ];
+
+                    $pelanggan->update($dataPelangganUpdate);
+                }
+
                 foreach ($validated["time_booking"] as $time) {
                     for ($i = 0; $i < 4; $i++) {
                         $exists = Booking::where('date_booking', $tanggalMulaiMember->copy()->addWeeks($i)->format('d-m-Y'))
@@ -93,6 +115,7 @@ class BookingController extends Controller
                         }
 
                         $bookingsToCreate[] = [
+                            'id_pelanggan' => $pelanggan->id,
                             'name_booking' => $validated['name_booking'],
                             'date_booking' => $tanggalMulaiMember->copy()->addWeeks($i)->format('d-m-Y'),
                             'court_booking' => $validated['court_booking'],
@@ -101,8 +124,27 @@ class BookingController extends Controller
                         ];
                     }
                 }
-                Booking::create($bookingsToCreate);
+
+                Booking::insert($bookingsToCreate);
             } else {
+                if ($pelanggan == null) {
+                    $pelanggan = Pelanggan::create([
+                        'name' => $validated['name_booking'],
+                        'phoneNumber' => $request->input('phoneNumber'),
+                        'playing' => 4,
+                        'first_come' => $validated['date_booking'],
+                        'last_playing' => $tanggalMulaiMember->copy()->addWeeks(3)->format('d-m-Y'),
+                    ]);
+                } else {
+                    $dataPelangganUpdate = [
+                        'playing' => $pelanggan->playing + 4,
+                        'last_playing' => $tanggalMulaiMember->copy()->addWeeks(3)->format('d-m-Y'),
+                        'phoneNumber' => $request->input('phoneNumber') ?? $pelanggan->phoneNumber
+                    ];
+
+                    $pelanggan->update($dataPelangganUpdate);
+                }
+
                 for ($i = 0; $i < 4; $i++) {
                     $exists = Booking::where('date_booking', $tanggalMulaiMember->copy()->addWeeks($i)->format('d-m-Y'))
                         ->where("court_booking", $validated['court_booking'])
@@ -114,6 +156,7 @@ class BookingController extends Controller
                     }
 
                     Booking::create([
+                        'id_pelanggan' => $pelanggan->id,
                         'name_booking' => $validated['name_booking'],
                         'date_booking' => $tanggalMulaiMember->copy()->addWeeks($i)->format('d-m-Y'),
                         'court_booking' => $validated['court_booking'],
@@ -125,24 +168,84 @@ class BookingController extends Controller
         } else {
             // Non-member
             $validated['date_booking'] = $tanggalMulaiMember->format('d-m-Y');
+
             if (count($request->time_booking) > 1) {
-                foreach ($validated["time_booking"] as $time) {
+                // Masukkin data ke table pelanggan
+                if ($pelanggan == null) {
+                    $pelanggan = Pelanggan::create([
+                        'name' => $validated['name_booking'],
+                        'phoneNumber' => $request->input('phoneNumber'),
+                        'playing' => count($validated['time_booking']),
+                        'first_come' => $validated['date_booking'],
+                        'last_playing' => $validated['date_booking'],
+                    ]);
+                    foreach ($validated["time_booking"] as $time) {
+                        Booking::create([
+                            'id_pelanggan' => $pelanggan->id,
+                            'name_booking' => $validated['name_booking'],
+                            'date_booking' => $validated['date_booking'],
+                            'court_booking' => $validated['court_booking'],
+                            'time_booking' => $time,
+                            'price_booking' => $court->price_court,
+                        ]);
+                    }
+                } else {
+                    foreach ($validated["time_booking"] as $time) {
+                        Booking::create([
+                            'id_pelanggan' => $pelanggan->id,
+                            'name_booking' => $validated['name_booking'],
+                            'date_booking' => $validated['date_booking'],
+                            'court_booking' => $validated['court_booking'],
+                            'time_booking' => $time,
+                            'price_booking' => $court->price_court,
+                        ]);
+                    }
+
+                    $dataPelangganUpdate = [
+                        'playing' => $pelanggan->playing + count($validated['time_booking']),
+                        'last_playing' => $validated['date_booking'],
+                        'phoneNumber' => $request->input('phoneNumber') ?? $pelanggan->phoneNumber
+                    ];
+
+                    $pelanggan->update($dataPelangganUpdate);
+                }
+            } else {
+                // Masukkin data ke table pelanggan
+                if ($pelanggan == null) {
+                    $pelanggan = Pelanggan::create([
+                        'name' => $validated['name_booking'],
+                        'phoneNumber' => $request->input('phoneNumber'),
+                        'playing' => 1,
+                        'first_come' => $validated['date_booking'],
+                        'last_playing' => $validated['date_booking'],
+                    ]);
+
                     Booking::create([
+                        'id_pelanggan' => $pelanggan->id,
                         'name_booking' => $validated['name_booking'],
                         'date_booking' => $validated['date_booking'],
                         'court_booking' => $validated['court_booking'],
-                        'time_booking' => $time,
+                        'time_booking' => $validated['time_booking'][0],
+                        'price_booking' => $court->price_court,
+                    ]);
+                } else {
+                    $dataPelangganUpdate = [
+                        'playing' => $pelanggan->playing + 1,
+                        'last_playing' => $validated['date_booking'],
+                        'phoneNumber' => $request->input('phoneNumber') ?? $pelanggan->phoneNumber
+                    ];
+
+                    $pelanggan->update($dataPelangganUpdate);
+
+                    Booking::create([
+                        'id_pelanggan' => $pelanggan->id,
+                        'name_booking' => $validated['name_booking'],
+                        'date_booking' => $validated['date_booking'],
+                        'court_booking' => $validated['court_booking'],
+                        'time_booking' => $validated['time_booking'][0],
                         'price_booking' => $court->price_court,
                     ]);
                 }
-            } else {
-                Booking::create([
-                    'name_booking' => $validated['name_booking'],
-                    'date_booking' => $validated['date_booking'],
-                    'court_booking' => $validated['court_booking'],
-                    'time_booking' => $validated['time_booking'][0],
-                    'price_booking' => $court->price_court,
-                ]);
             }
         }
 
@@ -198,6 +301,17 @@ class BookingController extends Controller
             'time_booking.array' => 'Slot waktu harus berupa array.',
         ]);
 
+
+        $pelanggan = Pelanggan::where('name', $request->name_booking)->first();
+        $formatDate = Carbon::parse($validated["date_booking"])->format('d-m-Y');
+        $validated['date_booking'] = $formatDate;
+        $formattedDate = Carbon::createFromFormat('d-m-Y', $validated["date_booking"]);
+        $lastPlayingDate = Carbon::createFromFormat('d-m-Y', $pelanggan->last_playing);
+
+        if ($lastPlayingDate->lessThan($formattedDate)) {
+            $pelanggan->update(['last_playing' => $formatDate]);
+        }
+
         $court = Court::where("name_court", $request->court_booking)->first();
         $validated["price_booking"] = $court->price_court;
         $booking->update($validated);
@@ -210,8 +324,14 @@ class BookingController extends Controller
      */
     public function destroy(Booking $booking)
     {
-        $booking->update(["status_delete_booking" => 2]);
-        $booking->delete();
+        $pelanggan = Pelanggan::where("name", $booking->name_booking)->first();
+        $pelanggan->update(['playing' => $pelanggan->playing - 1]);
+
+        if ($pelanggan->playing == 0) {
+            $pelanggan->delete();
+        }
+
+        $booking->forceDelete();
 
         return redirect('/admin/booking')->with('alert', 'Booking berhasil dihapus.');
     }

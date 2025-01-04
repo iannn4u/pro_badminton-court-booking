@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Operational;
 use App\Http\Requests\StoreOperationalRequest;
-use App\Http\Requests\UpdateOperationalRequest;
+use App\Models\Highlight;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,6 +18,7 @@ class OperationalController extends Controller
     {
         $data["title"] = "Setting";
         $data["operational"] = Operational::first();
+        $data["highlights"] = Highlight::all();
         $operational = Operational::first();
         $data["photos_preview"] = [];
         if (!empty($operational->photos_place)) {

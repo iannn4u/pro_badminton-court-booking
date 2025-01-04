@@ -1,7 +1,7 @@
 @extends('admin.layouts.index')
 
 @section('main')
-    <div class="flex justify-between mb-5">
+    <div class="flex justify-between max-sm:pt-5">
         <h1 class="text-3xl">{{ $title }}</h1>
     </div>
 
@@ -17,7 +17,8 @@
             </div>
         </div>
     @else
-        <div id="default-carousel" class="relative md:w-[80%] mx-auto max-md:p-3 rounded-3xl mb-10" data-carousel="slide">
+        <div id="default-carousel" class="relative md:w-[80%] mx-auto max-md:p-3 rounded-3xl md:mb-10 mb-5"
+            data-carousel="slide">
             <!-- Carousel wrapper -->
             <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                 @if ($operational->preview1 == 1)
@@ -71,7 +72,7 @@
         </div>
     @endif
 
-    <div class="bg-white shadow-xl p-10">
+    <div class="bg-white shadow-xl p-5 md:p-10">
         <div>
             <div class="mb-5">
                 <label for="name_biodata" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
@@ -80,7 +81,7 @@
                     class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     value="{{ $operational->name_biodata }}" disabled readonly>
             </div>
-            <div class="mb-5 grid grid-cols-2 gap-10">
+            <div class="mb-5 grid grid-cols-2 max-sm:grid-cols-1 gap-3 md:gap-10">
                 <div>
                     <label for="address_biodata" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat
                         Tempat</label>
@@ -97,7 +98,7 @@
                         value="{{ $operational->link_address_biodata }}" disabled readonly>
                 </div>
             </div>
-            <div class="mb-5 grid grid-cols-2 gap-10">
+            <div class="mb-5 grid grid-cols-2 max-sm:grid-cols-1 gap-3 md:gap-10">
                 <div>
                     <label for="wa_biodata" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No
                         Telepon/Whatsapp</label>
@@ -118,65 +119,37 @@
             class="text-white bg-slate-800 hover:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-slate-800 dark:hover:bg-slate-700 dark:focus:ring-slate-700 dark:border-slate-700">Edit</a>
     </div>
 
-    {{-- <div class="bg-white shadow-xl p-10 flex flex-wrap justify-between items-center gap-5">
-        <div class="font-normal max-lg:w-full relative">
-            <div class="block w-full lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow">
-                <a href="" class="hover:text-gray-500" onclick="return confirm('Yakin ingin hapus?')"><svg
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6 absolute top-5 right-5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                    </svg>
-                </a>
-                <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
-                    Fasilitas</h5>
-                <p class="font-normal text-gray-700">
-                    - 3 lapangan kayu <br>
-                    - Kamar mandi dan musholla <br>
-                    - kantin <br></p>
-            </div>
+    <div class="bg-white shadow-xl p-5 md:p-10">
+        <div class="font-normal max-lg:w-full flex flex-wrap justify-center max-md:gap-5 md:gap-10">
+            @foreach ($highlights as $highlight)
+                <div class="font-normal min-w-60 max-w-sm relative">
+                    <a href="/admin/pengaturan/hapus/highlight/{{ $highlight->id_highlight }}"
+                        class="hover:text-gray-500" onclick="return confirm('Yakin ingin hapus?')"><svg
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6 absolute top-2 right-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                        </svg>
+                    </a>
+                    <div
+                        class="block w-full overflow-auto lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+                        <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
+                            {{ $highlight->name_highlight }}</h5>
+                        <p class="font-normal text-gray-700" id="element-p">
+                            {!! $highlight->desc_highlight !!}
+                        </p>
+                    </div>
+                </div>
+            @endforeach
         </div>
-        <div class="font-normal max-lg:w-full relative">
-            <div class="block lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow">
-                <a href="" class="hover:text-gray-500" onclick="return confirm('Yakin ingin hapus?')"><svg
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6 absolute top-5 right-5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                    </svg>
-                </a>
-                <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
-                    Harga Sewa</h5>
-                <p class="font-normal text-gray-700">
-                    - 1 jam: Rp. 50.000 <br>
-                    - 3 jam: Rp. 120.000 <br>
-                    - Hubungi Whatsapp untuk member <br></p>
-            </div>
-        </div>
-        <div class="font-normal max-lg:w-full relative">
-            <div class="block lg:max-w-sm h-[175px] p-6 bg-white border border-gray-200 rounded-lg shadow">
-                <a href="" class="hover:text-gray-500" onclick="return confirm('Yakin ingin hapus?')"><svg
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6 absolute top-5 right-5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                    </svg>
-                </a>
-                <h5 class="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900">
-                    Review Lapangan
-                </h5>
-                <p class="font-normal text-gray-700">
-                    - <a href="https://www.instagram.com/reel/"
-                        class="underline hover:text-green-600">https://www.instagram.com/reel/</a> <br>
-                    - <a href="https://www.instagram.com/reel/"
-                        class="underline hover:text-green-600">https://www.instagram.com/reel/</a> <br>
-            </div>
-        </div>
-    </div> --}}
+        <a href="/admin/pengaturan/tambah/highlight"
+            class="block w-full md:w-max mt-5 max-md:text-center text-white bg-slate-800 hover:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-slate-800 dark:hover:bg-slate-700 dark:focus:ring-slate-700 dark:border-slate-700">Tambah
+            Highlight</a>
+    </div>
 
-    <div class="bg-white shadow-xl p-10">
+    <div class="bg-white shadow-xl p-5 md:p-10">
         <div>
-            <div class="mb-5 grid grid-cols-2 gap-10">
+            <div class="mb-5 grid grid-cols-2 max-sm:grid-cols-1 gap-3 md:gap-10">
                 <div>
                     <label for="username"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
@@ -195,4 +168,22 @@
             <a href="/admin/pengaturan/edit/account"
                 class="text-white bg-slate-800 hover:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-slate-800 dark:hover:bg-slate-700 dark:focus:ring-slate-700 dark:border-slate-700">Edit</a>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const orderedLists = document.querySelectorAll('ol');
+                const paragraphElements = document.querySelectorAll('#element-p');
+                paragraphElements.forEach(p => {
+                    if (p.nextElementSibling) {
+                        p.nextElementSibling.classList.add('break-words');
+                    }
+                });
+
+                if (orderedLists.length > 0) {
+                    orderedLists.forEach(function(ol) {
+                        ol.classList.add('list-disc', 'ps-5');
+                    });
+                }
+            });
+        </script>
     @endsection

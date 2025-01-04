@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Highlight;
 use App\Http\Requests\StoreHighlightRequest;
 use App\Http\Requests\UpdateHighlightRequest;
+use Illuminate\Http\Request;
 
 class HighlightController extends Controller
 {
@@ -21,15 +22,24 @@ class HighlightController extends Controller
      */
     public function create()
     {
-        //
+        $data["title"] = "Tambah Highlight";
+
+        return view("admin.operational.createHighlight", $data);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreHighlightRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name_highlight' => 'required|string',
+            'desc_highlight' => 'required|string',
+        ]);
+
+        Highlight::create($validated);
+
+        return redirect('/admin/pengaturan')->with('alert', 'Highlight berhasil diperbarui.');
     }
 
     /**
@@ -61,6 +71,8 @@ class HighlightController extends Controller
      */
     public function destroy(Highlight $highlight)
     {
-        //
+        $highlight->delete();
+
+        return redirect('/admin/pengaturan')->with('alert', 'Highlight berhasil dihapus.');
     }
 }

@@ -1,7 +1,7 @@
 @extends('admin.layouts.index')
 
 @section('main')
-    <h1 class="text-3xl">{{ $title }}</h1>
+    <h1 class="text-3xl max-sm:py-5">{{ $title }}</h1>
 
     <form action="/admin/lapangan/tambah" method="post" class="max-w-xl mt-10 space-y-5">
         @csrf
