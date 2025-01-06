@@ -32,7 +32,7 @@
             <input type="text" id="phoneNumber" name="phoneNumber" value="{{ old('phoneNumber') }}"
                 class="block w-full p-2 text-slate-900 border border-slate-500 rounded-lg bg-white text-xs focus:ring-slate-500 focus:border-slate-500">
         </div>
-        <div class="flex flex-wrap gap-10">
+        <div class="flex flex-wrap max-md:flex-col gap-10">
             <div>
                 <label for="date_booking" class="block mb-2 text-sm font-medium text-slate-900">Tanggal Booking</label>
                 <div class="relative max-w-sm">
