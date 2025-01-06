@@ -37,6 +37,7 @@ class BookingController extends Controller
     {
         $data["title"] = "Tambah Booking";
         $data["courts"] = Court::all();
+        $data['pelanggans'] = Pelanggan::all();
         $operational = Operational::get()->first();
         $partsTimeOpen = explode(':', $operational->time_open);
         $partsTimeClose = explode(':', $operational->time_close);
