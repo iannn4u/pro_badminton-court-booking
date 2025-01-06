@@ -11,7 +11,7 @@
                 class="block w-full p-2 text-slate-900 border border-slate-500 rounded-lg bg-white text-xs focus:ring-slate-500 focus:border-slate-500" value="{{ old("username", $user->username) }}">
         </div>
         <div>
-            <label for="password" class="block mb-2 text-sm font-medium text-slate-900">Harga Lapangan</label>
+            <label for="password" class="block mb-2 text-sm font-medium text-slate-900">Password</label>
             <input type="password" id="password" name="password"
                 class="block w-full p-2 text-slate-900 border border-slate-500 rounded-lg bg-white text-xs focus:ring-slate-500 focus:border-slate-500">
         </div>

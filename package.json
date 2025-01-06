@@ -30,6 +30,6 @@
         "flowbite-typography": "^1.0.5"
     },
     "overrides": {
-    "prosemirror-model": "1.19.3"
-}
+        "prosemirror-model": "1.19.3"
+    }
 }
