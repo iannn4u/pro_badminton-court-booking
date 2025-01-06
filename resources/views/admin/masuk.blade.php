@@ -22,12 +22,12 @@
             @csrf
             <div class="flex flex-col mb-3">
                 <label for="username" class="mb-1">Username</label>
-                <input type="text" name="username" id="username"
+                <input type="text" name="username" id="username" required
                     class="py-1 rounded-md focus:ring-slate-700 focus:border-slate-700" value="{{ old("username") }}">
             </div>
             <div class="flex flex-col mb-3">
                 <label for="password" class="mb-1">Password</label>
-                <input type="password" name="password" id="password"
+                <input type="password" name="password" id="password" required
                     class="py-1 rounded-md focus:ring-slate-700 focus:border-slate-700">
             </div>
             <button class="w-full bg-slate-800 text-slate-100 py-1 rounded-md mt-5">Masuk</button>
@@ -59,7 +59,7 @@
         </div>
     @enderror
     @if(session('masuk'))
-        <div id="alert-2" class="absolute bottom-0 right-5 flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50"
+        <div id="alert-2" class="absolute bottom-2 right-2 flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50"
             role="alert">
             <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                 viewBox="0 0 20 20">

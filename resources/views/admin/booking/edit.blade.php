@@ -6,11 +6,29 @@
     <form action="/admin/booking/edit/{{ $booking->id_booking }}" method="post" class="max-w-xl mt-5 md:mt-10 space-y-5">
         @method('put')
         @csrf
-        <div>
-            <label for="name_booking" class="block mb-2 text-sm font-medium text-slate-900">Nama Booking</label>
-            <input type="text" id="name_booking" name="name_booking"
-                value="{{ old('name_booking', $booking->name_booking) }}"
-                class="block w-full p-2 text-slate-900 border border-slate-500 rounded-lg bg-white text-xs focus:ring-slate-500 focus:border-slate-500">
+        <input type="hidden" name="old_name" value="{{ $booking->name_booking }}">
+        <div class="relative">
+            <div>
+                <label for="name_booking" class="block mb-2 text-sm font-medium text-slate-900">Nama Booking</label>
+                <input type="text" id="name_booking" name="name_booking"
+                    value="{{ old('name_booking', $booking->name_booking) }}"
+                    class="block w-full p-2 text-slate-900 border border-slate-500 rounded-lg bg-white text-xs focus:ring-slate-500 focus:border-slate-500" autocomplete="off">
+            </div>
+            @if (!$pelanggans->isEmpty())
+                <div id="dropdown"
+                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-full dark:bg-gray-700">
+                    <ul class="py-2 text-sm max-h-40 overflow-x-auto text-gray-700 dark:text-gray-200">
+                        @foreach ($pelanggans as $pelanggan)
+                            <li class="cursor-pointer">
+                                <p data-name="{{ $pelanggan->name }}"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    {{ $pelanggan->name }}
+                                </p>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
         <div class="flex flex-wrap max-md:flex-col gap-10">
             <div>
@@ -80,6 +98,62 @@
     </form>
 
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ambil elemen input dan dropdown
+            const nameBookingInput = document.getElementById('name_booking');
+            const dropdown = document.getElementById('dropdown');
+
+            // Pastikan dropdown ada sebelum melanjutkan
+            if (!dropdown) {
+                return;
+            }
+
+            // Ambil semua elemen <p> di dalam dropdown
+            const dropdownItems = dropdown.querySelectorAll('p');
+
+            // Tambahkan event listener pada setiap item di dropdown
+            dropdownItems.forEach((item) => {
+                item.addEventListener('click', function() {
+                    // Gunakan `this` di dalam fungsi reguler untuk mengakses elemen <p>
+                    nameBookingInput.value = this.dataset.name;
+
+                    // Sembunyikan dropdown
+                    dropdown.classList.add('hidden');
+                    dropdown.classList.remove('absolute');
+                });
+            });
+
+            dropdown.addEventListener('mousedown', (event) => {
+                event.preventDefault(); // Cegah blur pada input ketika dropdown diklik
+            });
+
+            // Event listener untuk mengontrol dropdown
+            nameBookingInput.addEventListener('blur', () => {
+                dropdown.classList.add('hidden');
+                dropdown.classList.remove('absolute');
+            });
+
+            nameBookingInput.addEventListener('click', () => {
+                if (nameBookingInput.value === '') {
+                    dropdown.classList.add('absolute');
+                    dropdown.classList.remove('hidden');
+                } else {
+                    dropdown.classList.add('hidden');
+                    dropdown.classList.remove('absolute');
+                }
+            });
+
+            nameBookingInput.addEventListener('input', () => {
+                if (nameBookingInput.value === '') {
+                    dropdown.classList.add('absolute');
+                    dropdown.classList.remove('hidden');
+                } else {
+                    dropdown.classList.add('hidden');
+                    dropdown.classList.remove('absolute');
+                }
+            });
+        });
+
         const inputTanggal = document.querySelector("#date_booking");
         const lapanganOptions = document.querySelector("#lapangan-options");
         const lapanganInputs = document.querySelectorAll("input[name='court_booking']");

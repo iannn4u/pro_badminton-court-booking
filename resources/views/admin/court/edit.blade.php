@@ -7,12 +7,12 @@
         @csrf
         <div>
             <label for="name_court" class="block mb-2 text-sm font-medium text-slate-900">Nama Lapangan</label>
-            <input type="text" id="name_court" name="name_court"
+            <input type="text" id="name_court" name="name_court" required
                 class="block w-full p-2 text-slate-900 border border-slate-500 rounded-lg bg-white text-xs focus:ring-slate-500 focus:border-slate-500" value="{{ old("name_court", $court->name_court) }}">
         </div>
         <div>
             <label for="price_court" class="block mb-2 text-sm font-medium text-slate-900">Harga Lapangan</label>
-            <input type="number" id="price_court" name="price_court"
+            <input type="number" id="price_court" name="price_court" required
                 class="block w-full p-2 text-slate-900 border border-slate-500 rounded-lg bg-white text-xs focus:ring-slate-500 focus:border-slate-500" value="{{ old("price_court", $court->price_court) }}">
         </div>
         <div class="flex gap-2">

@@ -105,60 +105,61 @@
     </form>
 
     <script>
-        // Ambil elemen input dan dropdown
-        const nameBookingInput = document.getElementById('name_booking');
-        const dropdown = document.getElementById('dropdown');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ambil elemen input dan dropdown
+            const nameBookingInput = document.getElementById('name_booking');
+            const dropdown = document.getElementById('dropdown');
 
-        // Ambil semua elemen <p> di dalam dropdown
-        const dropdownItems = dropdown.querySelectorAll('p');
+            // Pastikan dropdown ada sebelum melanjutkan
+            if (!dropdown) {
+                return;
+            }
 
-        // Tambahkan event listener pada setiap item di dropdown
-        dropdownItems.forEach((item) => {
-            item.addEventListener('click', function() {
-                // Gunakan `this` di dalam fungsi reguler untuk mengakses elemen <p>
-                nameBookingInput.value = this.dataset.name;
+            // Ambil semua elemen <p> di dalam dropdown
+            const dropdownItems = dropdown.querySelectorAll('p');
 
-                event.stopPropagation();
+            // Tambahkan event listener pada setiap item di dropdown
+            dropdownItems.forEach((item) => {
+                item.addEventListener('click', function() {
+                    // Gunakan `this` di dalam fungsi reguler untuk mengakses elemen <p>
+                    nameBookingInput.value = this.dataset.name;
 
-                // Sembunyikan dropdown
+                    // Sembunyikan dropdown
+                    dropdown.classList.add('hidden');
+                    dropdown.classList.remove('absolute');
+                });
+            });
+
+            dropdown.addEventListener('mousedown', (event) => {
+                event.preventDefault(); // Cegah blur pada input ketika dropdown diklik
+            });
+
+            // Event listener untuk mengontrol dropdown
+            nameBookingInput.addEventListener('blur', () => {
                 dropdown.classList.add('hidden');
                 dropdown.classList.remove('absolute');
             });
+
+            nameBookingInput.addEventListener('click', () => {
+                if (nameBookingInput.value === '') {
+                    dropdown.classList.add('absolute');
+                    dropdown.classList.remove('hidden');
+                } else {
+                    dropdown.classList.add('hidden');
+                    dropdown.classList.remove('absolute');
+                }
+            });
+
+            nameBookingInput.addEventListener('input', () => {
+                if (nameBookingInput.value === '') {
+                    dropdown.classList.add('absolute');
+                    dropdown.classList.remove('hidden');
+                } else {
+                    dropdown.classList.add('hidden');
+                    dropdown.classList.remove('absolute');
+                }
+            });
         });
-
-        dropdown.addEventListener('mousedown', (event) => {
-            event.preventDefault(); // Cegah blur pada input ketika dropdown diklik
-        });
-
-        // Event listener untuk mengontrol dropdown
-        nameBookingInput.addEventListener('blur', () => {
-            dropdown.classList.add('hidden');
-            dropdown.classList.remove('absolute');
-        });
-
-        nameBookingInput.addEventListener('click', () => {
-            if (nameBookingInput.value === '') {
-                dropdown.classList.add('absolute');
-                dropdown.classList.remove('hidden');
-            } else {
-                dropdown.classList.add('hidden');
-                dropdown.classList.remove('absolute');
-            }
-        });
-
-        nameBookingInput.addEventListener('input', () => {
-            if (nameBookingInput.value === '') {
-                dropdown.classList.add('absolute');
-                dropdown.classList.remove('hidden');
-            } else {
-                dropdown.classList.add('hidden');
-                dropdown.classList.remove('absolute');
-            }
-        });
-
-
-
-
 
         const inputTanggal = document.querySelector("#date_booking");
         const lapanganOptions = document.querySelector("#lapangan-options");

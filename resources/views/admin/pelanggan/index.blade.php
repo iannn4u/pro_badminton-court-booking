@@ -25,28 +25,28 @@
             <table class="md:w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-3 py-3 text-center">
+                        <th scope="col" class="p-2 text-center">
                             Nama
                         </th>
-                        <th scope="col" class="px-3 py-3 text-center">
+                        <th scope="col" class="p-2 text-center">
                             Nomor Telepon
                         </th>
-                        <th scope="col" class="px-3 py-3 text-center">
+                        <th scope="col" class="p-2 text-center">
                             Banyaknya Bermain
                         </th>
-                        <th scope="col" class="px-3 py-3 text-center">
+                        <th scope="col" class="p-2 text-center">
                             Pertama Kali Booking
                         </th>
-                        <th scope="col" class="px-3 py-3 text-center">
+                        <th scope="col" class="p-2 text-center">
                             Terakhir Kali Booking
                         </th>
-                        <th scope="col" class="px-3 py-3 text-center">
+                        <th scope="col" class="p-2 text-center">
                             Alamat
                         </th>
-                        <th scope="col" class="px-3 py-3 text-center">
+                        <th scope="col" class="p-2 text-center">
                             Status
                         </th>
-                        <th scope="col" class="px-3 py-3 text-center">
+                        <th scope="col" class="p-2 text-center">
                             Aksi
                         </th>
                     </tr>
@@ -63,25 +63,25 @@
                         @foreach ($pelanggans as $booking => $value)
                             <tr class="bg-white border-b">
                                 <th scope="row"
-                                    class="min-[955px]:px-6 min-[955px]:py-4 font-medium text-gray-900 whitespace-nowrap text-center">
+                                    class="min-[955px]:px-6 min-[955px]:py-4 p-1 font-medium text-gray-900 whitespace-nowrap text-center">
                                     {{ $value->name }}
                                 </th>
-                                <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
+                                <td class="min-[955px]:px-6 min-[955px]:py-4 p-1 text-center">
                                     {{ $value->phoneNumber ?? 'Belum di set'  }}
                                 </td>
-                                <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
+                                <td class="min-[955px]:px-6 min-[955px]:py-4 p-1 text-center">
                                     {{ $value->playing }}
                                 </td>
-                                <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
+                                <td class="min-[955px]:px-6 min-[955px]:py-4 p-1 text-center">
                                     {{ $value->first_come }}
                                 </td>
-                                <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
+                                <td class="min-[955px]:px-6 min-[955px]:py-4 p-1 text-center">
                                     {{ $value->last_playing }}
                                 </td>
-                                <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
+                                <td class="min-[955px]:px-6 min-[955px]:py-4 p-1 text-center">
                                     {{ $value->address ?? 'Belum di set' }}
                                 </td>
-                                <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
+                                <td class="min-[955px]:px-6 min-[955px]:py-4 p-1 text-center">
                                     {{ $value->status }}
                                 </td>
                                 <td class="px-6 py-4 flex gap-5 justify-center">

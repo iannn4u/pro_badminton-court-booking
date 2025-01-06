@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
-use App\Http\Requests\StoreBookingRequest;
-use App\Http\Requests\UpdateBookingRequest;
 use App\Models\Court;
 use App\Models\Operational;
 use App\Models\Pelanggan;
@@ -269,6 +267,7 @@ class BookingController extends Controller
     public function edit(Booking $booking)
     {
         $data["title"] = "Edit Booking";
+        $data['pelanggans'] = Pelanggan::all();
         $data["courts"] = Court::all();
         $data["booking"] = $booking;
         $operational = Operational::get()->first();
@@ -303,7 +302,21 @@ class BookingController extends Controller
         ]);
 
 
-        $pelanggan = Pelanggan::where('name', $request->name_booking)->first();
+        $pelanggan = Pelanggan::where('name', $request->old_name)->first();
+
+        if ($pelanggan) {
+            if ($pelanggan->name != $request->name_booking) {
+                $checkDoubleName = Pelanggan::where('name', $request->name_booking)
+                    ->where('id', '!=', $pelanggan->id)
+                    ->first();
+
+                if ($checkDoubleName) { // Periksa apakah ada pelanggan dengan nama yang sama
+                    return back()->withErrors(['duplicateName' => 'Nama sudah ada, ganti nama lain.'])->withInput();
+                } else {
+                    $pelanggan->update(['name' => $request->name_booking]);
+                }
+            }
+        }
         $formatDate = Carbon::parse($validated["date_booking"])->format('d-m-Y');
         $validated['date_booking'] = $formatDate;
         $formattedDate = Carbon::createFromFormat('d-m-Y', $validated["date_booking"]);
