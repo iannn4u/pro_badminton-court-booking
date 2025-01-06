@@ -15,7 +15,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="antialiased bg-gray-50 grid place-items-center h-[100vh] relative">
+<body class="antialiased bg-gray-50 flex justify-center items-center h-screen relative">
     <section class="bg-white shadow-md p-10 max-w-[400px] w-[90%] max-sm:pt-8 max-sm:px-5">
         <h1 class="text-center text-2xl font-semibold mb-5">Masuk</h1>
         <form action="/admin/login" method="post">
@@ -35,7 +35,7 @@
     </section>
 
     @error('masuk')
-        <div id="alert-2" class="absolute bottom-0 right-5 flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50"
+        <div id="alert-2" class="absolute bottom-2 max-sm:bottom-10 right-5 flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50"
             role="alert">
             <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                 viewBox="0 0 20 20">
@@ -59,7 +59,7 @@
         </div>
     @enderror
     @if(session('masuk'))
-        <div id="alert-2" class="absolute bottom-2 right-2 flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50"
+        <div id="alert-2" class="absolute bottom-2 max-sm:bottom-10 right-2 flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50"
             role="alert">
             <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                 viewBox="0 0 20 20">

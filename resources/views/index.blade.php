@@ -143,7 +143,7 @@
             </div>
         @endif
         <div class="bg-gray-300 md:w-[80%] mx-auto h-0.5 w-[85%]"></div>
-        <div class="lg:ms-[130px] mt-20 pb-10 lg:max-w-[81%]">
+        <div class="lg:ms-[130px] mt-10 pb-10 lg:max-w-[81%]">
             <div class="flex gap-5 max-md:p-5 max-[415px]:flex-col">
                 <h2 class="text-xl md:text-2xl font-bold flex gap-2 items-center"><svg
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
