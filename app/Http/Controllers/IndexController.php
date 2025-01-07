@@ -6,17 +6,12 @@ use App\Models\Booking;
 use App\Models\Court;
 use App\Models\Highlight;
 use App\Models\Operational;
-use App\Models\Pelanggan;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
     public function index()
     {
-        $search = '';
-        $pelanggans = Pelanggan::where('name', 'like', "%{$search}%")->get();
-dd(response()->json($pelanggans));
         $operational = Operational::first();
         $data = $this->week($operational->time_open, $operational->time_close);
         $data["time_close"] = $operational->time_close;

@@ -18,12 +18,16 @@ class BookingController extends Controller
     {
         $data["title"] = "Booking";
         $search = $request->input('search');
+        $sortBy = $request->input('sort_by', 'date_booking');
+        $sortOrder = $request->input('sort_order', 'asc');
 
         $data["bookings"] = Booking::when($search, function ($query, $search) {
             $query->where('name_booking', 'like', "%$search%")
                 ->orWhere('date_booking', 'like', "%$search%")
                 ->orWhere('court_booking', 'like', "%$search%");
-        })->get();
+        })
+            ->orderBy($sortBy, $sortOrder)
+            ->get();
 
         return view("admin.booking.index", $data);
     }
