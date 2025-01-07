@@ -12,7 +12,8 @@
                 <label for="name_booking" class="block mb-2 text-sm font-medium text-slate-900">Nama Booking</label>
                 <input type="text" id="name_booking" name="name_booking"
                     value="{{ old('name_booking', $booking->name_booking) }}"
-                    class="block w-full p-2 text-slate-900 border border-slate-500 rounded-lg bg-white text-xs focus:ring-slate-500 focus:border-slate-500" autocomplete="off">
+                    class="block w-full p-2 text-slate-900 border border-slate-500 rounded-lg bg-white text-xs focus:ring-slate-500 focus:border-slate-500"
+                    autocomplete="off">
             </div>
             @if (!$pelanggans->isEmpty())
                 <div id="dropdown"
@@ -143,13 +144,117 @@
                 }
             });
 
+            // Event listener untuk input
             nameBookingInput.addEventListener('input', () => {
-                if (nameBookingInput.value === '') {
-                    dropdown.classList.add('absolute');
-                    dropdown.classList.remove('hidden');
+                console.log(nameBookingInput.value);
+                const query = nameBookingInput.value.trim(); // Ambil nilai input
+                if (query == '') {
+                    // Lakukan fetch ke server dengan parameter query
+                    fetch(`/dropdown/pelanggan`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                    .content // CSRF protection
+                            },
+                            body: JSON.stringify({
+                                search: query
+                            })
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.length > 0) {
+                                // Bersihkan dropdown sebelumnya
+                                const dropdownList = dropdown.querySelector('ul');
+                                dropdownList.innerHTML = '';
+
+                                // Tambahkan hasil pencarian ke dropdown
+                                data.forEach(item => {
+                                    const li = document.createElement('li');
+                                    li.classList.add('cursor-pointer');
+                                    li.innerHTML =
+                                        `<p data-name="${item.name}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">${item.name}</p>`;
+                                    dropdownList.appendChild(li);
+
+                                    // Event listener untuk memilih item
+                                    li.addEventListener('click', () => {
+                                        nameBookingInput.value = item
+                                            .name; // Set nilai input ke nama yang dipilih
+                                        dropdown.classList.add(
+                                            'hidden'); // Sembunyikan dropdown
+                                    });
+                                });
+
+                                // Tampilkan dropdown
+                                dropdown.classList.remove('hidden');
+                                dropdown.classList.add('absolute');
+                            } else {
+                                // Jika tidak ada hasil, sembunyikan dropdown
+                                dropdown.classList.add('hidden');
+                                dropdown.classList.remove('absolute');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching data:', error);
+                        });
                 } else {
-                    dropdown.classList.add('hidden');
-                    dropdown.classList.remove('absolute');
+                    fetch(`/dropdown/pelanggan`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                    .content // CSRF protection
+                            },
+                            body: JSON.stringify({
+                                search: query
+                            })
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.length > 0) {
+                                // Bersihkan dropdown sebelumnya
+                                const dropdownList = dropdown.querySelector('ul');
+                                dropdownList.innerHTML = '';
+
+                                // Tambahkan hasil pencarian ke dropdown
+                                data.forEach(item => {
+                                    const li = document.createElement('li');
+                                    li.classList.add('cursor-pointer');
+                                    li.innerHTML =
+                                        `<p data-name="${item.name}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">${item.name}</p>`;
+                                    dropdownList.appendChild(li);
+
+                                    // Event listener untuk memilih item
+                                    li.addEventListener('click', () => {
+                                        nameBookingInput.value = item
+                                            .name; // Set nilai input ke nama yang dipilih
+                                        dropdown.classList.add(
+                                            'hidden'); // Sembunyikan dropdown
+                                    });
+                                });
+
+                                // Tampilkan dropdown
+                                dropdown.classList.remove('hidden');
+                                dropdown.classList.add('absolute');
+                            } else {
+                                // Jika tidak ada hasil, sembunyikan dropdown
+                                dropdown.classList.add('hidden');
+                                dropdown.classList.remove('absolute');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching data:', error);
+                        });
                 }
             });
         });

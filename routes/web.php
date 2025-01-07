@@ -7,6 +7,7 @@ use App\Http\Controllers\HighlightController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\OperationalController;
 use App\Http\Controllers\PelangganController;
+use App\Models\Pelanggan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,6 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/pengaturan/hapus/highlight/{highlight}', [HighlightController::class, 'destroy']);
 
     Route::resource('pelanggan', PelangganController::class);
+    Route::post('/dropdown/pelanggan', [PelangganController::class, 'searchPelanggan']);
     
     Route::get('admin/logout', [AdminController::class, "logout"]);
     Route::get('admin', [AdminController::class, "admin"]);

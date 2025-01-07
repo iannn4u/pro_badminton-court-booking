@@ -14,6 +14,22 @@ class PelangganController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function searchPelanggan(Request $request)
+    {
+        $search = $request->input('search');
+
+        // Validasi input
+        if (!$search) {
+            $pelanggans = Pelanggan::all();
+        } else {
+            $pelanggans = Pelanggan::where('name', 'like', "%{$search}%")->get();
+        }
+
+        // Kembalikan hasil sebagai JSON
+        return response()->json($pelanggans, 200);
+    }
+
     public function index(Request $request)
     {
         $data["title"] = "Pelanggan";
