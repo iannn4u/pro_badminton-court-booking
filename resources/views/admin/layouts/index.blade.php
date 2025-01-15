@@ -39,7 +39,7 @@
         </main>
     </div>
     @if (session('alert'))
-        <div class="fixed bottom-0 right-2">
+        <div class="fixed bottom-2 right-2">
             <div id="alert-5" class="flex items-center p-4 rounded-lg bg-gray-200 dark:bg-gray-800" role="alert">
                 <svg class="flex-shrink-0 w-4 h-4 dark:text-gray-300" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">

@@ -2,7 +2,7 @@
 
 @section('main')
     <h1 class="text-3xl max-sm:py-5">{{ $title }}</h1>
-    <form action="/admin/pengaturan/edit/account/{{ $user->id_user }}" method="post" class="max-w-xl mt-10 space-y-5">
+    <form action="/admin/pengaturan/edit/account/{{ $user->id }}" method="post" class="max-w-xl mt-10 space-y-5">
         @method("put")
         @csrf
         <div>

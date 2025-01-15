@@ -7,6 +7,7 @@ use App\Http\Controllers\HighlightController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\OperationalController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\UserController;
 use App\Models\Pelanggan;
 use Illuminate\Support\Facades\Route;
 
@@ -27,23 +28,13 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/dashboard', [AdminController::class, "index"]);
     Route::post('admin/operational/edit/{operational}', [OperationalController::class, "update"]);
 
-    Route::get('admin/booking', [BookingController::class, "index"]);
-    Route::get('admin/booking/tambah', [BookingController::class, "create"]);
-    Route::post('admin/booking/tambah', [BookingController::class, "store"]);
-    Route::get('admin/booking/edit/{booking}', [BookingController::class, "edit"]);
-    Route::put('admin/booking/edit/{booking}', [BookingController::class, "update"]);
-    Route::delete('admin/booking/delete/{booking}', [BookingController::class, "destroy"]);
+    Route::resource('admin/booking', BookingController::class);
     Route::post('booking/cekSlot', [BookingController::class, "cekSlot"]);
     Route::get('get/search/booking/{name}', [BookingController::class, "search"]);
     Route::post('get/booking', [BookingController::class, "modalInfo"]);
 
-    Route::get('admin/lapangan', [CourtController::class, "index"]);
-    Route::get('admin/lapangan/tambah', [CourtController::class, "create"]);
-    Route::post('admin/lapangan/tambah', [CourtController::class, "store"]);
-    Route::get('admin/lapangan/edit/{court}', [CourtController::class, "edit"]);
-    Route::put('admin/lapangan/edit/{court}', [CourtController::class, "update"]);
-    Route::delete('admin/lapangan/delete/{court}', [CourtController::class, "destroy"]);
-
+    Route::resource('admin/lapangan', CourtController::class);
+    
     Route::get('admin/pengaturan', [OperationalController::class, "index"]);
     Route::get('admin/pengaturan/edit/account', [OperationalController::class, "editAccount"]);
     Route::put('admin/pengaturan/edit/account/{user}', [OperationalController::class, "updateAccount"]);
@@ -56,6 +47,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('pelanggan', PelangganController::class);
     Route::post('/dropdown/pelanggan', [PelangganController::class, 'searchPelanggan']);
+
+    Route::resource('/admin/user', UserController::class);
     
     Route::get('admin/logout', [AdminController::class, "logout"]);
     Route::get('admin', [AdminController::class, "admin"]);

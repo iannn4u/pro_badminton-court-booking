@@ -36,7 +36,7 @@ class OperationalController extends Controller
     public function editAccount()
     {
         $data["title"] = "Edit Account";
-        $data["user"] = User::first();
+        $data["user"] = User::where("id", auth()->user()->id)->first();
 
         return view("admin.operational.editAuth", $data);
     }

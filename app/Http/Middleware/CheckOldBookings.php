@@ -18,10 +18,15 @@ class CheckOldBookings
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $today = now()->format('d-m-Y');
+        $dateParse = Carbon::parse($request->date_booking);
+        $today = Carbon::today();
 
+        // Validasi tanggal tidak boleh lebih kecil dari hari ini
+        if ($dateParse->lessThan($today)) {
+            return redirect()->back()->withErrors(['date_booking' => 'Tanggal pemesanan harus hari ini atau yang akan datang.'])->withInput();
+        }
         $bookings = Booking::all()->filter(function ($booking) use ($today) {
-            $bookingDate = Carbon::createFromFormat('d-m-Y', $booking->date_booking);
+            $bookingDate = Carbon::parse($booking->date_booking);
             return $bookingDate < $today;
         });
 
@@ -32,15 +37,16 @@ class CheckOldBookings
             }
         }
 
-        $today = Carbon::now();
         $oneMonthAgo = $today->subMonth();
         $pelanggans = Pelanggan::all()->filter(function ($pelanggan) use ($oneMonthAgo) {
-            $pelangganDate = Carbon::createFromFormat('d-m-Y', $pelanggan->last_playing);
+            $pelangganDate = Carbon::parse($pelanggan->last_playing);
             return $pelangganDate < $oneMonthAgo;
         });
-        
-        foreach ($pelanggans as $pelanggan) {
-            $pelanggan->update(['status' => 'tidak aktif']);
+
+        if ($pelanggans->isNotEmpty()) {
+            foreach ($pelanggans as $pelanggan) {
+                $pelanggan->update(['status' => 'tidak aktif']);
+            }
         }
 
         return $next($request);

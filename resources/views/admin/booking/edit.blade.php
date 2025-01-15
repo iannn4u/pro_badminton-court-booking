@@ -3,7 +3,7 @@
 @section('main')
     <h1 class="text-3xl p-4">{{ $title }}</h1>
 
-    <form action="/admin/booking/edit/{{ $booking->id_booking }}" method="post" class="max-w-xl mt-5 md:mt-10 space-y-5">
+    <form action="/admin/booking/{{ $booking->id_booking }}" method="post" class="max-w-xl mt-5 md:mt-10 space-y-5">
         @method('put')
         @csrf
         <input type="hidden" name="old_name" value="{{ $booking->name_booking }}">

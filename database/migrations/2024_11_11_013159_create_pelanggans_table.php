@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('phoneNumber')->nullable();
             $table->integer('playing')->default(0);
-            $table->string('first_come');
-            $table->string('last_playing');
+            $table->date('first_come');
+            $table->date('last_playing');
             $table->string('status')->default('aktif');
             $table->timestamps();
         });

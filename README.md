@@ -43,7 +43,6 @@ php artisan event:clear
 php artisan optimize:clear
 php artisan config:cache
 php artisan route:cache
-php artisan icons:cache
 php artisan cleanup:bookings
 ```
 

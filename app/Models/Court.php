@@ -9,7 +9,7 @@ class Court extends Model
 {
     use HasFactory;
     
-    protected $fillable = ["name_court", "price_court"];
+    protected $guarded = ["id_court"];
     protected $primaryKey = 'id_court';
     
     public $timestamps = false;

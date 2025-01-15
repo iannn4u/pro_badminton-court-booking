@@ -3,7 +3,7 @@
 @section('main')
     <h1 class="text-3xl">{{ $title }}</h1>
 
-    <form action="/admin/booking/tambah" method="post" class="max-w-xl mt-10 space-y-5">
+    <form action="/admin/booking" method="post" class="max-w-xl mt-10 space-y-5">
         @csrf
         <div class="relative">
             <label for="name_booking" class="block mb-2 text-sm font-medium text-slate-900">Nama Booking</label>

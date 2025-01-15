@@ -74,13 +74,11 @@ class BookingController extends Controller
         $pelanggan = Pelanggan::where("name", $validated['name_booking'])->first();
 
         // Ubah format input tanggal ke format Carbon
-        $formattedDate = Carbon::parse($request->date_booking)->format('d-m-Y');
-        $validated['date_booking'] = $formattedDate;
-        $tanggalMulaiMember = Carbon::createFromFormat('d-m-Y', $validated['date_booking']); // Format input DD-MM-YYYY
+        $dateParse = Carbon::parse($request->date_booking);
         $hariIni = Carbon::today();
 
         // Validasi tanggal tidak boleh lebih kecil dari hari ini
-        if ($tanggalMulaiMember->lessThan($hariIni)) {
+        if ($dateParse->lessThan($hariIni)) {
             return redirect()->back()->withErrors(['date_booking' => 'Tanggal pemesanan harus hari ini atau yang akan datang.'])->withInput();
         }
 
@@ -94,12 +92,12 @@ class BookingController extends Controller
                         'phoneNumber' => $request->input('phoneNumber'),
                         'playing' => 4 * count($validated['time_booking']),
                         'first_come' => $validated['date_booking'],
-                        'last_playing' => $tanggalMulaiMember->copy()->addWeeks(3)->format('d-m-Y'),
+                        'last_playing' => $dateParse->copy()->addWeeks(3),
                     ]);
                 } else {
                     $dataPelangganUpdate = [
                         'playing' => $pelanggan->playing + 4 * count($validated['time_booking']),
-                        'last_playing' => $tanggalMulaiMember->copy()->addWeeks(3)->format('d-m-Y'),
+                        'last_playing' => $dateParse->copy()->addWeeks(3),
                         'phoneNumber' => $request->input('phoneNumber') ?? $pelanggan->phoneNumber
                     ];
 
@@ -108,7 +106,7 @@ class BookingController extends Controller
 
                 foreach ($validated["time_booking"] as $time) {
                     for ($i = 0; $i < 4; $i++) {
-                        $exists = Booking::where('date_booking', $tanggalMulaiMember->copy()->addWeeks($i)->format('d-m-Y'))
+                        $exists = Booking::where('date_booking', $dateParse->copy()->addWeeks($i))
                             ->where("court_booking", $validated['court_booking'])
                             ->where("time_booking", $validated["time_booking"][0])
                             ->first();
@@ -120,7 +118,7 @@ class BookingController extends Controller
                         $bookingsToCreate[] = [
                             'id_pelanggan' => $pelanggan->id,
                             'name_booking' => $validated['name_booking'],
-                            'date_booking' => $tanggalMulaiMember->copy()->addWeeks($i)->format('d-m-Y'),
+                            'date_booking' => $dateParse->copy()->addWeeks($i),
                             'court_booking' => $validated['court_booking'],
                             'price_booking' => $court->price_court,
                             'time_booking' => $time,
@@ -136,12 +134,12 @@ class BookingController extends Controller
                         'phoneNumber' => $request->input('phoneNumber'),
                         'playing' => 4,
                         'first_come' => $validated['date_booking'],
-                        'last_playing' => $tanggalMulaiMember->copy()->addWeeks(3)->format('d-m-Y'),
+                        'last_playing' => $dateParse->copy()->addWeeks(3),
                     ]);
                 } else {
                     $dataPelangganUpdate = [
                         'playing' => $pelanggan->playing + 4,
-                        'last_playing' => $tanggalMulaiMember->copy()->addWeeks(3)->format('d-m-Y'),
+                        'last_playing' => $dateParse->copy()->addWeeks(3),
                         'phoneNumber' => $request->input('phoneNumber') ?? $pelanggan->phoneNumber
                     ];
 
@@ -149,7 +147,7 @@ class BookingController extends Controller
                 }
 
                 for ($i = 0; $i < 4; $i++) {
-                    $exists = Booking::where('date_booking', $tanggalMulaiMember->copy()->addWeeks($i)->format('d-m-Y'))
+                    $exists = Booking::where('date_booking', $dateParse->copy()->addWeeks($i))
                         ->where("court_booking", $validated['court_booking'])
                         ->where("time_booking", $validated["time_booking"][0])
                         ->first();
@@ -161,7 +159,7 @@ class BookingController extends Controller
                     Booking::create([
                         'id_pelanggan' => $pelanggan->id,
                         'name_booking' => $validated['name_booking'],
-                        'date_booking' => $tanggalMulaiMember->copy()->addWeeks($i)->format('d-m-Y'),
+                        'date_booking' => $dateParse->copy()->addWeeks($i),
                         'court_booking' => $validated['court_booking'],
                         'time_booking' => $validated["time_booking"][0],
                         'price_booking' => $court->price_court,
@@ -169,9 +167,6 @@ class BookingController extends Controller
                 }
             }
         } else {
-            // Non-member
-            $validated['date_booking'] = $tanggalMulaiMember->format('d-m-Y');
-
             if (count($request->time_booking) > 1) {
                 // Masukkin data ke table pelanggan
                 if ($pelanggan == null) {
@@ -321,13 +316,12 @@ class BookingController extends Controller
                 }
             }
         }
-        $formatDate = Carbon::parse($validated["date_booking"])->format('d-m-Y');
-        $validated['date_booking'] = $formatDate;
-        $formattedDate = Carbon::createFromFormat('d-m-Y', $validated["date_booking"]);
-        $lastPlayingDate = Carbon::createFromFormat('d-m-Y', $pelanggan->last_playing);
 
-        if ($lastPlayingDate->lessThan($formattedDate)) {
-            $pelanggan->update(['last_playing' => $formatDate]);
+        $dateParse = Carbon::parse($validated["date_booking"]);
+        $lastPlayingDate = Carbon::parse($pelanggan->last_playing);
+
+        if ($lastPlayingDate->lessThan($dateParse)) {
+            $pelanggan->update(['last_playing' => $dateParse]);
         }
 
         $court = Court::where("name_court", $request->court_booking)->first();

@@ -24,8 +24,10 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         User::create([
+            'name' => 'admin',
             'username' => 'admin',
-            'password' => 'admin'
+            'password' => 'admin',
+            'role' => 'admin'
         ]);
 
         $currentDate = Carbon::now();
