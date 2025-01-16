@@ -19,14 +19,18 @@ class PelangganController extends Controller
     {
         $search = $request->input('search');
 
-        // Validasi input
-        if (!$search) {
-            $pelanggans = Pelanggan::all();
-        } else {
-            $pelanggans = Pelanggan::where('name', 'like', "%{$search}%")->get();
+        $query = Pelanggan::where('status', 'aktif');
+    
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('id', 'like', "%{$search}%")
+                  ->orWhere('phoneNumber', 'like', "%{$search}%");
+            });
         }
-
-        // Kembalikan hasil sebagai JSON
+    
+        $pelanggans = $query->get();
+    
         return response()->json($pelanggans, 200);
     }
 

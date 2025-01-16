@@ -75,6 +75,9 @@
                             </div>
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
+                            Pembuat Booking
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-center">
                             Aksi
                         </th>
                     </tr>
@@ -105,6 +108,9 @@
                                 </td>
                                 <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
                                     {{ $value->time_booking }}
+                                </td>
+                                <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
+                                    {{ $value->name_made_booking }}
                                 </td>
                                 <td class="px-6 py-4 flex gap-5 justify-center">
                                     <a href="/admin/booking/{{ $value->id_booking }}/edit"

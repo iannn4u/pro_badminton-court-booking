@@ -165,7 +165,6 @@
                     </form>
 
 
-                    <!-- Modal toggle -->
                     <button data-modal-target="search-modal" data-modal-toggle="search-modal"
                         class="flex justify-between items-center gap-2 bg-gray-50 border shadow-md border-gray-300 text-gray-900 text-sm rounded-lg ocus:ring-4 focus:outline-none focus:ring-gray-500 focus:border-gray-500 font-medium  p-2.5 text-center w-32"
                         type="button">
@@ -177,189 +176,46 @@
                     </button>
                 </div>
 
-                <!-- Main modal -->
-                <div id="search-modal" tabindex="-1" aria-hidden="true"
-                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                    <div class="relative p-4 w-full max-w-5xl max-h-full">
-                        <!-- Modal content -->
-                        <div class="relative bg-white rounded-lg shadow">
-                            <!-- Modal header -->
-                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
-                                <h3 class="text-xl font-semibold text-gray-900">
-                                    Search
-                                </h3>
-                                <button type="button"
-                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-                                    data-modal-hide="search-modal">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 14 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                    </svg>
-                                    <span class="sr-only">Close modal</span>
-                                </button>
-                            </div>
-                            <!-- Modal body -->
-                            <div class="p-4 md:p-5 space-y-4">
-
-                                <div class="max-w-md mx-auto">
-                                    <label for="search-input"
-                                        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                                    <div class="relative">
-                                        <div
-                                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                            <svg class="w-4 h-4 text-gray-500" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 20 20">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                                            </svg>
-                                        </div>
-                                        <input type="search" id="search-input"
-                                            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500"
-                                            placeholder="Search nama..." required autocomplete="off" />
-                                        <button type="submit" onclick="search()" id="search-button"
-                                            class="text-white absolute end-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
-                                    </div>
-                                </div>
-                                <div class="relative overflow-x-auto">
-                                    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-                                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                                            <tr>
-                                                <th scope="col" class="px-6 py-3 text-center">
-                                                    Nama
-                                                </th>
-                                                <th scope="col" class="px-6 py-3 text-center">
-                                                    Tanggal
-                                                </th>
-                                                <th scope="col" class="px-6 py-3 text-center">
-                                                    Jam
-                                                </th>
-                                                <th scope="col" class="px-6 py-3 text-center">
-                                                    Lapangan
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="table-booking">
-                                            <tr class="bg-white border-b">
-                                                <th scope="row" colspan="4"
-                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                                    Cari data menggunakan search
-                                                </th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-            <div>
-                <div class="week max-[420px]:overflow-x-scroll">
-                    <div
-                        class="grid grid-cols-7 gap-2 mt-10 max-[415px]:mt-0 max-md:mt-5 max-md:p-2 max-md:pt-0 max-[420px]:w-max">
-                        @foreach ($week as $day => $slots)
-                            <div class="grid grid-cols-1 space-y-2">
-                                <!-- Tampilkan Nama Hari -->
-                                <p
-                                    class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center max-md:text-xs">
-                                    @php
-                                        $partsDay = explode(' ', $day);
-                                    @endphp
-                                    <span>{{ $partsDay[0] }}<br />{{ $partsDay[1] }}</span>
-                                </p>
+            <div class="week max-[420px]:overflow-x-scroll">
+                <div
+                    class="grid grid-cols-7 gap-2 mt-10 max-[415px]:mt-0 max-md:mt-5 max-md:p-2 max-md:pt-0 max-[420px]:w-max">
+                    @foreach ($week as $day => $slots)
+                        <div class="grid grid-cols-1 space-y-2">
+                            <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center max-md:text-xs">
+                                @php
+                                    $partsDay = explode(' ', $day);
+                                @endphp
+                                <span>{{ $partsDay[0] }}<br />{{ $partsDay[1] }}</span>
+                            </p>
 
-                                <!-- Iterasi Slot Waktu -->
-                                @foreach ($slots as $slot)
-                                    @if ($courts->isEmpty())
-                                        <button
-                                            class="text-center cursor-not-allowed bg-slate-200 w-full py-1 rounded-md max-md:text-xs max-md:px-2"
-                                            type="button" disabled>
-                                            @php
-                                                $partsSlot = explode(' ', $slot[0]);
-                                            @endphp
-                                            {{ $partsSlot[0] }}
-                                        </button>
-                                    @else
-                                        <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-                                            onclick="showDataBooking('{{ $slot[0] }}', '{{ $day }}')"
-                                            class="text-center {{ $slot['full_booked'] ? 'bg-slate-200' : 'bg-green-200' }} w-full py-1 rounded-md max-md:text-xs max-md:px-2"
-                                            type="button">
-                                            @php
-                                                $partsSlot = explode(' ', $slot[0]);
-                                            @endphp
-                                            {{ $partsSlot[0] }}
-                                        </button>
-                                    @endif
-                                @endforeach
-                            </div>
-                        @endforeach
-                    </div>
-                    <!-- Main modal -->
-                    <div id="default-modal" tabindex="-1" aria-hidden="true"
-                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                        <div class="relative p-4 w-full max-w-2xl max-h-full">
-                            <!-- Modal content -->
-                            <div class="relative bg-white rounded-lg shadow">
-                                <!-- Modal header -->
-                                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
-                                    <h3 class="text-xl font-semibold text-gray-900">
-                                        Jadwal <span id="komplit"></span>
-                                    </h3>
-                                    <button type="button"
-                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-                                        data-modal-hide="default-modal">
-                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 14 14">
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2"
-                                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                        </svg>
-                                        <span class="sr-only">Close modal</span>
+                            @foreach ($slots as $inc => $slot)
+                                @if ($courts->isEmpty())
+                                    <button
+                                        class="text-center cursor-not-allowed bg-slate-200 w-full py-1 rounded-md max-md:text-xs max-md:px-2"
+                                        type="button" disabled>
+                                        @php
+                                            $partsSlot = explode(' ', $slot[0]);
+                                        @endphp
+                                        {{ $partsSlot[0] }}
                                     </button>
-                                </div>
-                                <!-- Modal body -->
-                                <div class="p-4 md:p-5 space-y-4">
-                                    <div class="w-full overflow-x-auto">
-                                        <table class="w-full text-sm text-center">
-                                            <thead class="text-xs text-gray-700 uppercase">
-                                                <tr>
-                                                    <th scope="col" class="px-6 py-3"></th>
-                                                    @foreach ($courts as $court)
-                                                        <th scope="col" class="px-6 py-3 bg-gray-100">
-                                                            {{ $court->name_court }}
-                                                        </th>
-                                                    @endforeach
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="bg-white border-b">
-                                                    <td class="px-2 py-3 bg-gray-100 text-gray-900">Nama</td>
-                                                    @foreach ($courts as $index => $court)
-                                                        <td class="px-2 py-3 bg-green-200 italic text-gray-900"
-                                                            id="name_booking_court{{ $index + 1 }}">
-                                                            Tersedia
-                                                        </td>
-                                                    @endforeach
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- Modal footer -->
-                                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
-                                    <button data-modal-hide="default-modal" type="button"
-                                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Close</button>
-                                </div>
-                            </div>
+                                @else
+                                    <button data-modal-target="default-modal" data-modal-toggle="default-modal"
+                                        onclick="showDataBooking('{{ $slot[0] }}', '{{ $day }}')"
+                                        class="text-center {{ $slot['full_booked'] ? 'bg-slate-200' : 'bg-green-200' }} w-full py-1 rounded-md max-md:text-xs max-md:px-2"
+                                        type="button">
+                                        @php
+                                            $partsSlot = explode(' ', $slot[0]);
+                                        @endphp
+                                        {{ $partsSlot[0] }}
+                                    </button>
+                                @endif
+                            @endforeach
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
-            <div class="today w-full max-w-4xl p-2 mt-5 mx-auto">
+            <div class="today hidden w-full max-w-4xl p-2 mt-5 mx-auto">
                 <div class="bg-white shadow-md rounded-lg max-md:p-3 p-6 max-sm:overflow-x-scroll">
                     <table class="w-full text-sm text-center">
                         <thead class="text-gray-700 uppercase bg-gray-50">
@@ -413,6 +269,142 @@
         </div>
     </div>
 
+
+
+    <div id="default-modal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900">
+                        Jadwal <span id="komplit"></span>
+                    </h3>
+                    <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                        data-modal-hide="default-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-4 md:p-5 space-y-4">
+                    <div class="w-full overflow-x-auto">
+                        <table class="w-full text-sm text-center">
+                            <thead class="text-xs text-gray-700 uppercase">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3"></th>
+                                    @foreach ($courts as $court)
+                                        <th scope="col" class="px-6 py-3 bg-gray-100">
+                                            {{ $court->name_court }}
+                                        </th>
+                                    @endforeach
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b">
+                                    <td class="px-2 py-3 bg-gray-100 text-gray-900">Nama</td>
+                                    @foreach ($courts as $index => $court)
+                                        <td class="px-2 py-3 bg-green-200 italic text-gray-900"
+                                            id="name_booking_court{{ $index + 1 }}">
+                                            Tersedia
+                                        </td>
+                                    @endforeach
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
+                    <button data-modal-hide="default-modal" type="button"
+                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="search-modal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-5xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900">
+                        Search
+                    </h3>
+                    <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                        data-modal-hide="search-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-4 md:p-5 space-y-4">
+
+                    <div class="max-w-md mx-auto">
+                        <label for="search-input"
+                            class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                </svg>
+                            </div>
+                            <form id="search-form" onsubmit="search(event)">
+                                <input type="search" id="search-input"
+                                    class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500"
+                                    placeholder="Search nama..." required autocomplete="off" />
+                                <button id="search-button"
+                                    class="text-white absolute end-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="relative overflow-x-auto">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-center">
+                                        Nama
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center">
+                                        Tanggal
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center">
+                                        Jam
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center">
+                                        Lapangan
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-booking">
+                                <tr class="bg-white border-b">
+                                    <th scope="row" colspan="4"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                        Cari data menggunakan search
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const orderedLists = document.querySelectorAll('ol');
@@ -437,60 +429,62 @@
         });
 
         function formatTanggal(inputDate) {
-            const dateParts = inputDate.split('-'); // Memisahkan tanggal, bulan, tahun
-            const formattedDate = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`); // Format DD-MM-YYYY
+            const dateParts = inputDate.split('-');
+            const formattedDate = new Date(`${dateParts[0]}-${dateParts[1]}-${dateParts[2]}`);
 
             const options = {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
-            }; // Format tampilan yang diinginkan
-            return formattedDate.toLocaleDateString('id-ID', options); // Mengembalikan format "hari, tanggal-bulan-tahun"
+            };
+            return formattedDate.toLocaleDateString('id-ID', options);
         }
 
-        function search() {
+        function search(event) {
+            event.preventDefault();
+
             const input = document.querySelector('#search-input');
-            const button = document.querySelector('#search-button');
             const tableBooking = document.querySelector('#table-booking');
 
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-            })
-            fetch('/get/search/booking/' + input.value).then(response => response.json()).then(response => {
-                if (response.bookings.length !== 0) {
-                    tableBooking.innerHTML = '';
-                    response.bookings.forEach(element => {
-                        tableBooking.innerHTML += `
-                                        <tr class="bg-white border-b text-center">
-                                                <th scope="row"
-                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
-                                                    ${element.name_booking}
-                                                </th>
-                                                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
-                                                    ${formatTanggal(element.date_booking)}
-                                                </td>
-                                                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
-                                                    ${element.time_booking}
-                                                </td>
-                                                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
-                                                    ${element.court_booking}
-                                                </td>
-                                            </tr>
-                                            `
-                    });
-                } else {
-                    tableBooking.innerHTML = `
-                                        <tr class="bg-white border-b">
-                                                <th scope="row" colspan="4"
-                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                                    Tidak ada data
-                                                </th>
-                                            </tr>
-                                            `
-                }
-            }).catch(e => console.log(e))
+            fetch('/get/search/booking/' + input.value)
+                .then(response => response.json())
+                .then(response => {
+                    if (response.bookings.length !== 0) {
+                        tableBooking.innerHTML = '';
+                        response.bookings.forEach(element => {
+                            tableBooking.innerHTML += `
+                        <tr class="bg-white border-b text-center">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
+                                ${element.name_booking}
+                            </th>
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
+                                ${formatTanggal(element.date_booking)}
+                            </td>
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
+                                ${element.time_booking}
+                            </td>
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
+                                ${element.court_booking}
+                            </td>
+                        </tr>
+                    `;
+                        });
+                    } else {
+                        tableBooking.innerHTML = `
+                    <tr class="bg-white border-b">
+                        <th scope="row" colspan="4"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                            Tidak ada data
+                        </th>
+                    </tr>
+                `;
+                    }
+                })
+                .catch(e => console.log(e));
         }
+
 
         const searchInput = document.getElementById('search-input');
         const searchButton = document.getElementById('search-button');

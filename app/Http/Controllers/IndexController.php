@@ -108,7 +108,7 @@ class IndexController extends Controller
             $formatTanggal = $tanggalHariIni->format('D j/n/y');
             $tanggalSudahFormat = str_replace(array_keys($namaHariIndonesia), array_values($namaHariIndonesia), $formatTanggal);
             $partTanggal = explode(" ", $tanggalSudahFormat);
-            $tanggalQuery = Carbon::createFromFormat('d/m/y', $partTanggal[1])->format('d-m-Y');
+            $tanggalQuery = Carbon::createFromFormat('d/m/y', $partTanggal[1])->format('Y-m-d');
 
             $slotWaktu = [];
 

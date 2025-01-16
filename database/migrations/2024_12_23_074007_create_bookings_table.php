@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id("id_booking");
             $table->unsignedBigInteger("id_pelanggan");
             $table->string("name_booking");
+            $table->string("name_made_booking");
             $table->date("date_booking");
             $table->string("court_booking");
             $table->string("time_booking");

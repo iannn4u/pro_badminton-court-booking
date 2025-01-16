@@ -122,6 +122,7 @@ class BookingController extends Controller
                             'court_booking' => $validated['court_booking'],
                             'price_booking' => $court->price_court,
                             'time_booking' => $time,
+                            'name_made_booking' => auth()->user()->name
                         ];
                     }
                 }
@@ -163,6 +164,7 @@ class BookingController extends Controller
                         'court_booking' => $validated['court_booking'],
                         'time_booking' => $validated["time_booking"][0],
                         'price_booking' => $court->price_court,
+                        'name_made_booking' => auth()->user()->name
                     ]);
                 }
             }
@@ -185,6 +187,7 @@ class BookingController extends Controller
                             'court_booking' => $validated['court_booking'],
                             'time_booking' => $time,
                             'price_booking' => $court->price_court,
+                            'name_made_booking' => auth()->user()->name
                         ]);
                     }
                 } else {
@@ -196,6 +199,7 @@ class BookingController extends Controller
                             'court_booking' => $validated['court_booking'],
                             'time_booking' => $time,
                             'price_booking' => $court->price_court,
+                            'name_made_booking' => auth()->user()->name
                         ]);
                     }
 
@@ -208,7 +212,6 @@ class BookingController extends Controller
                     $pelanggan->update($dataPelangganUpdate);
                 }
             } else {
-                // Masukkin data ke table pelanggan
                 if ($pelanggan == null) {
                     $pelanggan = Pelanggan::create([
                         'name' => $validated['name_booking'],
@@ -225,6 +228,7 @@ class BookingController extends Controller
                         'court_booking' => $validated['court_booking'],
                         'time_booking' => $validated['time_booking'][0],
                         'price_booking' => $court->price_court,
+                        'name_made_booking' => auth()->user()->name
                     ]);
                 } else {
                     $dataPelangganUpdate = [
@@ -242,6 +246,7 @@ class BookingController extends Controller
                         'court_booking' => $validated['court_booking'],
                         'time_booking' => $validated['time_booking'][0],
                         'price_booking' => $court->price_court,
+                        'name_made_booking' => auth()->user()->name
                     ]);
                 }
             }
@@ -285,43 +290,21 @@ class BookingController extends Controller
     public function update(Request $request, Booking $booking)
     {
         $validated = $request->validate([
-            'name_booking' => 'required|string|min:3',
             'date_booking' => 'required',
             'court_booking' => 'required|string',
             'time_booking' => 'required',
         ], [
-            'name_booking.required' => 'Nama pemesanan wajib diisi.',
-            'name_booking.string' => 'Nama pemesanan harus berupa teks.',
-            'name_booking.min' => 'Nama pemesanan harus terdiri dari minimal 3 karakter.',
             'date_booking.required' => 'Silakan isi tanggal untuk pemesanan.',
             'court_booking.required' => 'Silakan pilih lapangan untuk pemesanan.',
             'court_booking.string' => 'Nama lapangan harus berupa teks.',
             'time_booking.required' => 'Silakan pilih minimal satu slot waktu untuk pemesanan.',
-            'time_booking.array' => 'Slot waktu harus berupa array.',
         ]);
 
-
-        $pelanggan = Pelanggan::where('name', $request->old_name)->first();
-
-        if ($pelanggan) {
-            if ($pelanggan->name != $request->name_booking) {
-                $checkDoubleName = Pelanggan::where('name', $request->name_booking)
-                    ->where('id', '!=', $pelanggan->id)
-                    ->first();
-
-                if ($checkDoubleName) { // Periksa apakah ada pelanggan dengan nama yang sama
-                    return back()->withErrors(['duplicateName' => 'Nama sudah ada, ganti nama lain.'])->withInput();
-                } else {
-                    $pelanggan->update(['name' => $request->name_booking]);
-                }
-            }
-        }
-
         $dateParse = Carbon::parse($validated["date_booking"]);
-        $lastPlayingDate = Carbon::parse($pelanggan->last_playing);
+        $lastPlayingDate = Carbon::parse($booking->pelanggan->last_playing);
 
         if ($lastPlayingDate->lessThan($dateParse)) {
-            $pelanggan->update(['last_playing' => $dateParse]);
+            $booking->pelanggan->update(['last_playing' => $dateParse]);
         }
 
         $court = Court::where("name_court", $request->court_booking)->first();
@@ -350,7 +333,7 @@ class BookingController extends Controller
 
     public function cekSlot(Request $request)
     {
-        $formattedDate = Carbon::parse($request->date_booking)->format('d-m-Y');
+        $formattedDate = Carbon::parse($request->date_booking)->format('Y-m-d');
 
         $bookings = Booking::where("court_booking", $request->court_booking)->where("date_booking", $formattedDate)->get();
         $dataBookings = $bookings->pluck('time_booking')->toArray();
@@ -387,7 +370,7 @@ class BookingController extends Controller
     public function modalInfo(Request $request)
     {
         $partsDate = explode(" ", $request->date);
-        $tanggalQuery = Carbon::createFromFormat('d/m/y', $partsDate[1])->format('d-m-Y');
+        $tanggalQuery = Carbon::createFromFormat('d/m/y', $partsDate[1])->format('Y-m-d');
         $result = Booking::where('time_booking', $request->time)->where('date_booking', $tanggalQuery)->get();
 
         $data = [
