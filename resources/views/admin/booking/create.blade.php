@@ -10,6 +10,7 @@
             <input type="text" id="name_booking" name="name_booking" value="{{ old('name_booking') }}"
                 class="block w-full p-2 text-slate-900 border border-slate-500 rounded-lg bg-white text-xs focus:ring-slate-500 focus:border-slate-500"
                 required autocomplete="off">
+            <input type="hidden" id="id_pelanggan" name="id_pelanggan" value="">
             <div id="pelanggan"
                 class="z-10 hidden max-h-40 overflow-y-auto bg-white divide-y divide-gray-100 rounded-lg shadow w-full dark:bg-gray-700">
                 <ul class="py-2 text-sm max-h-40 overflow-x-auto text-gray-700 dark:text-gray-200"></ul>
@@ -92,15 +93,16 @@
 
     <script>
         const inputName = document.querySelector('#name_booking');
+        const inputIdPelanggan = document.querySelector('#id_pelanggan'); // Input hidden untuk id_pelanggan
         const cardPelanggan = document.querySelector('#pelanggan');
+
         inputName.addEventListener('input', () => {
             const query = inputName.value.trim();
             fetch(`/dropdown/pelanggan`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                            .content
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                     },
                     body: JSON.stringify({
                         search: query
@@ -116,14 +118,14 @@
                             const li = document.createElement('li');
                             li.classList.add('cursor-pointer');
                             li.innerHTML =
-                                `<p data-name="${item.name}" class="block px-4 py-2 hover:bg-gray-100">${item.id} - ${item.name}</p>`;
+                                `<p data-id="${item.id}" data-name="${item.name}" class="block px-4 py-2 hover:bg-gray-100">${item.id} - ${item.name}</p>`;
                             listPelanggan.appendChild(li);
 
                             li.addEventListener('click', () => {
-                                inputName.value = item
-                                    .name;
-                                cardPelanggan.classList.add(
-                                    'hidden');
+                                inputName.value = item.name;
+                                inputIdPelanggan.value = item
+                                    .id; // Set id_pelanggan ke input hidden
+                                cardPelanggan.classList.add('hidden');
                             });
                         });
                         cardPelanggan.classList.remove('hidden');
@@ -131,19 +133,24 @@
                     } else {
                         cardPelanggan.classList.add('hidden');
                         cardPelanggan.classList.remove('absolute');
+                        inputIdPelanggan.value = ''; // Reset id_pelanggan jika tidak ada hasil
                     }
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
                 });
-
         });
 
+        // Saat input kehilangan fokus
         inputName.addEventListener('blur', () => {
-            cardPelanggan.classList.add('hidden');
-            cardPelanggan.classList.remove('absolute');
+            // Tunggu sebentar sebelum menyembunyikan dropdown (untuk memungkinkan klik pada dropdown)
+            setTimeout(() => {
+                cardPelanggan.classList.add('hidden');
+                cardPelanggan.classList.remove('absolute');
+            }, 100);
         });
 
+        // Saat dropdown diklik, cegah event blur
         cardPelanggan.addEventListener('mousedown', (event) => {
             event.preventDefault();
         });

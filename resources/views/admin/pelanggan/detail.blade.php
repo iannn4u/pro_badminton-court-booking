@@ -6,13 +6,14 @@
 
 
     <div
-        class="w-max max-sm:w-full mt-10 overflow-hidden flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        class="w-max max-sm:w-full mt-10 overflow-hidden flex flex-col max-md:items-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="flex flex-col p-10">
             <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ $pelanggan->name }}</h5>
             <span class="text-sm text-gray-500 dark:text-gray-400">No Hp : {{ $pelanggan->phoneNumber ?? 'Belum Ada No HP' }}</span>
             <span class="text-sm text-gray-500 dark:text-gray-400">Alamat : {{ $pelanggan->address ?? 'Belum Ada Alamat' }}</span>
-            <span class="text-sm text-gray-500 dark:text-gray-400">Pertama kali main : {{ $pelanggan->first_come }}</span>
-            <span class="text-sm text-gray-500 dark:text-gray-400">Terakhir kali main : {{ $pelanggan->last_playing }}</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">Pertama kali datang : {{ $pelanggan->first_come }}</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">Terakhir kali booking : {{ $pelanggan->last_booking }}</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">Terakhir kali main : {{ $pelanggan->last_playing ?? 'Belum Main' }}</span>
             <span class="text-sm text-gray-500 dark:text-gray-400">Total main : {{ $pelanggan->playing }}</span>
         </div>
         <div class="w-full p-2 overflow-x-auto">

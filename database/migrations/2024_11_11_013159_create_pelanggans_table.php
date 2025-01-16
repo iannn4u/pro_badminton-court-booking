@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('phoneNumber')->nullable();
             $table->integer('playing')->default(0);
             $table->date('first_come');
-            $table->date('last_playing');
+            $table->date('last_playing')->nullable();
+            $table->date('last_booking');
             $table->string('status')->default('aktif');
             $table->timestamps();
         });

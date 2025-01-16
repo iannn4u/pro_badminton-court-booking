@@ -54,7 +54,6 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        $court = Court::where("name_court", $request->court_booking)->first();
         $validated = $request->validate([
             'name_booking' => 'required|string|min:3',
             'date_booking' => 'required',
@@ -71,7 +70,8 @@ class BookingController extends Controller
             'time_booking.array' => 'Slot waktu harus berupa array.',
         ]);
 
-        $pelanggan = Pelanggan::where("name", $validated['name_booking'])->first();
+        $court = Court::where("name_court", $request->court_booking)->first();
+        $pelanggan = Pelanggan::where("id", $request->id_pelanggan)->first();
 
         // Ubah format input tanggal ke format Carbon
         $dateParse = Carbon::parse($request->date_booking);
@@ -90,14 +90,12 @@ class BookingController extends Controller
                     $pelanggan = Pelanggan::create([
                         'name' => $validated['name_booking'],
                         'phoneNumber' => $request->input('phoneNumber'),
-                        'playing' => 4 * count($validated['time_booking']),
-                        'first_come' => $validated['date_booking'],
-                        'last_playing' => $dateParse->copy()->addWeeks(3),
+                        'first_come' => $hariIni->format('Y-m-d'),
+                        'last_booking' => $hariIni->format('Y-m-d')
                     ]);
                 } else {
                     $dataPelangganUpdate = [
-                        'playing' => $pelanggan->playing + 4 * count($validated['time_booking']),
-                        'last_playing' => $dateParse->copy()->addWeeks(3),
+                        'last_booking' => $hariIni->format('Y-m-d'),
                         'phoneNumber' => $request->input('phoneNumber') ?? $pelanggan->phoneNumber
                     ];
 
@@ -133,14 +131,12 @@ class BookingController extends Controller
                     $pelanggan = Pelanggan::create([
                         'name' => $validated['name_booking'],
                         'phoneNumber' => $request->input('phoneNumber'),
-                        'playing' => 4,
-                        'first_come' => $validated['date_booking'],
-                        'last_playing' => $dateParse->copy()->addWeeks(3),
+                        'first_come' => $hariIni->format('Y-m-d'),
+                        'last_booking' => $hariIni->format('Y-m-d')
                     ]);
                 } else {
                     $dataPelangganUpdate = [
-                        'playing' => $pelanggan->playing + 4,
-                        'last_playing' => $dateParse->copy()->addWeeks(3),
+                        'last_booking' => $hariIni->format('Y-m-d'),
                         'phoneNumber' => $request->input('phoneNumber') ?? $pelanggan->phoneNumber
                     ];
 
@@ -175,9 +171,8 @@ class BookingController extends Controller
                     $pelanggan = Pelanggan::create([
                         'name' => $validated['name_booking'],
                         'phoneNumber' => $request->input('phoneNumber'),
-                        'playing' => count($validated['time_booking']),
-                        'first_come' => $validated['date_booking'],
-                        'last_playing' => $validated['date_booking'],
+                        'first_come' => $hariIni->format('Y-m-d'),
+                        'last_booking' => $hariIni->format('Y-m-d')
                     ]);
                     foreach ($validated["time_booking"] as $time) {
                         Booking::create([
@@ -204,8 +199,7 @@ class BookingController extends Controller
                     }
 
                     $dataPelangganUpdate = [
-                        'playing' => $pelanggan->playing + count($validated['time_booking']),
-                        'last_playing' => $validated['date_booking'],
+                        'last_booking' => $hariIni->format('Y-m-d'),
                         'phoneNumber' => $request->input('phoneNumber') ?? $pelanggan->phoneNumber
                     ];
 
@@ -216,9 +210,8 @@ class BookingController extends Controller
                     $pelanggan = Pelanggan::create([
                         'name' => $validated['name_booking'],
                         'phoneNumber' => $request->input('phoneNumber'),
-                        'playing' => 1,
-                        'first_come' => $validated['date_booking'],
-                        'last_playing' => $validated['date_booking'],
+                        'first_come' => $hariIni->format('Y-m-d'),
+                        'last_booking' => $hariIni->format('Y-m-d')
                     ]);
 
                     Booking::create([
@@ -232,8 +225,7 @@ class BookingController extends Controller
                     ]);
                 } else {
                     $dataPelangganUpdate = [
-                        'playing' => $pelanggan->playing + 1,
-                        'last_playing' => $validated['date_booking'],
+                        'last_booking' => $hariIni->format('Y-m-d'),
                         'phoneNumber' => $request->input('phoneNumber') ?? $pelanggan->phoneNumber
                     ];
 
@@ -262,7 +254,10 @@ class BookingController extends Controller
      */
     public function show(Booking $booking)
     {
-        //
+        $data["title"] = "Booking";
+        $data["booking"] = $booking;
+
+        return view("admin.booking.detail", $data);
     }
 
     /**
@@ -301,10 +296,16 @@ class BookingController extends Controller
         ]);
 
         $dateParse = Carbon::parse($validated["date_booking"]);
-        $lastPlayingDate = Carbon::parse($booking->pelanggan->last_playing);
+        $lastBookingDate = Carbon::parse($booking->pelanggan->last_booking);
+        $hariIni = Carbon::today();
 
-        if ($lastPlayingDate->lessThan($dateParse)) {
-            $booking->pelanggan->update(['last_playing' => $dateParse]);
+        if ($lastBookingDate->lessThan($hariIni)) {
+            $dataPelanggans = Pelanggan::where('id', $booking->pelanggan->id)->get();
+            if (count($dataPelanggans) == 1) {
+                $booking->pelanggan->update(['last_booking' => $hariIni->format('Y-m-d'), 'first_come' => $hariIni->format('Y-m-d')]);
+            } else {
+                $booking->pelanggan->update(['last_booking' => $dateParse->format('Y-m-d')]);
+            }
         }
 
         $court = Court::where("name_court", $request->court_booking)->first();

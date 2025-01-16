@@ -19,9 +19,11 @@
         </div>
         <div>
             <label for="role" class="block mb-2 text-sm font-medium text-slate-900">Role User</label>
-            <input type="text" id="role" name="role" value="{{ old('role') }}"
-                class="block w-full p-2 text-slate-900 border border-slate-500 rounded-lg bg-white text-xs focus:ring-slate-500 focus:border-slate-500"
-                required>
+            <select id="role" name="role"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option {{ old('role') == 'operator' ? 'selected' : '' }} value="operator">Operator</option>
+                <option {{ old('role') == 'admin' ? 'selected' : '' }} value="admin">Admin</option>
+            </select>
         </div>
         <div>
             <label for="password" class="block mb-2 text-sm font-medium text-slate-900">Password User</label>

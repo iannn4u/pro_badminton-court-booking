@@ -32,13 +32,16 @@
                             Nomor Telepon
                         </th>
                         <th scope="col" class="p-2 text-center">
-                            Banyaknya Bermain
+                            Bermain
                         </th>
                         <th scope="col" class="p-2 text-center">
-                            Pertama Kali Booking
+                            Pertama Booking
                         </th>
                         <th scope="col" class="p-2 text-center">
-                            Terakhir Kali Booking
+                            Terakhir Booking
+                        </th>
+                        <th scope="col" class="p-2 text-center">
+                            Terakhir Main
                         </th>
                         <th scope="col" class="p-2 text-center">
                             Alamat
@@ -76,7 +79,10 @@
                                     {{ $value->first_come }}
                                 </td>
                                 <td class="min-[955px]:px-6 min-[955px]:py-4 p-1 text-center">
-                                    {{ $value->last_playing }}
+                                    {{ $value->last_booking }}
+                                </td>
+                                <td class="min-[955px]:px-6 min-[955px]:py-4 p-1 text-center">
+                                    {{ $value->last_playing ?? 'Belum ada' }}
                                 </td>
                                 <td class="min-[955px]:px-6 min-[955px]:py-4 p-1 text-center">
                                     {{ $value->address ?? 'Belum di set' }}

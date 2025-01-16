@@ -18,20 +18,16 @@ class CheckOldBookings
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $dateParse = Carbon::parse($request->date_booking);
         $today = Carbon::today();
 
-        // Validasi tanggal tidak boleh lebih kecil dari hari ini
-        if ($dateParse->lessThan($today)) {
-            return redirect()->back()->withErrors(['date_booking' => 'Tanggal pemesanan harus hari ini atau yang akan datang.'])->withInput();
-        }
         $bookings = Booking::all()->filter(function ($booking) use ($today) {
             $bookingDate = Carbon::parse($booking->date_booking);
             return $bookingDate < $today;
         });
-
+        
         if ($bookings->isNotEmpty()) {
             foreach ($bookings as $booking) {
+                $booking->pelanggan->update(['last_playing' => $today->format('Y-m-d'), 'playing' => $booking->pelanggan->playing + 1]);
                 $booking->update(["status_delete_booking" => 1]);
                 $booking->delete();
             }
