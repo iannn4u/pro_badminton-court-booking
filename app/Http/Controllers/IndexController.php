@@ -49,7 +49,7 @@ class IndexController extends Controller
         }
 
         $today = Carbon::now();
-        $formatTanggal = $today->format('d-m-Y');
+        $formatTanggal = $today->format('Y-m-d');
         $data["slotJamHariIni"] = $checkingSlot;
         $todaySchedule = [];
         if (!$data["courts"]->isEmpty()) {
