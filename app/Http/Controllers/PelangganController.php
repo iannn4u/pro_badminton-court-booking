@@ -20,17 +20,17 @@ class PelangganController extends Controller
         $search = $request->input('search');
 
         $query = Pelanggan::where('status', 'aktif');
-    
+
         if ($search) {
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('id', 'like', "%{$search}%")
-                  ->orWhere('phoneNumber', 'like', "%{$search}%");
+                    ->orWhere('id', 'like', "%{$search}%")
+                    ->orWhere('phoneNumber', 'like', "%{$search}%");
             });
         }
-    
+
         $pelanggans = $query->get();
-    
+
         return response()->json($pelanggans, 200);
     }
 
@@ -123,7 +123,7 @@ class PelangganController extends Controller
      */
     public function destroy(Pelanggan $pelanggan)
     {
-        $bookings = Booking::where('name_booking', $pelanggan->name)->get();
+        $bookings = Booking::where('name_booking', $pelanggan->name,)->where("id_pelanggan", $pelanggan->id)->get();
         foreach ($bookings as $booking) {
             $booking->forceDelete();
         }

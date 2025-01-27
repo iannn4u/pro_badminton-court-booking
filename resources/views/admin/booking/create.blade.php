@@ -10,7 +10,7 @@
             <input type="text" id="name_booking" name="name_booking" value="{{ old('name_booking') }}"
                 class="block w-full p-2 text-slate-900 border border-slate-500 rounded-lg bg-white text-xs focus:ring-slate-500 focus:border-slate-500"
                 required autocomplete="off">
-            <input type="hidden" id="id_pelanggan" name="id_pelanggan" value="">
+            <input type="hidden" id="id_pelanggan" name="id_pelanggan" value="{{ old("id_pelanggan") }}">
             <div id="pelanggan"
                 class="z-10 hidden max-h-40 overflow-y-auto bg-white divide-y divide-gray-100 rounded-lg shadow w-full dark:bg-gray-700">
                 <ul class="py-2 text-sm max-h-40 overflow-x-auto text-gray-700 dark:text-gray-200"></ul>
