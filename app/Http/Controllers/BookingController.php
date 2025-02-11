@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Court;
 use App\Models\Operational;
 use App\Models\Pelanggan;
+use App\Models\Report;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -82,10 +83,21 @@ class BookingController extends Controller
             return redirect()->back()->withErrors(['date_booking' => 'Tanggal pemesanan harus hari ini atau yang akan datang.'])->withInput();
         }
 
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        $report = Report::where('bulan', $currentMonth)
+            ->where('tahun', $currentYear)
+            ->first();
+
+            
+        if (!$report) {
+            Report::create(["tahun" => $currentYear, "bulan" => $currentMonth]);
+        }
+
         // Proses booking untuk member
         if ($request->member_booking) {
             if (count($request->time_booking) > 1) {
-                // Masukkin data ke table pelanggan
                 if ($pelanggan == null) {
                     $pelanggan = Pelanggan::create([
                         'name' => $validated['name_booking'],
@@ -93,6 +105,8 @@ class BookingController extends Controller
                         'first_come' => $hariIni->format('Y-m-d'),
                         'last_booking' => $hariIni->format('Y-m-d')
                     ]);
+                    
+                    $report->update(["member" => $report->member + 1]);
                 } else {
                     $dataPelangganUpdate = [
                         'last_booking' => $hariIni->format('Y-m-d'),
@@ -134,6 +148,8 @@ class BookingController extends Controller
                         'first_come' => $hariIni->format('Y-m-d'),
                         'last_booking' => $hariIni->format('Y-m-d')
                     ]);
+
+                    $report->update(["member" => $report->member + 1]);
                 } else {
                     $dataPelangganUpdate = [
                         'last_booking' => $hariIni->format('Y-m-d'),
@@ -168,15 +184,9 @@ class BookingController extends Controller
             if (count($request->time_booking) > 1) {
                 // Masukkin data ke table pelanggan
                 if ($pelanggan == null) {
-                    $pelanggan = Pelanggan::create([
-                        'name' => $validated['name_booking'],
-                        'phoneNumber' => $request->input('phoneNumber'),
-                        'first_come' => $hariIni->format('Y-m-d'),
-                        'last_booking' => $hariIni->format('Y-m-d')
-                    ]);
                     foreach ($validated["time_booking"] as $time) {
                         Booking::create([
-                            'id_pelanggan' => $pelanggan->id,
+                            'id_pelanggan' => null,
                             'name_booking' => $validated['name_booking'],
                             'date_booking' => $validated['date_booking'],
                             'court_booking' => $validated['court_booking'],
@@ -207,15 +217,8 @@ class BookingController extends Controller
                 }
             } else {
                 if ($pelanggan == null) {
-                    $pelanggan = Pelanggan::create([
-                        'name' => $validated['name_booking'],
-                        'phoneNumber' => $request->input('phoneNumber'),
-                        'first_come' => $hariIni->format('Y-m-d'),
-                        'last_booking' => $hariIni->format('Y-m-d')
-                    ]);
-
                     Booking::create([
-                        'id_pelanggan' => $pelanggan->id,
+                        'id_pelanggan' => null,
                         'name_booking' => $validated['name_booking'],
                         'date_booking' => $validated['date_booking'],
                         'court_booking' => $validated['court_booking'],
@@ -224,13 +227,6 @@ class BookingController extends Controller
                         'name_made_booking' => auth()->user()->name
                     ]);
                 } else {
-                    $dataPelangganUpdate = [
-                        'last_booking' => $hariIni->format('Y-m-d'),
-                        'phoneNumber' => $request->input('phoneNumber') ?? $pelanggan->phoneNumber
-                    ];
-
-                    $pelanggan->update($dataPelangganUpdate);
-
                     Booking::create([
                         'id_pelanggan' => $pelanggan->id,
                         'name_booking' => $validated['name_booking'],
@@ -240,6 +236,13 @@ class BookingController extends Controller
                         'price_booking' => $court->price_court,
                         'name_made_booking' => auth()->user()->name
                     ]);
+
+                    $dataPelangganUpdate = [
+                        'last_booking' => $hariIni->format('Y-m-d'),
+                        'phoneNumber' => $request->input('phoneNumber') ?? $pelanggan->phoneNumber
+                    ];
+
+                    $pelanggan->update($dataPelangganUpdate);
                 }
             }
         }
@@ -320,6 +323,14 @@ class BookingController extends Controller
      */
     public function destroy(Booking $booking)
     {
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        $report = Report::where('bulan', $currentMonth)
+            ->where('tahun', $currentYear)
+            ->get();
+
+        
         $pelanggan = Pelanggan::where("name", $booking->name_booking)->first();
         $pelanggan->update(['playing' => $pelanggan->playing - 1]);
 

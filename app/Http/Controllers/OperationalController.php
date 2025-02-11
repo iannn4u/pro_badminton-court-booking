@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Operational;
 use App\Http\Requests\StoreOperationalRequest;
 use App\Models\Highlight;
+use App\Models\Report;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -164,5 +165,32 @@ class OperationalController extends Controller
     public function destroy(Operational $operational)
     {
         //
+    }
+
+    public function viewReport()
+    {
+        $data["title"] = "Report";
+
+        return view('admin.operational.report', $data);
+    }
+
+    public function detailReport(Request $request)
+    {
+        $report = Report::where('tahun', $request->year)->where('bulan', $request->month)->first();
+
+        if ($report) {
+            $data = [
+                'response' => 200,
+                'kunjungan' => $report->kunjungan,
+                'member' => $report->member,
+                'income' => $report->income
+            ];
+        } else {
+            $data = [
+                'response' => 200,
+            ];
+        }
+
+        return response()->json($data);
     }
 }

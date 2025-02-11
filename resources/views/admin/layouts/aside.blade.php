@@ -34,6 +34,12 @@
                         <span class="ms-3">User Management</span>
                     </a>
                 </li>
+                <li>
+                    <a href="/admin/report"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 group">
+                        <span class="ms-3">Financial Report</span>
+                    </a>
+                </li>
             @endif
             <li>
                 <a href="/admin/pengaturan"
