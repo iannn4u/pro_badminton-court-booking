@@ -24,7 +24,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [IndexController::class, "index"]);
-
+Route::post('/get/booking', [BookingController::class, "modalInfo"]);
+    
 Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, "index"]);
     Route::post('/admin/operational/edit/{operational}', [OperationalController::class, "update"]);
@@ -32,7 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('admin/booking', BookingController::class);
     Route::post('/booking/cekSlot', [BookingController::class, "cekSlot"]);
     Route::get('/get/search/booking/{name}', [BookingController::class, "search"]);
-    Route::post('/get/booking', [BookingController::class, "modalInfo"]);
 
     Route::resource('admin/lapangan', CourtController::class);
     

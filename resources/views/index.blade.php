@@ -201,7 +201,7 @@
                                     </button>
                                 @else
                                     <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-                                        onclick="showDataBooking('{{ $slot[0] }}', '{{ $day }}')"
+                                        onClick="showDataBooking('{{ $slot[0] }}', '{{ $day }}')"
                                         class="text-center {{ $slot['full_booked'] ? 'bg-slate-200' : 'bg-green-200' }} w-full py-1 rounded-md max-md:text-xs max-md:px-2"
                                         type="button">
                                         @php
@@ -515,8 +515,10 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Accept': 'application/json',
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                     },
+                    credentials: "include",
                     body: JSON.stringify({
                         time: jam,
                         date: tanggal
@@ -529,6 +531,7 @@
                         lapangan.classList.add("bg-green-200");
                         lapangan.classList.remove("bg-gray-100");
                     });
+
                     if (Array.isArray(data.bookings) && data.bookings.length > 0) {
                         data.bookings.forEach((booking) => {
                             const courtElement = document.querySelector(
