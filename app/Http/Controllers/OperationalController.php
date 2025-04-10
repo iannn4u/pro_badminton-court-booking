@@ -9,6 +9,7 @@ use App\Models\Report;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class OperationalController extends Controller
 {
@@ -53,6 +54,8 @@ class OperationalController extends Controller
             'username.min' => 'Username harus terdiri dari minimal 3 karakter.',
             'password.required' => 'Password wajib diisi.',
         ]);
+        
+        $validated["password"] = Hash::make($validated["password"]);
 
         $user->update($validated);
 
@@ -78,12 +81,6 @@ class OperationalController extends Controller
             "link_wa_biodata" => "required",
             "preview1" => "nullable",
             "preview2" => "nullable"
-        ], [
-            'username.required' => 'Nama tempat wajib diisi.',
-            'address_biodata.required' => 'Alamat tempat wajib diisi.',
-            'link_address_biodata.required' => 'Link google maps wajib diisi.',
-            'wa_biodata.required' => 'No Telepon/Whatsapp wajib diisi.',
-            'link_wa_biodata.required' => 'Link No Telepon/Whatsapp wajib diisi.',
         ]);
 
         $validated["preview1"] = $request->input('preview1') ? 1 : 0;

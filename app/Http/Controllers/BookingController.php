@@ -332,12 +332,15 @@ class BookingController extends Controller
 
         
         $pelanggan = Pelanggan::where("name", $booking->name_booking)->first();
-        $pelanggan->update(['playing' => $pelanggan->playing - 1]);
-
-        if ($pelanggan->playing == 0) {
-            $pelanggan->delete();
+      
+        if($pelanggan) {
+            $pelanggan->update(['playing' => $pelanggan->playing - 1]);
+    
+            if ($pelanggan->playing == 0) {
+                $pelanggan->delete();
+            }
         }
-
+        
         $booking->forceDelete();
 
         return redirect('/admin/booking')->with('alert', 'Booking berhasil dihapus.');

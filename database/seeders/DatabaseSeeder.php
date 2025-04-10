@@ -13,6 +13,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use PhpParser\JsonDecoder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,7 +27,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'admin',
             'username' => 'admin',
-            'password' => 'admin',
+            'password' => Hash::make('admin'),
             'role' => 'admin'
         ]);
 
