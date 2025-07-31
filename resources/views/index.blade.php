@@ -181,6 +181,16 @@
                 <div
                     class="grid grid-cols-7 gap-2 mt-10 max-[415px]:mt-0 max-md:mt-5 max-md:p-2 max-md:pt-0 max-[420px]:w-max">
                     @foreach ($week as $day => $slots)
+                        @php
+                            $dayString = $day;
+
+                            $parts = explode(' ', $dayString);
+
+                            $dateOnly = $parts[1];
+
+                            $dateObject = \Carbon\Carbon::createFromFormat('d/n/y', $dateOnly);
+                        @endphp
+
                         <div class="grid grid-cols-1 space-y-2">
                             <p class="text-center w-full flex max-sm:flex-col md:gap-2 justify-center max-md:text-xs">
                                 @php
@@ -201,7 +211,7 @@
                                     </button>
                                 @else
                                     <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-                                        onClick="showDataBooking('{{ $slot[0] }}', '{{ $day }}')"
+                                        onClick="showDataBooking('{{ $slot[0] }}', '{{ $day }}', '{{ $dateObject->format('Y-m-d') }}')"
                                         class="text-center {{ $slot['full_booked'] ? 'bg-slate-200' : 'bg-green-200' }} w-full py-1 rounded-md max-md:text-xs max-md:px-2"
                                         type="button">
                                         @php
@@ -495,56 +505,64 @@
             }
         });
 
-        function showDataBooking(jam, tanggal) {
-            const spanKomplit = document.querySelector('#komplit');
-            const daysInIndonesian = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-            const dateParts = tanggal.split(' ');
-            const tanggalParts = dateParts[1].split('/');
-            const d = new Date(`${tanggalParts[1]}-${tanggalParts[0]}-${tanggalParts[2]}`);
-            const dayIndex = d.getDay();
-            const options = {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            };
-            const tanggalSlot = new Intl.DateTimeFormat('id-ID', options).format(d);
-            const paketKomplitTanggal = `${daysInIndonesian[dayIndex]}, ${tanggalSlot}, pukul ${jam}.`;
-            spanKomplit.textContent = paketKomplitTanggal;
+        function showDataBooking(jam, tanggalLama, tanggalISO) {
+            try {
+                const d = new Date(tanggalISO);
 
-            fetch(`/get/booking/`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    credentials: "include",
-                    body: JSON.stringify({
-                        time: jam,
-                        date: tanggal
+                if (isNaN(d)) {
+                    console.error("Format tanggal ISO tidak valid:", tanggalISO);
+                    return;
+                }
+
+                const spanKomplit = document.querySelector('#komplit');
+                const options = {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                };
+                const tanggalSlot = new Intl.DateTimeFormat('id-ID', options).format(d);
+                const paketKomplitTanggal = `${tanggalSlot}, pukul ${jam}.`;
+                spanKomplit.textContent = paketKomplitTanggal;
+
+                fetch(`/get/booking/`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        },
+                        credentials: "include",
+                        body: JSON.stringify({
+                            time: jam,
+                            date: tanggalLama
+                        })
                     })
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    document.querySelectorAll('[id^="name_booking_court"]').forEach((lapangan) => {
-                        lapangan.textContent = "Tersedia";
-                        lapangan.classList.add("bg-green-200");
-                        lapangan.classList.remove("bg-gray-100");
-                    });
-
-                    if (Array.isArray(data.bookings) && data.bookings.length > 0) {
-                        data.bookings.forEach((booking) => {
-                            const courtElement = document.querySelector(
-                                `#name_booking_court${booking.court_booking.split(' ')[1]}`);
-                            if (courtElement) {
-                                courtElement.textContent = booking.name_booking;
-                                courtElement.classList.add("bg-gray-300");
-                                courtElement.classList.remove("bg-green-200");
-                            }
+                    .then(response => response.json())
+                    .then(data => {
+                        document.querySelectorAll('[id^="name_booking_court"]').forEach((lapangan) => {
+                            lapangan.textContent = "Tersedia";
+                            lapangan.classList.add("bg-green-200");
+                            lapangan.classList.remove("bg-gray-300");
                         });
-                    }
-                })
-                .catch((e) => console.error(e));
+
+                        if (Array.isArray(data.bookings) && data.bookings.length > 0) {
+                            data.bookings.forEach((booking) => {
+                                const courtElement = document.querySelector(
+                                    `#name_booking_court${booking.court_booking.split(' ')[1]}`);
+                                if (courtElement) {
+                                    courtElement.textContent = booking.name_booking;
+                                    courtElement.classList.add("bg-gray-300");
+                                    courtElement.classList.remove("bg-green-200");
+                                }
+                            });
+                        }
+                    })
+                    .catch((e) => console.error("Terjadi kesalahan saat fetch data:", e));
+
+            } catch (error) {
+                console.error("Terjadi error tak terduga di dalam fungsi showDataBooking:", error);
+            }
         }
 
         const filterSchedule = document.getElementById('filter');
