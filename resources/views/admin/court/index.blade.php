@@ -18,9 +18,7 @@
                     <th scope="col" class="px-6 py-3 text-center">
                         Nama Lapangan
                     </th>
-                    <th scope="col" class="px-6 py-3 text-center">
-                        Harga Lapangan
-                    </th>
+
                     <th scope="col" class="px-6 py-3 text-center">
                         Aksi
                     </th>
@@ -39,9 +37,7 @@
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
                                 {{ $value->name_court }}
                             </th>
-                            <td class="px-6 py-4 text-center">
-                                {{ $value->price_court }}
-                            </td>
+
                             <td class="px-6 py-4 flex gap-5 justify-center">
                                 <a href="/admin/lapangan/{{ $value->id_court }}/edit"
                                     class="font-medium text-slate-600 dark:text-slate-500 hover:underline">Edit</a>

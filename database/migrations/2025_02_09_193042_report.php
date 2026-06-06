@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string("bulan");
             $table->integer("member")->default(0);
             $table->integer("kunjungan")->default(0);
-            $table->integer("income")->default(0);
             $table->timestamps();
         });
     }

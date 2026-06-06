@@ -29,9 +29,7 @@
                         <th scope="col" class="px-3 py-3 text-center">
                             Jam
                         </th>
-                        <th scope="col" class="px-3 py-3 text-center">
-                            Harga
-                        </th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -61,9 +59,7 @@
                                 <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
                                     {{ $value->time_booking }}
                                 </td>
-                                <td class="min-[955px]:px-6 min-[955px]:py-4 text-center">
-                                    {{ $value->price_booking }}
-                                </td>
+
                             </tr>
                         @endforeach
                     @endif

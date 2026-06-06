@@ -37,7 +37,6 @@ class CourtController extends Controller
     {
         $validated = $request->validate([
             'name_court' => 'required|string',
-            'price_court' => 'required|numeric|min:0',
         ]);
     
         Court::create($validated);
@@ -72,7 +71,6 @@ class CourtController extends Controller
         $court = Court::where("id_court", $id_court)->first();
         $validated = $request->validate([
             'name_court' => 'required|string',
-            'price_court' => 'required|numeric|min:0',
         ]);
     
         $court->update($validated);

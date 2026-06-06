@@ -84,15 +84,12 @@ class DatabaseSeeder extends Seeder
         Court::insert([
             [
                 'name_court' => 'Lapangan 1',
-                'price_court' => '45000',
             ],
             [
                 'name_court' => 'Lapangan 2',
-                'price_court' => '45000',
             ],
             [
                 'name_court' => 'Lapangan 3',
-                'price_court' => '45000',
             ]
         ]);
     }

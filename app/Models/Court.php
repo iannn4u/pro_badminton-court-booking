@@ -13,4 +13,9 @@ class Court extends Model
     protected $primaryKey = 'id_court';
     
     public $timestamps = false;
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'id_court', 'id_court');
+    }
 }

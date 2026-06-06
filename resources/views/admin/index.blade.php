@@ -76,9 +76,6 @@
             <h5 class="font-normal text-gray-700">Jumlah Pengunjung Hari Ini</h5>
             <p class="mb-2 text-3xl font-bold tracking-tight text-gray-900">{{ $visitor }}</p>
         </section>
-        <section class="block min-w-80 max-sm:w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-            <h5 class="font-normal text-gray-700">Income Bulan Ini</h5>
-            <p class="mb-2 text-3xl font-bold tracking-tight text-gray-900">Rp {{ $income }}</p>
-        </section>
+
     </div>
 @endsection

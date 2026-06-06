@@ -52,9 +52,9 @@
                                     {{ $value->role }}
                                 </td>
                                 <td class="px-6 py-4 flex gap-5 justify-center">
-                                    <a href="/admin/user/{{ $value->id }}/edit"
+                                    <a href="/admin/user/{{ $value->id_user }}/edit"
                                         class="font-medium text-slate-600 dark:text-slate-500 hover:underline">Edit</a>
-                                    <form action="/admin/user/{{ $value->id }}" method="post">
+                                    <form action="/admin/user/{{ $value->id_user }}" method="post">
                                         @method('delete')
                                         @csrf
                                         <button class="font-medium text-slate-600 dark:text-slate-500 hover:underline"

@@ -72,7 +72,7 @@ class BookingController extends Controller
         ]);
 
         $court = Court::where("name_court", $request->court_booking)->first();
-        $pelanggan = Pelanggan::where("id", $request->id_pelanggan)->first();
+        $pelanggan = Pelanggan::where("id_pelanggan", $request->id_pelanggan)->first();
 
         // Ubah format input tanggal ke format Carbon
         $dateParse = Carbon::parse($request->date_booking);
@@ -128,13 +128,13 @@ class BookingController extends Controller
                         }
 
                         $bookingsToCreate[] = [
-                            'id_pelanggan' => $pelanggan->id,
+                            'id_pelanggan' => $pelanggan->id_pelanggan,
                             'name_booking' => $validated['name_booking'],
                             'date_booking' => $dateParse->copy()->addWeeks($i),
                             'court_booking' => $validated['court_booking'],
-                            'price_booking' => $court->price_court,
+                            'id_court' => $court->id_court,
                             'time_booking' => $time,
-                            'name_made_booking' => auth()->user()->name
+                            'id_user' => auth()->user()->id_user
                         ];
                     }
                 }
@@ -170,13 +170,13 @@ class BookingController extends Controller
                     }
 
                     Booking::create([
-                        'id_pelanggan' => $pelanggan->id,
+                        'id_pelanggan' => $pelanggan->id_pelanggan,
                         'name_booking' => $validated['name_booking'],
                         'date_booking' => $dateParse->copy()->addWeeks($i),
                         'court_booking' => $validated['court_booking'],
+                        'id_court' => $court->id_court,
                         'time_booking' => $validated["time_booking"][0],
-                        'price_booking' => $court->price_court,
-                        'name_made_booking' => auth()->user()->name
+                        'id_user' => auth()->user()->id_user
                     ]);
                 }
             }
@@ -190,21 +190,21 @@ class BookingController extends Controller
                             'name_booking' => $validated['name_booking'],
                             'date_booking' => $validated['date_booking'],
                             'court_booking' => $validated['court_booking'],
+                            'id_court' => $court->id_court,
                             'time_booking' => $time,
-                            'price_booking' => $court->price_court,
-                            'name_made_booking' => auth()->user()->name
+                            'id_user' => auth()->user()->id_user
                         ]);
                     }
                 } else {
                     foreach ($validated["time_booking"] as $time) {
                         Booking::create([
-                            'id_pelanggan' => $pelanggan->id,
+                            'id_pelanggan' => $pelanggan->id_pelanggan,
                             'name_booking' => $validated['name_booking'],
                             'date_booking' => $validated['date_booking'],
                             'court_booking' => $validated['court_booking'],
+                            'id_court' => $court->id_court,
                             'time_booking' => $time,
-                            'price_booking' => $court->price_court,
-                            'name_made_booking' => auth()->user()->name
+                            'id_user' => auth()->user()->id_user
                         ]);
                     }
 
@@ -222,19 +222,19 @@ class BookingController extends Controller
                         'name_booking' => $validated['name_booking'],
                         'date_booking' => $validated['date_booking'],
                         'court_booking' => $validated['court_booking'],
+                        'id_court' => $court->id_court,
                         'time_booking' => $validated['time_booking'][0],
-                        'price_booking' => $court->price_court,
-                        'name_made_booking' => auth()->user()->name
+                        'id_user' => auth()->user()->id_user
                     ]);
                 } else {
                     Booking::create([
-                        'id_pelanggan' => $pelanggan->id,
+                        'id_pelanggan' => $pelanggan->id_pelanggan,
                         'name_booking' => $validated['name_booking'],
                         'date_booking' => $validated['date_booking'],
                         'court_booking' => $validated['court_booking'],
+                        'id_court' => $court->id_court,
                         'time_booking' => $validated['time_booking'][0],
-                        'price_booking' => $court->price_court,
-                        'name_made_booking' => auth()->user()->name
+                        'id_user' => auth()->user()->id_user
                     ]);
 
                     $dataPelangganUpdate = [
@@ -303,7 +303,7 @@ class BookingController extends Controller
         $hariIni = Carbon::today();
 
         if ($lastBookingDate->lessThan($hariIni)) {
-            $dataPelanggans = Pelanggan::where('id', $booking->pelanggan->id)->get();
+            $dataPelanggans = Pelanggan::where('id_pelanggan', $booking->pelanggan->id_pelanggan)->get();
             if (count($dataPelanggans) == 1) {
                 $booking->pelanggan->update(['last_booking' => $hariIni->format('Y-m-d'), 'first_come' => $hariIni->format('Y-m-d')]);
             } else {
@@ -312,7 +312,7 @@ class BookingController extends Controller
         }
 
         $court = Court::where("name_court", $request->court_booking)->first();
-        $validated["price_booking"] = $court->price_court;
+        $validated["id_court"] = $court->id_court;
         $booking->update($validated);
 
         return redirect('/admin/booking')->with('alert', 'Pesanan berhasil diperbarui.');

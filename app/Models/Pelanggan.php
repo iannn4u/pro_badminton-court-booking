@@ -9,9 +9,10 @@ class Pelanggan extends Model
 {
     use HasFactory;
 
-    protected $guarded = ["id"];
+    protected $primaryKey = 'id_pelanggan';
+    protected $guarded = ["id_pelanggan"];
 
     public function booking() {
-        return $this->hasMany(Booking::class, 'id_pelanggan', 'id');
+        return $this->hasMany(Booking::class, 'id_pelanggan', 'id_pelanggan');
     }
 }

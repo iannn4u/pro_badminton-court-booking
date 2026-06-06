@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('courts', function (Blueprint $table) {
             $table->id("id_court");
             $table->string("name_court");
-            $table->string("price_court");
         });
     }
 

@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $data["title"] = "User Management";
-        $data["users"] = User::where('id', "!=", auth()->user()->id)->where('name', "!=", 'admin')->get();
+        $data["users"] = User::where('id_user', "!=", auth()->user()->id_user)->where('name', "!=", 'admin')->get();
 
         return view("admin.user.index", $data);
     }

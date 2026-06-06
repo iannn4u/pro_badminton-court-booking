@@ -25,23 +25,6 @@ class AdminController extends Controller
     {
         $data["title"] = "Dashboard";
         $data["operational"] =  Operational::get()->first();
-        $bookingsNotDelete = Booking::where('status_delete_booking', 0)->get();
-        $bookingsSofDeleted = Booking::where('status_delete_booking', 1)->withTrashed()->get();
-        $income = 0;
-        foreach ($bookingsSofDeleted as $booking) {
-            $partsDate = explode("-", $booking->date_booking);
-            if ($partsDate[0] == Carbon::now()->format("Y")) {
-                $income += $booking->price_booking;
-            }
-        }
-        foreach ($bookingsNotDelete as $booking) {
-            $partsDate = explode("-", $booking->date_booking);
-            if (end($partsDate) == Carbon::now()->format("Y")) {
-                $income += $booking->price_booking;
-            }
-        }
-        
-        $data["income"] = $income;
         $data["visitor"] = Booking::where('date_booking', Carbon::now()->format("d-m-Y"))->where("status_delete_booking", [0, 1])->count();
 
         return view("admin.index",  $data);

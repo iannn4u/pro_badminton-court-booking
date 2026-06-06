@@ -24,7 +24,7 @@ class PelangganController extends Controller
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                    ->orWhere('id', 'like', "%{$search}%")
+                    ->orWhere('id_pelanggan', 'like', "%{$search}%")
                     ->orWhere('phoneNumber', 'like', "%{$search}%");
             });
         }
@@ -100,7 +100,7 @@ class PelangganController extends Controller
                 'required',
                 'string',
                 'min:3',
-                Rule::unique('pelanggans', 'name')->ignore($pelanggan->id),
+                Rule::unique('pelanggans', 'name')->ignore($pelanggan->id_pelanggan),
             ],
             'phoneNumber' => 'numeric',
             'address' => 'nullable',
@@ -123,7 +123,7 @@ class PelangganController extends Controller
      */
     public function destroy(Pelanggan $pelanggan)
     {
-        $bookings = Booking::where('name_booking', $pelanggan->name,)->where("id_pelanggan", $pelanggan->id)->get();
+        $bookings = Booking::where('name_booking', $pelanggan->name,)->where("id_pelanggan", $pelanggan->id_pelanggan)->get();
         foreach ($bookings as $booking) {
             $booking->forceDelete();
         }

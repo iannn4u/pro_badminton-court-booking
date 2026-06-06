@@ -38,7 +38,7 @@ class OperationalController extends Controller
     public function editAccount()
     {
         $data["title"] = "Edit Account";
-        $data["user"] = User::where("id", auth()->user()->id)->first();
+        $data["user"] = User::where("id_user", auth()->user()->id_user)->first();
 
         return view("admin.operational.editAuth", $data);
     }
@@ -180,7 +180,6 @@ class OperationalController extends Controller
                 'response' => 200,
                 'kunjungan' => $report->kunjungan,
                 'member' => $report->member,
-                'income' => $report->income
             ];
         } else {
             $data = [

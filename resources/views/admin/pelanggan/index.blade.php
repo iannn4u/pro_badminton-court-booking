@@ -91,11 +91,11 @@
                                     {{ $value->status }}
                                 </td>
                                 <td class="px-6 py-4 flex gap-5 justify-center">
-                                    <a href="/pelanggan/{{ $value->id }}"
+                                    <a href="/pelanggan/{{ $value->id_pelanggan }}"
                                         class="font-medium text-slate-600 dark:text-slate-500 hover:underline">Detail</a>
-                                    <a href="/pelanggan/{{ $value->id }}/edit"
+                                    <a href="/pelanggan/{{ $value->id_pelanggan }}/edit"
                                         class="font-medium text-slate-600 dark:text-slate-500 hover:underline">Edit</a>
-                                    <form action="/pelanggan/{{ $value->id }}" method="post">
+                                    <form action="/pelanggan/{{ $value->id_pelanggan }}" method="post">
                                         @method('delete')
                                         @csrf
                                         <button class="font-medium text-slate-600 dark:text-slate-500 hover:underline"

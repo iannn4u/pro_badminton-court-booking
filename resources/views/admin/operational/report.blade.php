@@ -95,10 +95,7 @@
                     <td>Jumlah Member Baru</td>
                     <td id="new_members">-</td>
                 </tr>
-                <tr>
-                    <td>Total Income</td>
-                    <td id="total_income">-</td>
-                </tr>
+
             </tbody>
         </table>
     </div>
@@ -142,8 +139,7 @@
                 // Perbarui tabel dengan data dari server
                 document.getElementById('total_visits').textContent = data.kunjungan ?? '-';
                 document.getElementById('new_members').textContent = data.member ?? '-';
-                document.getElementById('total_income').textContent = data.income ?
-                    `Rp ${data.income.toLocaleString()}` : '-';
+
 
             } catch (error) {
                 console.error('Error fetching report:', error);

@@ -42,7 +42,7 @@ class CheckOldBookings
                     $booking->pelanggan->update(['last_playing' => $today->format('Y-m-d'), 'playing' => $booking->pelanggan->playing + 1]);
                 }
 
-                $report->update(["kunjungan" => $report->kunjungan + 1, "income" => $report->income + $booking->price_booking]);
+                $report->update(["kunjungan" => $report->kunjungan + 1]);
 
                 $booking->update(["status_delete_booking" => 1]);
                 $booking->delete();
